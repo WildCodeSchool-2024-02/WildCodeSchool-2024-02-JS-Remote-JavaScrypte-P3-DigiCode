@@ -4,9 +4,9 @@ CREATE TABLE video (
   name VARCHAR(80) NOT NULL,
   description TEXT,
   date DATE NOT NULL,
-  is_premium BOOLEAN NOT NULL,
-  is_free BOOLEAN NOT NULL,
-  requires_account BOOLEAN NOT NULL
+  is_premium BOOLEAN NOT NULL DEFAULT FALSE,
+  is_free BOOLEAN NOT NULL DEFAULT TRUE,
+  requires_account BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 -- Catégorie

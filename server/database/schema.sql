@@ -5,7 +5,7 @@ CREATE TABLE video (
   description TEXT,
   date DATE NOT NULL,
   is_premium BOOLEAN NOT NULL DEFAULT FALSE,
-  is_free BOOLEAN NOT NULL DEFAULT TRUE,
+  is_free BOOLEAN NOT NULL DEFAULT FALSE,
   requires_account BOOLEAN NOT NULL DEFAULT FALSE
 );
 

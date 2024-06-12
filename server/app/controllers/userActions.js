@@ -6,7 +6,7 @@ const browse = async (req, res, next) => {
   try {
     const users = await tables.user.readAll();
 
-    res.json(users);
+    res.sendStatus(200).json(users);
   } catch (error) {
     next(error);
   }
@@ -18,7 +18,7 @@ const read = async (req, res, next) => {
     const { id } = req.params;
     const user = await tables.user.readById(id);
 
-    if (user != null) res.json(user);
+    if (user != null) res.sendStatus(200).json(user);
     else res.sendStatus(404);
   } catch (error) {
     next(error);
@@ -61,7 +61,7 @@ const add = async (req, res, next) => {
       role_id
     );
 
-    res.sendStatus(204).json({ newUser: user });
+    res.sendStatus(201).json({ newUser: user });
   } catch (error) {
     next(error);
   }

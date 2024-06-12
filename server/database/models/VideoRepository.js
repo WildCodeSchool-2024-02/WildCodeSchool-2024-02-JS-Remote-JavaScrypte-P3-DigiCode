@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const AbstractRepository = require("./AbstractRepository");
 
 class VideoRepository extends AbstractRepository {
@@ -5,10 +6,10 @@ class VideoRepository extends AbstractRepository {
     super({ table: "video" });
   }
 
-  // Browse (read all) videos from specific category????
+  // Browse (read all) videos
 
   async readAll() {
-    // execute the SQL SELECT query to retrieve all videos from a specific category?
+    // execute the SQL SELECT query to retrieve all videos
     const [rows] = await this.database.query();
 
     // return the arry of videos
@@ -19,26 +20,60 @@ class VideoRepository extends AbstractRepository {
 
   async read(id) {
     // execute the SQL SELECT query to retrieve a specific video by its id
-    const [rows] = await this.database.query(
-      `select * from ${this.table} where id = ?`,
+    const [row] = await this.database.query(
+      `SELECT v.name, v.url, v.image, v.description, v.date, v.is_premium, v.is_free, v.requires_account FROM ${this.table} AS v where id = ?`,
       [id]
     );
 
     // return the first row of the result, aka the video
-    return rows[0];
+    return row[0];
   }
 
   // Add (create)
 
   async add(video) {
+    const {
+      name,
+      url,
+      image,
+      description,
+      date,
+      is_premium,
+      is_free,
+      requires_account,
+      category_id,
+    } = video;
     // execute the SQL INSERT query to add a new video to the "video" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (name, ) values(?)`,
-      [video.name]
+      `INSERT INTO ${this.table} (name, url, image, description, date, is_premium, is_free, requires_account, category_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        name,
+        url,
+        image,
+        description,
+        date,
+        is_premium,
+        is_free,
+        requires_account,
+        category_id,
+      ]
     );
 
     // return the id of the newly inserted video
     return result.insertId;
+  }
+
+  // Edit
+
+  async edit(video) {
+    const { is_premium, is_free, requires_account, category_id } = video;
+
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} SET is_premium=?; is_free=?, requires_account=?, category_id=?`,
+      [is_premium, is_free, requires_account, category_id]
+    );
+
+    return result;
   }
 }
 

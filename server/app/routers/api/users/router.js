@@ -10,6 +10,7 @@ const {
   add,
   destroy,
 } = require("../../../controllers/userActions");
+const hashPassword = require("../../../services/hashPassword");
 
 // get a list of all users
 router.get("/", browse);
@@ -18,10 +19,10 @@ router.get("/", browse);
 router.get("/:id", read);
 
 // route to edit an existing user
-router.put("/:id", edit);
+router.put("/:id", hashPassword, edit);
 
 // route to add a new user
-router.post("/", add);
+router.post("/", hashPassword, add);
 
 // route to delete an existing user
 router.delete("/:id", destroy);

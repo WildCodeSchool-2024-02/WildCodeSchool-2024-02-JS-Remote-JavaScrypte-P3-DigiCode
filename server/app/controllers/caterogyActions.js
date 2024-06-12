@@ -10,8 +10,10 @@ const browse = async (req, res, next) => {
   }
 };
 const read = async (req, res, next) => {
+  const { id } = req.params
+
   try {
-    const category = await tables.category.read(req.params.id);
+    const category = await tables.category.read(id);
 
     if (category == null) {
       res.sendStatus(404);
@@ -23,10 +25,10 @@ const read = async (req, res, next) => {
   }
 };
 const add = async (req, res, next) => {
-  const category = req.body;
+const {name} = req.body
 
   try {
-    const insertId = await tables.category.add(category);
+    const insertId = await tables.category.add(name);
 
     res.status(201).json({ insertId });
   } catch (err) {
@@ -37,7 +39,7 @@ const add = async (req, res, next) => {
 const edit = async (req, res, next) => {
   const { id } = req.params;
   const {name} = req.body;
-
+  
   try {
     await tables.category.edit(id, name);
 
@@ -48,8 +50,10 @@ const edit = async (req, res, next) => {
 };
 
 const destroy = async (req, res, next) => {
+    const {id} = req.params;
+
   try {
-    await tables.category.delete(req.params.id);
+    await tables.category.delete(id);
 
     res.sendStatus(204);
   } catch (err) {

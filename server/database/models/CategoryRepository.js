@@ -17,19 +17,19 @@ async read (id) {
     return rows[0]; 
 }
 
-async add (category) {
+async add (name) {
     const [rows] = await this.database.query(
         `insert into ${this.table} (name) value = ?`, 
-        [category.name]
+        [name]
         );
 
     return rows.insertId;
 }
 
 
-async update(category) {
+async edit(name, id) {
     const [result] = await this.database.query(`update ${this.table} set name = ? where id = ? `, 
-[category.name, category.id])
+[name, id])
 
 return result.affectedRows;
 }

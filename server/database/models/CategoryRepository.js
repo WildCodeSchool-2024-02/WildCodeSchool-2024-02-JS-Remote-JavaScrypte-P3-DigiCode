@@ -40,6 +40,7 @@ async destroy (id) {
         `delete from ${this.table} where id = ?`,
         [id]
     );
+    return row.affectedRows
 }
 }
 

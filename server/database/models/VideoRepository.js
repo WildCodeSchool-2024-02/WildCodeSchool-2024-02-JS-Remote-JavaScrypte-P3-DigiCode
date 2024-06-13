@@ -8,11 +8,34 @@ class VideoRepository extends AbstractRepository {
 
   // Browse (read all) videos
 
-  async readAll() {
-    // execute the SQL SELECT query to retrieve all videos
-    const [rows] = await this.database.query();
+  async readAll(video) {
+    const {
+      name,
+      url,
+      image,
+      description,
+      date,
+      is_premium,
+      is_free,
+      requires_account,
+      category_id,
+    } = video;
+    const [rows] = await this.database.query(
+      `SELECT name, url, image, description, date, is_premium, is_free, requires_account FROM ${this.table}`,
+      [
+        name,
+        url,
+        image,
+        description,
+        date,
+        is_premium,
+        is_free,
+        requires_account,
+        category_id,
+      ]
+    );
 
-    // return the arry of videos
+    // return the array of videos
     return rows;
   }
 
@@ -21,12 +44,25 @@ class VideoRepository extends AbstractRepository {
   async read(id) {
     // execute the SQL SELECT query to retrieve a specific video by its id
     const [row] = await this.database.query(
-      `SELECT v.name, v.url, v.image, v.description, v.date, v.is_premium, v.is_free, v.requires_account FROM ${this.table} AS v where id = ?`,
+      `SELECT name, url, image, description, date, is_premium, is_free, requires_account FROM ${this.table} where id = ?`,
       [id]
     );
 
     // return the first row of the result, aka the video
     return row[0];
+  }
+
+  // Edit
+
+  async edit(video) {
+    const { is_premium, is_free, requires_account, category_id } = video;
+
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} SET is_premium=?, is_free=?, requires_account=?, category_id=?`,
+      [is_premium, is_free, requires_account, category_id]
+    );
+
+    return result;
   }
 
   // Add (create)
@@ -63,14 +99,11 @@ class VideoRepository extends AbstractRepository {
     return result.insertId;
   }
 
-  // Edit
-
-  async edit(video) {
-    const { is_premium, is_free, requires_account, category_id } = video;
-
+  // Destroy (delete)
+  async delete(video) {
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET is_premium=?; is_free=?, requires_account=?, category_id=?`,
-      [is_premium, is_free, requires_account, category_id]
+      `DELETE FROM ${this.table} WHERE id=?`,
+      [video]
     );
 
     return result;

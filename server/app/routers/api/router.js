@@ -10,6 +10,10 @@ const usersRouter = require("./users/router")
 
 router.use("/users", usersRouter);
 
+const videosRouter = require("./videos/router");
+
+router.use("/videos", videosRouter);
+
 /* ************************************************************************* */
 
 module.exports = router;

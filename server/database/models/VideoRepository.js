@@ -58,11 +58,11 @@ class VideoRepository extends AbstractRepository {
     const { is_premium, is_free, requires_account, category_id } = video;
 
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET is_premium=?, is_free=?, requires_account=?, category_id=?`,
+      `UPDATE ${this.table} SET is_premium=?, is_free=?, requires_account=?, category_id=? WHERE id=?`,
       [is_premium, is_free, requires_account, category_id]
     );
 
-    return result;
+    return result.affectedRows;
   }
 
   // Add (create)
@@ -100,13 +100,13 @@ class VideoRepository extends AbstractRepository {
   }
 
   // Destroy (delete)
-  async destroy(video) {
+  async destroy(id) {
     const [result] = await this.database.query(
       `DELETE FROM ${this.table} WHERE id=?`,
-      [video]
+      [id]
     );
 
-    return result;
+    return result.affectedRows;
   }
 }
 

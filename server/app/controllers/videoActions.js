@@ -9,8 +9,7 @@ const browse = async (req, res, next) => {
     // fetch all videos from the database
     const videos = await tables.videos.readAll();
 
-    // respond with the videos in JSON format
-    res.json(videos);
+    res.status.json(videos);
   } catch (err) {
     // pass any errors to the error-handling middleware
     next(err);
@@ -30,7 +29,7 @@ const read = async (req, res, next) => {
     if (video == null) {
       res.sendStatus(404);
     } else {
-      res.json(video);
+      res.status.json(video);
     }
   } catch (err) {
     // pass any errors to the error-handling middleware

@@ -100,7 +100,7 @@ class VideoRepository extends AbstractRepository {
   }
 
   // Destroy (delete)
-  async delete(video) {
+  async destroy(video) {
     const [result] = await this.database.query(
       `DELETE FROM ${this.table} WHERE id=?`,
       [video]

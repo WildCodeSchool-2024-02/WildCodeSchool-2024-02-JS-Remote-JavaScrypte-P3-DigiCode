@@ -45,7 +45,7 @@ CREATE TABLE payment (
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
-CREATE TABLE privilege (
+CREATE TABLE user_video (
     video_id INT UNSIGNED,
     user_id INT UNSIGNED,
     FOREIGN KEY (video_id) REFERENCES video (id),

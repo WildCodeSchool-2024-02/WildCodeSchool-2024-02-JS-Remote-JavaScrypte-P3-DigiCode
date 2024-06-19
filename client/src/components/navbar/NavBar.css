@@ -1,0 +1,12 @@
+.navbar-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+#navlinks {
+  margin: 0;
+  position: absolute;
+  top: 12%;
+  left: 2%;
+}

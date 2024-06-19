@@ -6,25 +6,29 @@ import App from "./App";
 import HomePage from "./pages/homepage/HomePage";
 import CategoryPage from "./pages/categorypage/CategoryPage";
 import VideoPage from "./pages/videopage/VideoPage";
-
+import SignupPage from "./pages/signupPage/SignupPage";
 
 const router = createBrowserRouter([
   {
     element: <App />,
     children: [
       {
-         path: "/",
-         element: <HomePage />
+        path: "/",
+        element: <HomePage />,
       },
       {
         path: "/category",
-        element: <CategoryPage />
+        element: <CategoryPage />,
       },
       {
-       path : "/video/:id",
-       element : <VideoPage /> 
+        path: "/video/:id",
+        element: <VideoPage />,
       },
-    ]
+      {
+        path: "/signup",
+        element: <SignupPage />,
+      },
+    ],
   },
 ]);
 

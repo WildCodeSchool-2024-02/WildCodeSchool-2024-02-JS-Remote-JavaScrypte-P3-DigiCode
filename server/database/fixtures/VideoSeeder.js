@@ -1,5 +1,4 @@
 const AbstractSeeder = require("./AbstractSeeder");
-// const CategorySeeder = require("./CategorySeeder");
 
 class VideoSeeder extends AbstractSeeder {
   constructor() {

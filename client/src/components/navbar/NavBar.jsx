@@ -5,14 +5,18 @@ export default function NavBar() {
   return (
     <nav className="navbar-container">
       <button
+        className="menu-button"
         type="button"
         popovertarget="navlinks"
         popovertargetaction="toggle"
       >
         Menu
       </button>
-      <div id="navlinks" popover="true">
+      <div id="navlinks" popover="auto">
         <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
           <li>
             <Link to="/categories">Categories</Link>
           </li>
@@ -28,9 +32,14 @@ export default function NavBar() {
           </li>
         </ul>
       </div>
-      <h1>
+      <img
+        className="logo"
+        src="src/assets/images/origins-digital.svg"
+        alt="logo"
+      />
+      {/* <h1>
         <Link to="/">Origins Digital</Link>
-      </h1>
+      </h1> */}
     </nav>
   );
 }

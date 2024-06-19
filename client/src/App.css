@@ -1,8 +1,8 @@
+@import url("./variables.css");
 @font-face {
   font-family: Exo;
   src: url("./assets/fonts/Exo-VariableFont_wght.ttf");
 }
-@import url("./variables.css");
 
 body {
   background-color: var(--main-color-black);

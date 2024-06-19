@@ -15,7 +15,7 @@ export default function NavBar() {
       <div id="navlinks" popover="auto">
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">HOME</Link>
           </li>
           <li>
             <Link to="/categories">Categories</Link>
@@ -32,11 +32,13 @@ export default function NavBar() {
           </li>
         </ul>
       </div>
-      <img
-        className="logo"
-        src="src/assets/images/origins-digital.svg"
-        alt="logo"
-      />
+      <Link to="/">
+        <img
+          className="logo"
+          src="src/assets/images/origins-digital.svg"
+          alt="logo"
+        />
+      </Link>
       {/* <h1>
         <Link to="/">Origins Digital</Link>
       </h1> */}

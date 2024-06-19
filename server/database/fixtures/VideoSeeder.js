@@ -1,4 +1,5 @@
 const AbstractSeeder = require("./AbstractSeeder");
+// const CategorySeeder = require("./CategorySeeder");
 
 class VideoSeeder extends AbstractSeeder {
   constructor() {
@@ -17,6 +18,7 @@ class VideoSeeder extends AbstractSeeder {
         image: this.faker.image.urlLoremFlickr(), // generates a fake image
         description: this.faker.lorem.paragraph(), // generates a fake description
         date: this.faker.date.recent(), // generate a fake date
+        category_id: this.faker.number.int({ min: 1, max: 5 }),
       };
 
       // insert the fakeVideo data into the "video" table

@@ -23,7 +23,6 @@ export default function NavBar() {
           <li>
             <Link to="login">Login</Link> / <Link to="signup">Signup</Link>
           </li>
-          {/* Une fois l'utilisateur authentifié, changer "login/signup" par "my account" */}
           <li>
             <Link to="contact">Contact</Link>
           </li>
@@ -39,9 +38,6 @@ export default function NavBar() {
           alt="logo"
         />
       </Link>
-      {/* <h1>
-        <Link to="/">Origins Digital</Link>
-      </h1> */}
     </nav>
   );
 }

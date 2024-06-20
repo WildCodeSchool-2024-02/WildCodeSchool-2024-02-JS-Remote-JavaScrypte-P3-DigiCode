@@ -16,7 +16,7 @@ CREATE TABLE video (
     is_free BOOLEAN NOT NULL DEFAULT FALSE,
     requires_account BOOLEAN NOT NULL DEFAULT FALSE,
     category_id INT UNSIGNED,
-    FOREIGN KEY (category_id) REFERENCES category (id)
+    FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- Utilisateur

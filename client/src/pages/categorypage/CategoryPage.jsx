@@ -1,5 +1,22 @@
+import { useLoaderData } from "react-router-dom";
+
+import Filter from "../../components/filter/Filter";
+
+
 export default function CategoryPage () {
 
-    return <h1>categroy page </h1>;
+const categoryData = useLoaderData();
+
+const handleBack = () => {
+ window.history.back();
+};
+
+  
+  return (
+ <>
+ <button type="button" onClick={handleBack} className="backButton">Back</button>
+ <Filter category={categoryData}/>
+ </>
+)
 
 }

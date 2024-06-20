@@ -18,6 +18,6 @@ router.put("/:id", edit);
 
 router.post("/", add);
 
-router.destroy("/:id", destroy);
+router.delete("/:id", destroy);
 
 module.exports = router;

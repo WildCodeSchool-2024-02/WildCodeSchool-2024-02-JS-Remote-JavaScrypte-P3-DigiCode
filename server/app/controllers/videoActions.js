@@ -7,7 +7,7 @@ const tables = require("../../database/tables");
 const browse = async (req, res, next) => {
   try {
     // fetch all videos from the database
-    const videos = await tables.videos.readAll();
+    const videos = await tables.video.readAll();
 
     res.status(200).json(videos);
   } catch (err) {

@@ -8,31 +8,9 @@ class VideoRepository extends AbstractRepository {
 
   // Browse (read all) videos
 
-  async readAll(video) {
-    const {
-      name,
-      url,
-      image,
-      description,
-      date,
-      is_premium,
-      is_free,
-      requires_account,
-      category_id,
-    } = video;
+  async readAll() {
     const [rows] = await this.database.query(
-      `SELECT name, url, image, description, date, is_premium, is_free, requires_account FROM ${this.table}`,
-      [
-        name,
-        url,
-        image,
-        description,
-        date,
-        is_premium,
-        is_free,
-        requires_account,
-        category_id,
-      ]
+      `SELECT name, url, image, description, date, is_premium, is_free, requires_account FROM ${this.table}`
     );
 
     // return the array of videos

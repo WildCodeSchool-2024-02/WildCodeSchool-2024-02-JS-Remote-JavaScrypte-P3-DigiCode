@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import { Navigation, Pagination, HashNavigation } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function HomePage() {
@@ -19,10 +19,10 @@ export default function HomePage() {
           clickable: true,
         }}
         navigation
-        modules={[Pagination, Navigation, HashNavigation]}
+        modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {videoData.map((v) => (
+        {videoData.slice(0, 3).map((v) => (
           <SwiperSlide key={v.name}>
             {" "}
             <img src={v.image} alt={v.alt} />

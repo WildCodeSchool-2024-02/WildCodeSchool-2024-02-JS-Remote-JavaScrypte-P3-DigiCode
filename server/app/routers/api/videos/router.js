@@ -26,6 +26,6 @@ router.post("/", add);
 router.put("/:id", edit);
 
 // route to delete a video
-router.destroy("/:id", destroy);
+router.delete("/:id", destroy);
 
 module.exports = router;

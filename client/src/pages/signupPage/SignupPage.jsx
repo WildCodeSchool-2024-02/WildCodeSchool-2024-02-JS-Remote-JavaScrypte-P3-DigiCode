@@ -136,9 +136,13 @@ export default function LoginPage() {
             required: "This field is required !",
             pattern: {
               value:
-                /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,64}$/,
+                /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){16,64}$/,
               message:
-                "You need at least 8 characters, including at least: one uppercase and one lowercase letter, one number and a special character",
+                "You need at least 16 characters, including at least: one uppercase and one lowercase letter, one number and a special character",
+            },
+            maxLength: {
+              value: 64,
+              message: "You can't put more that 64 characters",
             },
           })}
         />

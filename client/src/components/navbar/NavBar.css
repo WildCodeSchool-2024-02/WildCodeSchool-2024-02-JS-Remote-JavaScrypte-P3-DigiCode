@@ -1,0 +1,50 @@
+@import url("../../variables.css");
+
+.navbar-container {
+  position: relative;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  min-height: 3rem;
+}
+
+.logo {
+  max-height: 4rem;
+}
+
+.menu-button {
+  background-image: url("../../assets/images/menu.svg");
+  object-fit: contain;
+  color: transparent;
+  border: none;
+  background-color: transparent;
+  max-width: 2.5rem;
+  max-height: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0;
+}
+
+#navlinks {
+  margin: 0;
+  position: absolute;
+  top: 10%;
+  left: 2%;
+  background-color: var(--main-color-black);
+  color: var(--main-color-gray);
+  border-radius: 0.375rem;
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0.25rem;
+  }
+  a {
+    color: var(--accent-color);
+    text-decoration: none;
+  }
+  a:visited {
+    color: var(--main-color-gray);
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}

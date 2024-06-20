@@ -11,6 +11,7 @@ const {
   destroy,
 } = require("../../../controllers/userActions");
 const hashPassword = require("../../../services/hashPassword");
+const validateFormData = require("../../../services/validateFormData");
 
 // get a list of all users
 router.get("/", browse);
@@ -22,7 +23,7 @@ router.get("/:id", read);
 router.put("/:id", hashPassword, edit);
 
 // route to add a new user
-router.post("/", hashPassword, add);
+router.post("/", validateFormData, hashPassword, add);
 
 // route to delete an existing user
 router.delete("/:id", destroy);

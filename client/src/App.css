@@ -1,6 +1,11 @@
 @import url("./variables.css");
+@font-face {
+  font-family: Exo;
+  src: url("./assets/fonts/Exo-VariableFont_wght.ttf");
+}
 
 body {
   background-color: var(--main-color-black);
   color: var(--main-color-gray);
+  font-family: "Exo";
 }

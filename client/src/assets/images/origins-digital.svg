@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="400"
+   height="200"
+   viewBox="0 0 105.83333 52.916665"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <rect
+       x="90.375839"
+       y="73.385704"
+       width="103.29807"
+       height="30.475504"
+       id="rect1" />
+  </defs>
+  <g
+     id="layer1">
+    <text
+       xml:space="preserve"
+       transform="matrix(0.73799288,0,0,0.73799288,-64.713097,-48.299158)"
+       id="text1"
+       style="font-size:25.8133px;line-height:0.9;white-space:pre;shape-inside:url(#rect1);fill:#f4f4f4;fill-opacity:1"><tspan
+         x="90.375"
+         y="97.467221"
+         id="tspan4"><tspan
+           style="font-family:Wedges;-inkscape-font-specification:Wedges"
+           id="tspan3">Origins</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.5933px;line-height:0.9;font-family:Wedges;-inkscape-font-specification:Wedges;fill:#00bf63;fill-opacity:1;stroke-width:0.737992"
+       x="25.890591"
+       y="47.012928"
+       id="text2"><tspan
+         id="tspan2"
+         style="font-size:19.5933px;fill:#00bf63;fill-opacity:1;stroke-width:0.737992"
+         x="25.890591"
+         y="47.012928">digital</tspan></text>
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#f4f4f4;stroke-width:1.19614;stroke-dasharray:none;stroke-opacity:1"
+       id="path2"
+       cx="87.766228"
+       cy="15.581982"
+       r="12.327133" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#f4f4f4;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="path3"
+       d="m 72.823393,50.104487 -0.169689,-7.380465 -0.169688,-7.380464 6.476515,3.543278 6.476514,3.543278 -6.306827,3.837187 z"
+       transform="matrix(0.72075051,0.01716424,-0.01509758,0.81941281,32.219807,-20.158795)" />
+  </g>
+</svg>

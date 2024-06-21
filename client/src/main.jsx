@@ -1,14 +1,35 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
+import HomePage from "./pages/homepage/HomePage";
+import CategoryPage from "./pages/categorypage/CategoryPage";
+import VideoPage from "./pages/videopage/VideoPage";
+import SignupPage from "./pages/signupPage/SignupPage";
 
 const router = createBrowserRouter([
   {
-    path: "/",
     element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+        loader: () => fetch("http://localhost:3310/api/videos"),
+      },
+      {
+        path: "/category",
+        element: <CategoryPage />,
+      },
+      {
+        path: "/video/:id",
+        element: <VideoPage />,
+      },
+      {
+        path: "/signup",
+        element: <SignupPage />,
+      },
+    ],
   },
 ]);
 

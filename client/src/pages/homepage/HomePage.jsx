@@ -12,7 +12,7 @@ import SearchBar from "../../components/searchbar/SearchBar";
 
 export default function HomePage() {
   const videoData = useLoaderData();
-  console.info(videoData);
+
   return (
     <>
       <Swiper

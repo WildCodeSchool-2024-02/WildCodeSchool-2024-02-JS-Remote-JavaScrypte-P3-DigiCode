@@ -8,12 +8,10 @@ class RoleSeeder extends AbstractSeeder {
   run() {
     const roles = [
         {
-            name: "User",
-            access: "user"
+            name: "user",
         },
         {
-            name: "Admin",
-            access: "admin"
+            name: "admin",
         }
     ]
     roles.forEach((role) => this.insert(role));

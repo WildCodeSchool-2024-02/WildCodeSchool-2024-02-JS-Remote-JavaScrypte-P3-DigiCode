@@ -105,10 +105,10 @@ const destroy = async (req, res, next) => {
 const query = async (req, res, next) => {
   try {
     const { search } = req.params;
-    console.info(req.params.search);
+  
     const searchResults = await tables.video.query(search);
 
-    res.sendStatus(200).json(searchResults);
+    res.json(searchResults);
   } catch (err) {
     next(err);
   }

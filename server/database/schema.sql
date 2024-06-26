@@ -48,6 +48,3 @@ CREATE TABLE privilege (
     FOREIGN KEY (video_id) REFERENCES video (id),
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
-
--- Création de roles
-INSERT INTO role (name) VALUES ('user'), ('admin');

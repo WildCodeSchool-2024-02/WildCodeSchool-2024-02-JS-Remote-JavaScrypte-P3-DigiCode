@@ -15,8 +15,7 @@ class UserSeeder extends AbstractSeeder{
                lastname: this.faker.person.lastName(),
                email: this.faker.internet.email(),
                password: this.faker.internet.password(),
-               role_id: this.faker.number.int({min:1, max:2}),
-
+/*                role_id: this.faker.number.int({min:1, max:2}), */
             };
             this.insert(fakeUser);
         }

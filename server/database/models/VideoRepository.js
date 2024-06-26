@@ -89,8 +89,9 @@ class VideoRepository extends AbstractRepository {
 
   // Search (query)
   async query(search) {
+
     const [rows] = await this.database.query(
-      `SELECT name, url, image, description, date, is_premium, is_free, requires_account, category_id FROM ${this.table} WHERE LOCATE(?, name)`,
+      `SELECT title, url, image, description, date, is_premium, is_free, category_id FROM ${this.table} WHERE LOCATE(?, title)`,
       [search]
     );
 

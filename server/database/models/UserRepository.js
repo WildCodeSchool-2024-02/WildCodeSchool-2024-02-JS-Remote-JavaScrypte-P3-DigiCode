@@ -27,12 +27,12 @@ class UserRepository extends AbstractRepository {
 
   // Edit
   async update(user) {
-    const { firstname, lastname, email, password, birthdate, role_id, id } =
+    const { firstname, lastname, email, password, role_id, id } =
       user;
 
     const [result] = await this.database.query(
       `UPDATE ${this.table} SET firstname=?, lastname=?, email=?, password=?, birthdate=?, role_id=? WHERE id=?`,
-      [firstname, lastname, email, password, birthdate, role_id, id]
+      [firstname, lastname, email, password, role_id, id]
     );
 
     return result;
@@ -40,11 +40,11 @@ class UserRepository extends AbstractRepository {
 
   // Add
   async create(user) {
-    const { firstname, lastname, email, password, birthdate, role_id } = user;
+    const { firstname, lastname, email, password, role_id } = user;
 
     const [result] = await this.database.query(
       `INSERT INTO ${this.table} (firstname, lastname, email, password, birthdate, role_id) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [firstname, lastname, email, password, birthdate, role_id]
+      [firstname, lastname, email, password, role_id]
     );
 
     return result.insertId;

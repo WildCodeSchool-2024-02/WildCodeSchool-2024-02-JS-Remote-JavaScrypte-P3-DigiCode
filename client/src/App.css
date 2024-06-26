@@ -8,6 +8,25 @@ body {
   background-color: var(--main-color-black);
   color: var(--main-color-gray);
   font-family: "Exo";
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  min-height: 100vh;
+  position: relative;
+}
+
+/** Style commun aux liens de navigation */
+a {
+  text-decoration: none;
+  color: var(--accent-color);
+}
+a:visited {
+  color: var(--main-color-gray);
+}
+a:hover {
+  text-decoration: underline;
 }
 
 .backButton {

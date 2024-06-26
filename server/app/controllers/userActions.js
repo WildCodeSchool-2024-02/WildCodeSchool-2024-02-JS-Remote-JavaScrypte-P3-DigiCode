@@ -29,14 +29,12 @@ const read = async (req, res, next) => {
 const edit = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { firstname, lastname, email, password, birthdate, role_id } =
-      req.body;
+    const { firstname, lastname, email, password, role_id } = req.body;
     const user = await tables.user.update(
       firstname,
       lastname,
       email,
       password,
-      birthdate,
       role_id,
       id
     );
@@ -50,14 +48,12 @@ const edit = async (req, res, next) => {
 // Add
 const add = async (req, res, next) => {
   try {
-    const { firstname, lastname, email, password, birthdate, role_id } =
-      req.body;
+    const { firstname, lastname, email, password, role_id } = req.body;
     const user = await tables.user.create(
       firstname,
       lastname,
       email,
       password,
-      birthdate,
       role_id
     );
 

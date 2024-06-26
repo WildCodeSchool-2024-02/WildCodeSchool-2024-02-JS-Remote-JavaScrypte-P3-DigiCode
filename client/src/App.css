@@ -28,3 +28,13 @@ a:visited {
 a:hover {
   text-decoration: underline;
 }
+
+.backButton {
+  font-weight: bold;
+  margin-top: 3em;
+  margin-left: 15px;
+  padding: 5px;
+  background-color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  border-radius: 5px;
+}

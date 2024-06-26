@@ -10,7 +10,7 @@ class VideoRepository extends AbstractRepository {
 
   async readAll() {
     const [rows] = await this.database.query(
-      `SELECT name, url, image, description, date, is_premium, is_free, requires_account FROM ${this.table}`
+      `SELECT id, title, url, image, description, date, is_premium, is_free  FROM ${this.table}`
     );
 
     // return the array of videos
@@ -22,7 +22,7 @@ class VideoRepository extends AbstractRepository {
   async read(id) {
     // execute the SQL SELECT query to retrieve a specific video by its id
     const [row] = await this.database.query(
-      `SELECT name, url, image, description, date, is_premium, is_free, requires_account FROM ${this.table} where id = ?`,
+      `SELECT id, title, url, image, description, date, is_premium, is_free FROM ${this.table} where id = ?`,
       [id]
     );
 
@@ -33,11 +33,11 @@ class VideoRepository extends AbstractRepository {
   // Edit
 
   async edit(video) {
-    const { is_premium, is_free, requires_account, category_id } = video;
+    const { is_premium, is_free, category_id } = video;
 
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET is_premium=?, is_free=?, requires_account=?, category_id=? WHERE id=?`,
-      [is_premium, is_free, requires_account, category_id]
+      `UPDATE ${this.table} SET is_premium=?, is_free=?, category_id=? WHERE id=?`,
+      [is_premium, is_free, category_id]
     );
 
     return result.affectedRows;
@@ -47,30 +47,19 @@ class VideoRepository extends AbstractRepository {
 
   async add(video) {
     const {
-      name,
+      title,
       url,
       image,
       description,
       date,
       is_premium,
       is_free,
-      requires_account,
       category_id,
     } = video;
     // execute the SQL INSERT query to add a new video to the "video" table
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (name, url, image, description, date, is_premium, is_free, requires_account, category_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [
-        name,
-        url,
-        image,
-        description,
-        date,
-        is_premium,
-        is_free,
-        requires_account,
-        category_id,
-      ]
+      `INSERT INTO ${this.table} (title, url, image, description, date, is_premium, is_free, category_id) values(?, ?, ?, ?, ?, ?, ?, ?)`,
+      [title, url, image, description, date, is_premium, is_free, category_id]
     );
 
     // return the id of the newly inserted video

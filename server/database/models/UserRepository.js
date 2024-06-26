@@ -9,7 +9,7 @@ class UserRepository extends AbstractRepository {
   // Browse
   async readAll() {
     const [rows] = await this.database.query(
-      `SELECT u.firstname, u.lastname, u.email, u.password, u.birthdate, r.name AS role_name, r.access AS role_access FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id`
+      `SELECT u.firstname, u.lastname, u.email, u.password, r.name AS role_name, r.access AS role_access FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id`
     );
 
     return rows;
@@ -18,7 +18,7 @@ class UserRepository extends AbstractRepository {
   // Read
   async readById(id) {
     const [row] = await this.database.query(
-      `SELECT u.firstname, u.lastname, u.email, u.password, u.birthdate, r.name AS role_name, r.access AS role_access FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id WHERE u.id=?`,
+      `SELECT u.firstname, u.lastname, u.email, u.password, r.name AS role_name, r.access AS role_access FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id WHERE u.id=?`,
       [id]
     );
 
@@ -27,11 +27,10 @@ class UserRepository extends AbstractRepository {
 
   // Edit
   async update(user) {
-    const { firstname, lastname, email, password, role_id, id } =
-      user;
+    const { firstname, lastname, email, password, role_id, id } = user;
 
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET firstname=?, lastname=?, email=?, password=?, birthdate=?, role_id=? WHERE id=?`,
+      `UPDATE ${this.table} SET firstname=?, lastname=?, email=?, password=?, role_id=? WHERE id=?`,
       [firstname, lastname, email, password, role_id, id]
     );
 
@@ -43,7 +42,7 @@ class UserRepository extends AbstractRepository {
     const { firstname, lastname, email, password, role_id } = user;
 
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (firstname, lastname, email, password, birthdate, role_id) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO ${this.table} (firstname, lastname, email, password, role_id) VALUES (?, ?, ?, ?, ?)`,
       [firstname, lastname, email, password, role_id]
     );
 

@@ -13,7 +13,7 @@ class VideoSeeder extends AbstractSeeder {
       // generate fake video data
       const fakeVideo = {
         title: this.faker.lorem.words(), // generates a fake name (title)
-        url: this.faker.internet.url(), // generates a fake url
+        url: "https://videos.pexels.com/video-files/3144446/3144446-hd_1920_1080_25fps.mp4",
         image: this.faker.image.urlLoremFlickr(), // generates a fake image
         description: this.faker.lorem.paragraph(), // generates a fake description
         date: this.faker.date.recent(), // generate a fake date

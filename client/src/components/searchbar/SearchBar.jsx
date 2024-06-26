@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useRef } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom"
 
 export default function SearchBar() {
-    const search = useRef(null);
+    const [inputValue, SetInputValue] = useState("");
+
     const {
         register,
         handleSubmit,
@@ -14,12 +15,12 @@ export default function SearchBar() {
 
     const submitAction = (e) => {
         e.preventDefault()
-        navigate(`/search?q=${search.current.value}`)
+        navigate(`/search?q=${inputValue}`)
     };
     
     return (
         <form onSubmit={handleSubmit(submitAction)}>
-            <input ref={search} id="search" type="text" value={(e) => e.target.value} {...register("search", {
+            <input id="search" type="text" value={inputValue} onChange={(event) => SetInputValue(event.target.value)} {...register("search", {
                 required: "Your search can't be empty",
                 minLength: {
                     value: 2,

@@ -41,26 +41,24 @@ const read = async (req, res, next) => {
 const edit = async (req, res, next) => {
   try {
     const {
-      name,
+      title,
       url,
       image,
       description,
       date,
       is_premium,
       is_free,
-      requires_account,
       category_id,
     } = req.body;
 
     const video = await tables.video.edit(
-      name,
+      title,
       url,
       image,
       description,
       date,
       is_premium,
       is_free,
-      requires_account,
       category_id
     );
     res.sendStatus(204).json({ updated: video });

@@ -7,14 +7,13 @@ CREATE TABLE category (
 -- Vidéo
 CREATE TABLE video (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    name VARCHAR(80) NOT NULL,
+    title VARCHAR(80) NOT NULL,
     url VARCHAR(255) NOT NULL,
     image VARCHAR(255) NOT NULL,
     description TEXT,
     date DATE NOT NULL,
     is_premium BOOLEAN NOT NULL DEFAULT FALSE,
     is_free BOOLEAN NOT NULL DEFAULT FALSE,
-    requires_account BOOLEAN NOT NULL DEFAULT FALSE,
     category_id INT UNSIGNED,
     FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE SET NULL ON UPDATE CASCADE
 );
@@ -22,18 +21,16 @@ CREATE TABLE video (
 -- Utilisateur
 CREATE TABLE role (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    name VARCHAR(80) NOT NULL,
-    access VARCHAR(40) NOT NULL
+    name VARCHAR(80) NOT NULL
 );
 
 CREATE TABLE user (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
     firstname VARCHAR(120) NOT NULL,
     lastname VARCHAR(120) NOT NULL,
-    email VARCHAR(120) NOT NULL,
-    password TEXT NOT NULL,
-    birthdate DATE,
-    role_id INT UNSIGNED,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role_id INT UNSIGNED DEFAULT 1,
     FOREIGN KEY (role_id) REFERENCES role (id)
 );
 
@@ -51,3 +48,6 @@ CREATE TABLE privilege (
     FOREIGN KEY (video_id) REFERENCES video (id),
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
+
+-- Création de roles
+INSERT INTO role (name) VALUES ('user'), ('admin');

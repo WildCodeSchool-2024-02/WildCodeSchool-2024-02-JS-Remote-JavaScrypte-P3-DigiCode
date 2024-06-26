@@ -1,0 +1,25 @@
+@import url("../../variables.css");
+
+.filterContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2em;
+}
+
+.filterButton {
+  font-weight: bold;
+  width: 100px;
+  height: 50px;
+  background-color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  border-radius: 5px;
+}
+
+@media screen and (width > 1200px) {
+  .filterContainer {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 1;
+  }
+}

@@ -2,16 +2,17 @@
 
 import { useLoaderData } from "react-router-dom";
 
+import { Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import { Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import SearchBar from "../../components/searchbar/SearchBar";
 
 export default function HomePage() {
   const videoData = useLoaderData();
-  console.info(videoData);
+
   return (
     <>
       <Swiper
@@ -40,14 +41,14 @@ export default function HomePage() {
         id="heroSwiper"
       >
         {videoData.slice(0, 5).map((v) => (
-          <SwiperSlide key={v.name} id="heroSlide">
-            {" "}
-            <img id="imageSlider" src={v.image} alt={v.alt} />
+          <SwiperSlide key={v.title} id="heroSlide">
+            <img id="imageSlider" src={v.image} alt={v.title} />
           </SwiperSlide>
         ))}
       </Swiper>
 
       <h1>Homepage</h1>
+      <SearchBar/>
     </>
   );
 }

@@ -98,4 +98,18 @@ const destroy = async (req, res, next) => {
   }
 };
 
-module.exports = { browse, read, edit, add, destroy };
+// Search (query)
+
+const query = async (req, res, next) => {
+  try {
+    const { search } = req.params;
+  
+    const searchResults = await tables.video.query(search);
+
+    res.json(searchResults);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { browse, read, edit, add, destroy, query };

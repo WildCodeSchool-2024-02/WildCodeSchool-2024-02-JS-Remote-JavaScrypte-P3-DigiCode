@@ -75,6 +75,16 @@ class VideoRepository extends AbstractRepository {
 
     return result.affectedRows;
   }
+
+  // Search (query)
+  async query(search) {
+    const [rows] = await this.database.query(
+      `SELECT id, title, url, image, description, date, is_premium, is_free, category_id FROM ${this.table} WHERE LOCATE(?, title)`,
+      [search]
+    );
+
+    return rows;
+  }
 }
 
 module.exports = VideoRepository;

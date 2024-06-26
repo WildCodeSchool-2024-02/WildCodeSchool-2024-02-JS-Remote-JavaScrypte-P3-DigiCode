@@ -8,6 +8,7 @@ import CategoriesPage from "./pages/categoriespage/CategoriesPage";
 import CategoryPage from "./pages/categorypage/CategoryPage";
 import VideoPage from "./pages/videopage/VideoPage";
 import SignupPage from "./pages/signupPage/SignupPage";
+import ResultPage from "./pages/resultpage/ResultPage";
 
 
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <SignupPage />,
       },
+      {
+        path: "/result/:q",
+        element: <ResultPage/>
+      }
     ],
   },
 ]);

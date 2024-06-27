@@ -16,15 +16,29 @@ export default function CategoryPage() {
     };
     fetchCategoryVideo();
   }, [categoryFind]);
-  console.info(result);
+
+  console.info(categoryFind);
 
   const handleBack = () => {
     window.history.back();
   };
 
   return (
-    <button type="button" onClick={handleBack} className="backButton">
-      Back
-    </button>
+    <>
+      <button type="button" onClick={handleBack} className="backButton">
+        Back
+      </button>
+      <h1>{categoryFind.name.replaceAll("-", " ")}</h1>
+      {result && result[0].id !== null ? (
+        result.map((v) => (
+          <div key={v.id}>
+            <img src={v.image} alt={v.title} />
+            <h2>{v.title}</h2>
+          </div>
+        ))
+      ) : (
+        <h2>no video associate</h2>
+      )}
+    </>
   );
 }

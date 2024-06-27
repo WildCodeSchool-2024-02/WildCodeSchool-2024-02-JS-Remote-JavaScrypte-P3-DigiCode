@@ -1,0 +1,23 @@
+.searchForm {
+  display: flex;
+  justify-content: center;
+}
+
+#search {
+  border-radius: 5px;
+}
+
+.searchButton {
+  font-weight: bold;
+  width: 100px;
+  height: 50px;
+  background-color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  border-radius: 5px;
+}
+
+@media screen and (width > 760px) {
+  #search {
+    width: 30rem;
+  }
+}

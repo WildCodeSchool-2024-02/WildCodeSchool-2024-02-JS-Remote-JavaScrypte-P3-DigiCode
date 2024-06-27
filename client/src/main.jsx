@@ -10,7 +10,7 @@ import VideoPage from "./pages/videopage/VideoPage";
 import SignupPage from "./pages/signupPage/SignupPage";
 import ResultPage from "./pages/resultpage/ResultPage";
 
-
+const express = import.meta.en.VITE_API_URL
 
 const router = createBrowserRouter([
   {
@@ -33,6 +33,8 @@ const router = createBrowserRouter([
       {
         path: "/video/:id",
         element: <VideoPage />,
+        loader : ({params}) => 
+          fetch(`${express}/api/videos/${params.id}`)
       },
       {
         path: "/signup",

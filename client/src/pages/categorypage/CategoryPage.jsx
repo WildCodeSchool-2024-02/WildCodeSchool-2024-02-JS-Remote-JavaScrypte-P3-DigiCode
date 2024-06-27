@@ -17,8 +17,6 @@ export default function CategoryPage() {
     fetchCategoryVideo();
   }, [categoryFind]);
 
-  console.info(categoryFind);
-
   const handleBack = () => {
     window.history.back();
   };

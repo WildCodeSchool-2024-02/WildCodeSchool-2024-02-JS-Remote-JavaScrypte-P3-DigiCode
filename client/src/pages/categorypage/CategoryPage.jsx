@@ -33,7 +33,7 @@ export default function CategoryPage() {
         {result && result[0].id !== null ? (
           result.map((v) => <VideoCard video={v} key={v.id} />)
         ) : (
-          <h2>no video associate</h2>
+          <h2>no video associated</h2>
         )}
       </div>
     </>

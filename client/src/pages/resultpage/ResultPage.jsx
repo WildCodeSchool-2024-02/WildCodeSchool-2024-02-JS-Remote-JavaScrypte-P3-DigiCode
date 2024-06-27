@@ -27,7 +27,9 @@ export default function ResultPage() {
       </h1>
       <SearchBar />
       <div className="resultCards">
-        {result && result.map((v) => <VideoCard video={v} key={v.id} />)}
+        {result?.map((v) => (
+          <VideoCard video={v} key={v.id} />
+        ))}
       </div>
     </>
   );

@@ -15,11 +15,14 @@ class CategoryRepository extends AbstractRepository {
 
   async read(id) {
     const [rows] = await this.database.query(
-      `select name from ${this.table} where id = ?`,
+      `SELECT c.name, v.id, v.title, v.image
+         FROM ${this.table} AS c  
+         LEFT JOIN video AS v ON c.id = v.category_id 
+         WHERE c.name = ?`,
       [id]
     );
 
-    return rows[0];
+    return rows;
   }
 
   async add(name) {

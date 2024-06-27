@@ -13,6 +13,10 @@ console.info(videoData)
         <track kind="captions"/>
   
       </video>
+      <p> {videoData.description} </p>
+      <p> {videoData.date}</p>
+
+      
     </>
   );
 }

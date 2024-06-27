@@ -10,7 +10,7 @@ import VideoPage from "./pages/videopage/VideoPage";
 import SignupPage from "./pages/signupPage/SignupPage";
 import ResultPage from "./pages/resultpage/ResultPage";
 
-const express = import.meta.en.VITE_API_URL
+const express = import.meta.env.VITE_API_URL;
 
 const router = createBrowserRouter([
   {
@@ -19,22 +19,21 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
-        loader: () => fetch("http://localhost:3310/api/videos"),
+        loader: () => fetch(`${express}/api/videos`),
       },
       {
         path: "/categories",
         element: <CategoriesPage />,
-        loader: () => fetch(`http://localhost:3310/api/categories`)
+        loader: () => fetch(`${express}/api/categories`),
       },
-      {        
+      {
         path: "/categories/:name",
         element: <CategoryPage />,
       },
       {
         path: "/video/:id",
         element: <VideoPage />,
-        loader : ({params}) => 
-          fetch(`${express}/api/videos/${params.id}`)
+        loader: ({ params }) => fetch(`${express}/api/videos/${params.id}`),
       },
       {
         path: "/signup",
@@ -42,8 +41,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/result/:q",
-        element: <ResultPage/>
-      }
+        element: <ResultPage />,
+      },
     ],
   },
 ]);

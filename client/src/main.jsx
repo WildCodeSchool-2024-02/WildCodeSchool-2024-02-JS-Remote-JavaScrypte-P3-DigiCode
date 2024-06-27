@@ -33,6 +33,7 @@ const router = createBrowserRouter([
       {
         path: "/video/:id",
         element: <VideoPage />,
+        loader: ({ params }) => fetch(`${express}/api/videos/${params.id}`),
       },
       {
         path: "/signup",

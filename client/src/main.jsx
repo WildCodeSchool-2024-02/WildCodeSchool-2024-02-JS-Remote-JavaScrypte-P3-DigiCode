@@ -9,8 +9,7 @@ import CategoryPage from "./pages/categorypage/CategoryPage";
 import VideoPage from "./pages/videopage/VideoPage";
 import SignupPage from "./pages/signupPage/SignupPage";
 import ResultPage from "./pages/resultpage/ResultPage";
-
-
+import LoginPage from "./pages/loginpage/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -24,9 +23,9 @@ const router = createBrowserRouter([
       {
         path: "/categories",
         element: <CategoriesPage />,
-        loader: () => fetch(`http://localhost:3310/api/categories`)
+        loader: () => fetch(`http://localhost:3310/api/categories`),
       },
-      {        
+      {
         path: "/categories/:name",
         element: <CategoryPage />,
       },
@@ -39,9 +38,13 @@ const router = createBrowserRouter([
         element: <SignupPage />,
       },
       {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
         path: "/result/:q",
-        element: <ResultPage/>
-      }
+        element: <ResultPage />,
+      },
     ],
   },
 ]);

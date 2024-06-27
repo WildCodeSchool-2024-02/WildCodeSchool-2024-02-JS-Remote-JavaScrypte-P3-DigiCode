@@ -1,9 +1,8 @@
 .cardContainer {
-  border: 1px solid black;
   width: 300px;
   display: flex;
   flex-direction: column-reverse;
-  align-items: center;
+  align-items: start;
 }
 
 .cardImage {
@@ -11,6 +10,10 @@
 }
 
 @media screen and (width > 1200px) {
+  .cardContainer {
+    align-items: center;
+  }
+
   .overlay {
     text-align: center;
     display: none;

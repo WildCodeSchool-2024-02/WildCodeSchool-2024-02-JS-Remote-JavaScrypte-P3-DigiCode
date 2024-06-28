@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SearchBar from "../../components/searchbar/SearchBar";
+import VideoCard from "../../components/videocard/VideoCard";
+import "./ResultPage.css";
 
 export default function ResultPage() {
   const [result, setResult] = useState();
@@ -18,15 +20,17 @@ export default function ResultPage() {
 
   return (
     <>
-      <h1>search page</h1>
+      <h1 className="sTitle">
+        {result && result.length === 0
+          ? `no result for '${q}'`
+          : `result for '${q}' (${result && result.length})`}
+      </h1>
       <SearchBar />
-      {result &&
-        result.map((v) => (
-          <div key={v.id}>
-            <img src={v.image} alt={v.title} />
-            <h2>{v.title}</h2>
-          </div>
+      <div className="resultCards">
+        {result?.map((v) => (
+          <VideoCard video={v} key={v.id} />
         ))}
+      </div>
     </>
   );
 }

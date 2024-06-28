@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import VideoCard from "../../components/videocard/VideoCard";
+import "./CategoryPage.css";
 
 export default function CategoryPage() {
   const [result, setResult] = useState();
@@ -26,17 +28,14 @@ export default function CategoryPage() {
       <button type="button" onClick={handleBack} className="backButton">
         Back
       </button>
-      <h1>{categoryFind.name.replaceAll("-", " ")}</h1>
-      {result && result[0].id !== null ? (
-        result.map((v) => (
-          <div key={v.id}>
-            <img src={v.image} alt={v.title} />
-            <h2>{v.title}</h2>
-          </div>
-        ))
-      ) : (
-        <h2>no video associate</h2>
-      )}
+      <h1 className="cTitle">{categoryFind.name.replaceAll("-", " ")}</h1>
+      <div className="categoryCards">
+        {result && result[0].id !== null ? (
+          result.map((v) => <VideoCard video={v} key={v.id} />)
+        ) : (
+          <h2>no video associated</h2>
+        )}
+      </div>
     </>
   );
 }

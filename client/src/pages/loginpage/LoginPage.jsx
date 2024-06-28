@@ -18,7 +18,7 @@ export default function SignupPage() {
   const onSubmit = async (data) => {
     try {
       await axios
-        .post(`${expressURL}/api/users/login`, data, {
+        .post(`${expressURL}/api/auth/login`, data, {
           headers: { "Content-Type": "application/json" },
         })
         .then((response) => setResStatus(response.status));

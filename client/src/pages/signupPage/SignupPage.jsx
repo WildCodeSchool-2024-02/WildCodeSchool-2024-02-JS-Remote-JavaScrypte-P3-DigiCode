@@ -175,7 +175,7 @@ export default function LoginPage() {
             required: "This field is required !",
             pattern: {
               value:
-                /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$/,
+                /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){16,64}$/,
               message: "Invalid password format",
             },
             validate: (value) =>

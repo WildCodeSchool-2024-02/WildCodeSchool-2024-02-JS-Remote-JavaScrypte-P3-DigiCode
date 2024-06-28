@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const formDataSchema = Joi.object({
+const userValidationSchema = Joi.object({
   firstname: Joi.string().max(120).required(),
   lastname: Joi.string().max(120).required(),
   email: Joi.string()
@@ -13,10 +13,10 @@ const formDataSchema = Joi.object({
     .required(),
 });
 
-const validateFormData = (req, res, next) => {
+const userValidation = (req, res, next) => {
   delete req.body.confirmemail;
   delete req.body.confirmpassword;
-  const { error } = formDataSchema.validate(req.body, { abortEarly: false });
+  const { error } = userValidationSchema.validate(req.body, { abortEarly: false });
 
   if (error == null) {
     next();
@@ -25,4 +25,4 @@ const validateFormData = (req, res, next) => {
   }
 };
 
-module.exports = validateFormData;
+module.exports = userValidation;

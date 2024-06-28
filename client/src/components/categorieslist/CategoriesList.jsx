@@ -21,7 +21,6 @@ export default function CategoriesList({ category }) {
     };
     fetchCategoryVideo();
   }, [name]);
-  console.info(result);
 
   return (
     <>

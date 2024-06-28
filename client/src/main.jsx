@@ -9,6 +9,7 @@ import CategoryPage from "./pages/categorypage/CategoryPage";
 import VideoPage from "./pages/videopage/VideoPage";
 import SignupPage from "./pages/signupPage/SignupPage";
 import ResultPage from "./pages/resultpage/ResultPage";
+import LoginPage from "./pages/loginpage/LoginPage";
 
 const express = import.meta.env.VITE_API_URL;
 
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignupPage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
       },
       {
         path: "/result/:q",

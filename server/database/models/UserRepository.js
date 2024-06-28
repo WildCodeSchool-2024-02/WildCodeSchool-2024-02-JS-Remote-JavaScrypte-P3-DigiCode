@@ -38,9 +38,7 @@ class UserRepository extends AbstractRepository {
   }
 
   // Add
-  async create(user) {
-    const { firstname, lastname, email, password, role_id } = user;
-
+  async create(firstname, lastname, email, password, role_id) {
     const [result] = await this.database.query(
       `INSERT INTO ${this.table} (firstname, lastname, email, password, role_id) VALUES (?, ?, ?, ?, ?)`,
       [firstname, lastname, email, password, role_id]
@@ -54,6 +52,16 @@ class UserRepository extends AbstractRepository {
     const [result] = await this.database.query(
       `DELETE FROM ${this.table} WHERE id=?`,
       [id]
+    );
+
+    return result;
+  }
+
+  // Search user by email
+  async searchByEmail(email) {
+    const [result] = await this.database.query(
+      `SELECT firstname, lastname, email, password, role_id FROM ${this.table} WHERE email = ?`,
+      [email]
     );
 
     return result;

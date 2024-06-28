@@ -1,9 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SignupPage.css";
 
 export default function LoginPage() {
+  const [resStatus, setResStatus] = useState(null);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -11,9 +16,18 @@ export default function LoginPage() {
     watch,
   } = useForm();
 
+  const expressURL = import.meta.env.VITE_API_URL;
   const onSubmit = async (data) => {
     try {
-      await axios.post("/api/user", data);
+      await axios
+        .post(`${expressURL}/api/users/register`, data, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((response) => setResStatus(response.status));
+
+      if (resStatus === 201) {
+        navigate("/login");
+      }
     } catch (err) {
       console.error(err);
     }
@@ -151,7 +165,6 @@ export default function LoginPage() {
         )}
 
         <label className="label-form" htmlFor="confirmpassword">
-          {" "}
           Confirm password
         </label>
         <input

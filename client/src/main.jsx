@@ -4,9 +4,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
 import HomePage from "./pages/homepage/HomePage";
+import CategoriesPage from "./pages/categoriespage/CategoriesPage";
 import CategoryPage from "./pages/categorypage/CategoryPage";
 import VideoPage from "./pages/videopage/VideoPage";
 import SignupPage from "./pages/signupPage/SignupPage";
+import ResultPage from "./pages/resultpage/ResultPage";
+import LoginPage from "./pages/loginpage/LoginPage";
+
+const express = import.meta.env.VITE_API_URL;
 
 const router = createBrowserRouter([
   {
@@ -15,19 +20,33 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
-        loader: () => fetch("http://localhost:3310/api/videos"),
+        loader: () => fetch(`${express}/api/videos`),
       },
       {
-        path: "/category",
+        path: "/categories",
+        element: <CategoriesPage />,
+        loader: () => fetch(`${express}/api/categories`),
+      },
+      {
+        path: "/categories/:name",
         element: <CategoryPage />,
       },
       {
         path: "/video/:id",
         element: <VideoPage />,
+        loader: ({ params }) => fetch(`${express}/api/videos/${params.id}`),
       },
       {
         path: "/signup",
         element: <SignupPage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/result/:q",
+        element: <ResultPage />,
       },
     ],
   },

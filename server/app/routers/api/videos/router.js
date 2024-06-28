@@ -2,6 +2,11 @@ const express = require("express");
 
 const router = express.Router();
 
+// sub-route to search videos
+const searchRouter = require("./search/router");
+
+router.use("/q", searchRouter);
+
 // define API routes
 
 // import video-related actions

@@ -14,10 +14,15 @@ const formDataSchema = Joi.object({
 });
 
 const validateFormData = (req, res, next) => {
+  delete req.body.confirmemail;
+  delete req.body.confirmpassword;
   const { error } = formDataSchema.validate(req.body, { abortEarly: false });
 
-  if (error == null) next();
-  else res.sendStatus(400).json({ validationErrors: error.details });
+  if (error == null) {
+    next();
+  } else {
+    res.json({ validationErrors: error.details });
+  }
 };
 
 module.exports = validateFormData;

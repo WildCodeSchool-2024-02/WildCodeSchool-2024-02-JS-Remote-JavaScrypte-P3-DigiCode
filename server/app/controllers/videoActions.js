@@ -41,26 +41,24 @@ const read = async (req, res, next) => {
 const edit = async (req, res, next) => {
   try {
     const {
-      name,
+      title,
       url,
       image,
       description,
       date,
       is_premium,
       is_free,
-      requires_account,
       category_id,
     } = req.body;
 
     const video = await tables.video.edit(
-      name,
+      title,
       url,
       image,
       description,
       date,
       is_premium,
       is_free,
-      requires_account,
       category_id
     );
     res.sendStatus(204).json({ updated: video });
@@ -100,4 +98,18 @@ const destroy = async (req, res, next) => {
   }
 };
 
-module.exports = { browse, read, edit, add, destroy };
+// Search (query)
+
+const query = async (req, res, next) => {
+  try {
+    const { search } = req.params;
+  
+    const searchResults = await tables.video.query(search);
+
+    res.json(searchResults);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { browse, read, edit, add, destroy, query };

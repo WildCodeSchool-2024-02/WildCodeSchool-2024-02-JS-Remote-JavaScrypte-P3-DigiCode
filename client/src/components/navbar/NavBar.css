@@ -37,14 +37,4 @@
     margin: 0;
     padding: 0.25rem;
   }
-  a {
-    color: var(--accent-color);
-    text-decoration: none;
-  }
-  a:visited {
-    color: var(--main-color-gray);
-  }
-  a:hover {
-    text-decoration: underline;
-  }
 }

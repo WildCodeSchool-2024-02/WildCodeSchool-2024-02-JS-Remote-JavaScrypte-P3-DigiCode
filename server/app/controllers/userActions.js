@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+const argon2 = require("argon2");
 const tables = require("../../database/tables");
 
 // Browse
@@ -29,14 +30,12 @@ const read = async (req, res, next) => {
 const edit = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { firstname, lastname, email, password, birthdate, role_id } =
-      req.body;
+    const { firstname, lastname, email, password, role_id } = req.body;
     const user = await tables.user.update(
       firstname,
       lastname,
       email,
       password,
-      birthdate,
       role_id,
       id
     );
@@ -50,18 +49,19 @@ const edit = async (req, res, next) => {
 // Add
 const add = async (req, res, next) => {
   try {
-    const { firstname, lastname, email, password, birthdate, role_id } =
-      req.body;
-    const user = await tables.user.create(
+    const { firstname, lastname, email, password } = req.body;
+    const role_id = req.body.role_id || 1;
+
+    const userId = await tables.user.create(
       firstname,
       lastname,
       email,
       password,
-      birthdate,
       role_id
     );
+    console.info(`New user created with id ${userId}`);
 
-    res.sendStatus(201).json({ newUser: user });
+    res.sendStatus(201);
   } catch (error) {
     next(error);
   }
@@ -79,4 +79,23 @@ const destroy = async (req, res, next) => {
   }
 };
 
-module.exports = { browse, read, edit, add, destroy };
+// Login
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const user = await tables.user.searchByEmail(email);
+    const storedPassword = user[0].password;
+    const verified = await argon2.verify(storedPassword, password);
+
+    if (verified) {
+      delete user.password;
+      res.json(user);
+    } else {
+      res.sendStatus(422);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { browse, read, edit, add, destroy, login };

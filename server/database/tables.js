@@ -10,9 +10,12 @@ const tables = {};
 /* ************************************************************************* */
 
 // Register each repository as data access point for its table
-tables.user = new UserRepository();
 
+/** table user */
+tables.user = new UserRepository();
+/** table video */
 tables.video = new VideoRepository();
+/** table category */
 tables.category = new CategoryRepository();
 /* ************************************************************************* */
 

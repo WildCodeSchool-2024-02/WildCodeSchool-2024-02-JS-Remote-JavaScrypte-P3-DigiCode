@@ -8,4 +8,33 @@ body {
   background-color: var(--main-color-black);
   color: var(--main-color-gray);
   font-family: "Exo";
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  min-height: 100vh;
+  position: relative;
+}
+
+/** Style commun aux liens de navigation */
+a {
+  text-decoration: none;
+  color: var(--accent-color);
+}
+a:visited {
+  color: var(--main-color-gray);
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.backButton {
+  font-weight: bold;
+  margin-top: 3em;
+  margin-left: 15px;
+  padding: 5px;
+  background-color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  border-radius: 5px;
 }

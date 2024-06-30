@@ -6,9 +6,10 @@
     "db:seed": "node ./bin/seed.js",
     "build": "node ./bin/migrate.js",
     "start": "node index.js",
-    "test": "jest"
+    "test": "jest --setupFiles dotenv/config"
   },
   "dependencies": {
+    "@types/jest": "^29.5.12",
     "argon2": "^0.40.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

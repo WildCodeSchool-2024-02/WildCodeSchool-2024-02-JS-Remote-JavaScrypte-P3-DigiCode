@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./NavBar.css";
 
 export default function NavBar() {
+
   return (
     <nav className="navbar-container">
       <button
@@ -22,6 +23,9 @@ export default function NavBar() {
           </li>
           <li>
             <Link to="login">Login</Link> / <Link to="signup">Signup</Link>
+          </li>
+          <li>
+            <Link to="logout">Logout</Link>
           </li>
           <li>
             <Link to="contact">Contact</Link>

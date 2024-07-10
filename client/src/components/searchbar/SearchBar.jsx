@@ -16,7 +16,9 @@ export default function SearchBar() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate(`/result/${inputValue}`);
+    if (inputValue.length > 1) {
+      navigate(`/result/${inputValue}`);
+    }
   };
 
   return (

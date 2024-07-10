@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { NavLink } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import PropTypes from "prop-types";
@@ -24,7 +24,11 @@ export default function CategoriesList({ category }) {
 
   return (
     <>
-      <h1>{name}</h1>
+      <h1>
+        <NavLink to={`/categories/${name.replaceAll(" ", "-")}`}>
+          {name}
+        </NavLink>
+      </h1>
       <Swiper
         slidesPerView={1}
         spaceBetween={50}
@@ -60,6 +64,7 @@ CategoriesList.propTypes = {
   category: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
+      replaceAll: PropTypes.func.isRequired,
     })
   ).isRequired,
 };

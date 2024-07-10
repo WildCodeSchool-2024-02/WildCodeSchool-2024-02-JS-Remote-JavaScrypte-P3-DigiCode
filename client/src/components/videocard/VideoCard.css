@@ -10,20 +10,6 @@
 }
 
 @media screen and (width > 1200px) {
-  .cardContainer {
-    align-items: center;
-  }
-
-  .overlay {
-    text-align: center;
-    display: none;
-    position: absolute;
-  }
-
-  .cardContainer:hover .overlay {
-    display: block;
-  }
-
   .cardImage:hover {
     opacity: 0.4;
   }

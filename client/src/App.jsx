@@ -8,7 +8,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   return (
     <div className="app-container">
-      <NavBar context={{ currentUser, setCurrentUser }} />
+      <NavBar/>
       <main>
         <Outlet context={{ currentUser, setCurrentUser }} />
       </main>

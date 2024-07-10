@@ -1,5 +1,4 @@
 /* eslint-disable import/no-unresolved */
-
 import { useLoaderData, NavLink } from "react-router-dom";
 
 import { Navigation, Pagination } from "swiper/modules";
@@ -44,7 +43,7 @@ export default function HomePage() {
         {videoData.slice(0, 5).map((v) => (
           <SwiperSlide key={v.title} id="heroSlide">
             <NavLink to={`/video/${v.id}`}>
-              <img id="imageHero" src={v.image} alt={v.title} />{" "}
+              <img id="imageHero" src={v.image} alt={v.title} />
             </NavLink>
           </SwiperSlide>
         ))}
@@ -80,7 +79,7 @@ export default function HomePage() {
         {videoData.slice(6, 10).map((v) => (
           <SwiperSlide key={v.title} id="newinSlide">
             <NavLink to={`/video/${v.id}`}>
-              <img id="imageNewin" src={v.image} alt={v.title} />{" "}
+              <img id="imageNewin" src={v.image} alt={v.title} />
             </NavLink>
           </SwiperSlide>
         ))}

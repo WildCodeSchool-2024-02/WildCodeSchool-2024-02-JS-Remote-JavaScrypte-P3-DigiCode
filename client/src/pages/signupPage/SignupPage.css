@@ -45,7 +45,7 @@
 .signup-button {
   background-color: var(--accent-color);
   width: 7rem;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   border: none;
 }
 

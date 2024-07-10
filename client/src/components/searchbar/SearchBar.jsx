@@ -35,7 +35,7 @@ export default function SearchBar() {
         onChange={(event) => setInputValue(event.target.value)}
       />
       <button className="searchButton" type="submit">
-        search
+        Search
       </button>
       {errors.search && <p className="form-error">{errors.search.message}</p>}
     </form>

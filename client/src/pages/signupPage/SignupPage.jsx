@@ -19,17 +19,18 @@ export default function LoginPage() {
 
   const expressURL = import.meta.env.VITE_API_URL;
   
+  const redirect = () => {
+    if (resStatus === 201) {
+      navigate("/login");
+    }
+  }
   const onSubmit = async (data) => {
     try {
       await axios
         .post(`${expressURL}/api/users/register`, data, {
           headers: { "Content-Type": "application/json" },
         })
-        .then((response) => setResStatus(parseInt(response.status, 10)));
-
-      if (resStatus === 201) {
-        navigate("/login");
-      }
+        .then((response) => setResStatus(parseInt(response.status, 10))).finally(redirect())
     } catch (err) {
       console.error(err);
     }

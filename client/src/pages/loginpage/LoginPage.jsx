@@ -18,14 +18,6 @@ export default function SignupPage() {
   } = useForm();
   const expressURL = import.meta.env.VITE_API_URL;
 
-  // https://www.geeksforgeeks.org/how-to-reset-a-file-input-in-react-js/
-  // const emptyInputFields = () => {
-  //   if(inputRef.current) {
-  //     inputRef.current.value = "";
-  //     inputRef.current.type = "text";
-  //   }
-  // }
-
   const redirect = () => {
     if(resStatus === 200) navigate("/")
   };

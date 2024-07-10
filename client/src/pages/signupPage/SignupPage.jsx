@@ -37,8 +37,8 @@ export default function LoginPage() {
 
   return (
     <>
-      <h1 className="signup-title"> Create an account</h1>
-      <form className="signup-form" onSubmit={handleSubmit(onSubmit)} >
+      <h1 className="signup-title">Create an account</h1>
+      <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
         <h2 className="signup-subtitle">
           To have access to more videos and the possibility of adding them to
           favorites

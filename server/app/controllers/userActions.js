@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-const argon2 = require("argon2");
 const tables = require("../../database/tables");
 
 // Browse
@@ -79,23 +78,5 @@ const destroy = async (req, res, next) => {
   }
 };
 
-// Login
-const login = async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
-    const user = await tables.user.searchByEmail(email);
-    const storedPassword = user[0].password;
-    const verified = await argon2.verify(storedPassword, password);
 
-    if (verified) {
-      delete user.password;
-      res.json(user);
-    } else {
-      res.sendStatus(422);
-    }
-  } catch (error) {
-    next(error);
-  }
-};
-
-module.exports = { browse, read, edit, add, destroy, login };
+module.exports = { browse, read, edit, add, destroy};

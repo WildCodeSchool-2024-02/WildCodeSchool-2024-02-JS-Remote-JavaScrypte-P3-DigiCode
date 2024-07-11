@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SignupPage.css";
 
 export default function LoginPage() {
-  const [resStatus, setResStatus] = useState(null);
   const navigate = useNavigate();
+  const inputRef = useRef();
 
   const {
     register,
@@ -17,17 +17,14 @@ export default function LoginPage() {
   } = useForm();
 
   const expressURL = import.meta.env.VITE_API_URL;
+
   const onSubmit = async (data) => {
     try {
       await axios
         .post(`${expressURL}/api/users/register`, data, {
           headers: { "Content-Type": "application/json" },
         })
-        .then((response) => setResStatus(response.status));
-
-      if (resStatus === 201) {
-        navigate("/login");
-      }
+        .finally(() => navigate("/login"))
     } catch (err) {
       console.error(err);
     }
@@ -35,7 +32,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <h1 className="signup-title"> Create an account</h1>
+      <h1 className="signup-title">Create an account</h1>
       <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
         <h2 className="signup-subtitle">
           To have access to more videos and the possibility of adding them to
@@ -47,6 +44,7 @@ export default function LoginPage() {
               Firstname
             </label>
             <input
+              ref={inputRef}
               type="text"
               name="firstname"
               className="user-nameone-input"
@@ -72,6 +70,7 @@ export default function LoginPage() {
               Lastname
             </label>
             <input
+              ref={inputRef}
               type="text"
               name="lastname"
               className="user-nameone-input"
@@ -97,6 +96,7 @@ export default function LoginPage() {
           Email
         </label>
         <input
+          ref={inputRef}
           type="email"
           name="email"
           className="signup-input"
@@ -118,6 +118,7 @@ export default function LoginPage() {
           Confirm Email
         </label>
         <input
+          ref={inputRef}
           type="email"
           name="confirmemail"
           className="signup-input"
@@ -143,6 +144,7 @@ export default function LoginPage() {
           Password
         </label>
         <input
+          ref={inputRef}
           type="password"
           name="password"
           className="signup-input"
@@ -168,6 +170,7 @@ export default function LoginPage() {
           Confirm password
         </label>
         <input
+          ref={inputRef}
           type="password"
           name="confirmpassword"
           className="signup-input"
@@ -175,7 +178,7 @@ export default function LoginPage() {
             required: "This field is required !",
             pattern: {
               value:
-                /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$/,
+                /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){16,64}$/,
               message: "Invalid password format",
             },
             validate: (value) =>
@@ -186,7 +189,7 @@ export default function LoginPage() {
           <p className="form-error">{errors.confirmpassword.message}</p>
         )}
 
-        <button className="signup-button" type="submit">
+        <button className="signup-button" type="submit" >
           Create
         </button>
       </form>

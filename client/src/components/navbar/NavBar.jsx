@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+import PropTypes from "prop-types";
 import "./NavBar.css";
 
-export default function NavBar() {
+export default function NavBar({ user = null }) {
 
   return (
     <nav className="navbar-container">
@@ -21,12 +22,12 @@ export default function NavBar() {
           <li>
             <Link to="/categories">Categories</Link>
           </li>
-          <li>
+          { user === null ? <li>
             <Link to="login">Login</Link> / <Link to="signup">Signup</Link>
-          </li>
+          </li> :
           <li>
             <Link to="logout">Logout</Link>
-          </li>
+          </li>}
           <li>
             <Link to="contact">Contact</Link>
           </li>
@@ -44,4 +45,13 @@ export default function NavBar() {
       </Link>
     </nav>
   );
+}
+
+NavBar.propTypes = {
+  user: PropTypes.shape({
+    firstname: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+  }).isRequired,
 }

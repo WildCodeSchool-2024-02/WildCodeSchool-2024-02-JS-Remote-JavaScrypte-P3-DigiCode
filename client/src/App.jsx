@@ -6,9 +6,12 @@ import "./App.css";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+
   return (
     <div className="app-container">
-      <NavBar/>
+      {
+        currentUser != null ? <NavBar user={currentUser}/> : <NavBar />
+      }
       <main>
         <Outlet context={{ currentUser, setCurrentUser }} />
       </main>

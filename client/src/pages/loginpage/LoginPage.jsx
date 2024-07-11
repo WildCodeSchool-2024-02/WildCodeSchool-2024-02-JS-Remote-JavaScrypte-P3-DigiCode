@@ -1,12 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
+
 import axios from "axios";
 
 export default function SignupPage() {
-  const [resStatus, setResStatus] = useState(null);
+
   const navigate = useNavigate();
+  const {setCurrentUser} = useOutletContext();
+  const inputRef = useRef();
 
   const {
     register,
@@ -18,19 +21,23 @@ export default function SignupPage() {
   const onSubmit = async (data) => {
     try {
       await axios
-        .post(`${expressURL}/api/users/login`, data, {
-          headers: { "Content-Type": "application/json" },
+        .post(`${expressURL}/api/auth/login`, data, 
+          {
+          withCredentials: true,
+        },
+          {
+          headers: { 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8' },
         })
-        .then((response) => setResStatus(response.status));
-      if (resStatus === 200) {
-        navigate("/");
-      }
+        .then((response) => {
+          setCurrentUser(response.data.user);
+        }).finally(navigate("/"))
     } catch (error) {
       console.error(error);
     }
   };
 
-  return (
+
+  return ( 
     <>
       <h1>Login</h1>
 
@@ -39,6 +46,7 @@ export default function SignupPage() {
           <label>
             Email
             <input
+              ref={inputRef}
               type="text"
               name="email"
               {...register("email", {
@@ -60,6 +68,7 @@ export default function SignupPage() {
         <label>
           Password
           <input
+            ref={inputRef}
             type="password"
             name="password"
             {...register("password", {
@@ -81,7 +90,7 @@ export default function SignupPage() {
           <p className="form-error">{errors.password.message}</p>
         )}
 
-        <button type="submit">Login</button>
+        <button type="submit" >Login</button>
       </form>
     </>
   );

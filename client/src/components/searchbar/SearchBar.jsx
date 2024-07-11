@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import "./SearchBar.css";
 
 export default function SearchBar() {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate(`/result/${inputValue}`);
+    if (inputValue.length > 1) {
+      navigate(`/result/${inputValue}`);
+    }
   };
 
   return (
@@ -17,6 +19,7 @@ export default function SearchBar() {
       <input
         id="search"
         type="text"
+        placeholder="Search"
         onChange={(event) => setInputValue(event.target.value)}
       />
       <button className="searchButton" type="submit">

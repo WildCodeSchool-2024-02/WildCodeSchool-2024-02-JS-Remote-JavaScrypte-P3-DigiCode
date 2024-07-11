@@ -11,9 +11,8 @@ CREATE TABLE video (
     url VARCHAR(255) NOT NULL,
     image VARCHAR(255) NOT NULL,
     description TEXT,
-    date DATE NOT NULL,
-    is_premium BOOLEAN NOT NULL DEFAULT FALSE,
-    is_free BOOLEAN NOT NULL DEFAULT FALSE,
+    date DATETIME DEFAULT NOW(),
+    is_connected BOOLEAN DEFAULT FALSE,
     category_id INT UNSIGNED,
     FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE SET NULL ON UPDATE CASCADE
 );
@@ -51,3 +50,20 @@ CREATE TABLE privilege (
 
 -- Création de roles
 INSERT INTO role (name) VALUES ('user'), ('admin');
+
+-- Création d'un admin
+INSERT INTO
+    user (
+        firstname,
+        lastname,
+        email,
+        password,
+        role_id
+    )
+VALUES (
+        'Admin',
+        'Admin',
+        'admin@admin.none',
+        '6Ð¡oNq+¤léYºd¸F¸L[-.á"BöTñ¼\'[&~@i¾\\T>[*uåd~q¾3gÄÒJ',
+        2
+    );

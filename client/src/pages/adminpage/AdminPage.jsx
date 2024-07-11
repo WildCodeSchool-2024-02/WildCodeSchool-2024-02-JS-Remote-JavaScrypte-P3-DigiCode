@@ -1,14 +1,30 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useOutletContext, Link } from "react-router-dom";
+import VideoPanel from "../../components/videopanel/VideoPanel";
+import HeroSlider from "../../components/HeroSlider/HeroSlider";
 
 export default function AdminPage() {
+  const [categoryData, setCategoryData] = useState();
   const { currentUser } = useOutletContext();
 
   useEffect(() => {
+    const url = `${import.meta.env.VITE_API_URL}/api/auth/checkauth`;
+    const express = import.meta.env.VITE_API_URL;
+
+    // vérification de l'authentification
     try {
-      axios.get(`${import.meta.env.VITE_API_URL}/api/auth/checkauth`, {
+      axios.get(url, {
         withCredentials: true,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+
+    try {
+      axios.get(`${express}/api/categories`).then((response) => {
+        const { data } = response;
+        setCategoryData(data);
       });
     } catch (err) {
       console.error(err);
@@ -16,8 +32,26 @@ export default function AdminPage() {
   }, []);
 
   return currentUser && currentUser.role === "admin" ? (
-    <h1>Admin page</h1>
+    <>
+      <h1>Admin Panel</h1>
+
+      <VideoPanel />
+
+      <div>
+        <h2> Categories panel </h2>
+
+        <select>
+          {categoryData?.map((cat) => (
+            <option key={cat.id}> {cat.name} </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <h2>Hero slider</h2>
+        <HeroSlider />
+      </div>
+    </>
   ) : (
-    <h2>Not connected as an admin</h2>
+    <Link to="/"> access denied</Link>
   );
 }

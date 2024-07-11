@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from "react-hook-form";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 import axios from "axios";
 
 export default function SignupPage() {
-  const [resStatus, setResStatus] = useState(null);
+
   const navigate = useNavigate();
   const {setCurrentUser} = useOutletContext();
   const inputRef = useRef();
@@ -17,10 +17,6 @@ export default function SignupPage() {
     formState: { errors },
   } = useForm();
   const expressURL = import.meta.env.VITE_API_URL;
-
-  const redirect = () => {
-    if(resStatus === 200) navigate("/")
-  };
 
   const onSubmit = async (data) => {
     try {
@@ -33,9 +29,8 @@ export default function SignupPage() {
           headers: { 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8' },
         })
         .then((response) => {
-          setResStatus(parseInt(response.status, 10))
           setCurrentUser(response.data.user);
-        }).finally(redirect())
+        }).finally(navigate("/"))
     } catch (error) {
       console.error(error);
     }

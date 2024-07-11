@@ -1,12 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from "react-hook-form";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SignupPage.css";
 
 export default function LoginPage() {
-  const [resStatus, setResStatus] = useState(null);
   const navigate = useNavigate();
   const inputRef = useRef();
 
@@ -18,19 +17,14 @@ export default function LoginPage() {
   } = useForm();
 
   const expressURL = import.meta.env.VITE_API_URL;
-  
-  const redirect = () => {
-    if (resStatus === 201) {
-      navigate("/login");
-    }
-  }
+
   const onSubmit = async (data) => {
     try {
       await axios
         .post(`${expressURL}/api/users/register`, data, {
           headers: { "Content-Type": "application/json" },
         })
-        .then((response) => setResStatus(parseInt(response.status, 10))).finally(redirect())
+        .finally(() => navigate("/login"))
     } catch (err) {
       console.error(err);
     }

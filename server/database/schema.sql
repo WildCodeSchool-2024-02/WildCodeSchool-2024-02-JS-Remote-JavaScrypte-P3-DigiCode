@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- Catégorie
 CREATE TABLE category (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -50,5 +51,3 @@ CREATE TABLE privilege (
 
 -- Création de roles
 INSERT INTO role (name) VALUES ('user'), ('admin');
-
--- Création d'un admin

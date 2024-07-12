@@ -8,7 +8,7 @@ import axios from "axios";
 export default function SignupPage() {
 
   const navigate = useNavigate();
-  const {setCurrentUser} = useOutletContext();
+  const {currentUser, setCurrentUser} = useOutletContext();
   const inputRef = useRef();
 
   const {
@@ -30,7 +30,7 @@ export default function SignupPage() {
         })
         .then((response) => {
           setCurrentUser(response.data.user);
-        }).finally(navigate("/"))
+        }).finally(currentUser.role === "admin" ? navigate("/history9") : navigate("/"))
     } catch (error) {
       console.error(error);
     }

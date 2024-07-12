@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useOutletContext, Link } from "react-router-dom";
+import { useOutletContext , Navigate } from "react-router-dom";
 import VideoPanel from "../../components/videopanel/VideoPanel";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
 
 export default function AdminPage() {
+
+
+
   const [categoryData, setCategoryData] = useState();
   const { currentUser } = useOutletContext();
 
@@ -52,6 +55,6 @@ export default function AdminPage() {
       </div>
     </>
   ) : (
-    <Link to="/"> access denied</Link>
-  );
+   <Navigate to="/"/>
+  )
 }

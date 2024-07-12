@@ -29,7 +29,7 @@ CREATE TABLE user (
     lastname VARCHAR(120) NOT NULL,
     email VARCHAR(120) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role_id INT UNSIGNED DEFAULT 1,
+    role_id INT UNSIGNED DEFAULT 2,
     FOREIGN KEY (role_id) REFERENCES role (id)
 );
 
@@ -52,18 +52,3 @@ CREATE TABLE privilege (
 INSERT INTO role (name) VALUES ('user'), ('admin');
 
 -- Création d'un admin
-INSERT INTO
-    user (
-        firstname,
-        lastname,
-        email,
-        password,
-        role_id
-    )
-VALUES (
-        'Admin',
-        'Admin',
-        'admin@admin.none',
-        '6Ð¡oNq+¤léYºd¸F¸L[-.á"BöTñ¼\'[&~@i¾\\T>[*uåd~q¾3gÄÒJ',
-        2
-    );

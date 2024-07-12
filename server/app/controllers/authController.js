@@ -25,7 +25,7 @@ const login = async (req, res) => {
 
   delete user.password;
 
-  const token = encodeJWT(user);
+  const token = await encodeJWT(user);
   return res
     .cookie("auth_token", token, { httpOnly: true, secure: false })
     .json({ user, token });
@@ -35,7 +35,7 @@ const logout = (req, res) => {
   res.clearCookie("auth").sendStatus(200);
 };
 
-const checkAuth = (req, res) => {
+const checkAuth = async (req, res) => {
   const token = req.cookies?.auth_token;
 
   if (!token) {
@@ -43,7 +43,7 @@ const checkAuth = (req, res) => {
   }
 
   try {
-    const validToken = decodeJWT(token);
+    const validToken = await decodeJWT(token);
 
     return res
       .status(200)

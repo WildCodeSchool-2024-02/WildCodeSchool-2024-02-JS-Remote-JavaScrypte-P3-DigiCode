@@ -1,10 +1,15 @@
 @import url("../../variables.css");
 
+.filter-wrapper {
+  padding-top: 1.5rem;
+}
+
 .filterContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2em;
+  gap: 1.25em;
+  margin-top: 2rem;
 }
 
 .filterButton {
@@ -13,11 +18,17 @@
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  width: 6.25rem;
-  height: 3.125rem;
+  min-width: 5rem;
+  min-height: 1.75rem;
   background-color: var(--accent-color);
   border: 2px solid var(--accent-color);
-  border-radius: 5px;
+  border-radius: 8px;
+  padding: 0.25rem 0.3rem;
+}
+
+.categories-mapped-name {
+  color: var(--main-color-black);
+  font-size: 1rem;
 }
 
 @media screen and (width > 1000px) {

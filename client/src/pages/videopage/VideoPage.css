@@ -6,13 +6,29 @@
 
   .video-title {
     text-transform: capitalize;
-    margin-top: 7rem;
+    margin-top: 4rem;
+    padding: 0 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+  @media screen and (width > 760px) {
+    .video-title {
+      font-size: 1.8rem;
+      margin-top: 6rem;
+    }
   }
 
   .backButton {
     align-self: flex-start;
     position: absolute;
-    left: 10%;
+    top: -1.5rem;
+  }
+  @media screen and (width > 760px) {
+    .backButton {
+      align-self: flex-start;
+      position: absolute;
+      left: 10%;
+    }
   }
 
   .video-playback {
@@ -23,5 +39,12 @@
 
   .video-description {
     margin-top: 2rem;
+    width: 75%;
+  }
+
+  .video-metadata {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
   }
 }

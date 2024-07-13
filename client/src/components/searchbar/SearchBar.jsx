@@ -23,7 +23,7 @@ export default function SearchBar() {
         onChange={(event) => setInputValue(event.target.value)}
       />
       <button className="searchButton" type="submit">
-        Search
+        🔎
       </button>
     </form>
   );

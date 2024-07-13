@@ -1,4 +1,9 @@
 #newinSwiper {
-  margin-top: 5rem;
-  height: 15rem;
+  margin-top: 2.5rem;
+}
+
+@media screen and (width > 760px) {
+  #newinSwiper {
+    margin-bottom: 2rem;
+  }
 }

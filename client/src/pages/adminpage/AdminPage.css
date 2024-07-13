@@ -1,0 +1,11 @@
+.admin-title {
+  text-align: center;
+}
+
+@media screen and (width > 1000px) {
+  .admin-panel-row1 {
+    margin: 6rem 0;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}

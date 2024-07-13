@@ -19,7 +19,10 @@ export default function VideoPage() {
         <track kind="captions" />
       </video>
       <div className="video-description">
-        <p>{videoData.date.slice(0, 10)}</p>
+        <p className="video-metadata">
+          <span>{videoData.date.slice(0, 10)}</span>{" "}
+          <span>{videoData.category || "Uncategorized"}</span>
+        </p>
         <p>{videoData.description}</p>
       </div>
     </div>

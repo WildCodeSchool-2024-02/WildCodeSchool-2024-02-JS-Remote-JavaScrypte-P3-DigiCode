@@ -6,7 +6,7 @@ export default function VideoCard({ video }) {
   return (
     <NavLink className="cardContainer" to={`/video/${video.id}`}>
       <div className="overlay">
-        <h2 className="cardTitle">{`${video.title}`}</h2>
+        <h2 className="cardTitle">{video.title}</h2>
       </div>
       <img className="cardImage" src={video.image} alt={video.title} />
     </NavLink>

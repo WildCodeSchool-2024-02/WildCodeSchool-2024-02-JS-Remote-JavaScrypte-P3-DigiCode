@@ -56,7 +56,7 @@ a:hover {
   padding: 4px 10px;
   background-color: var(--accent-color);
   border: 0.125rem solid var(--accent-color);
-  border-radius: 0.3125rem;
+  border-radius: var(--medium-border-radius);
   cursor: pointer;
 }
 

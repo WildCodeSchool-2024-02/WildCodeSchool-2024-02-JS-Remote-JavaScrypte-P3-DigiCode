@@ -33,7 +33,7 @@
   left: var(--nav-horizontal-padding);
   background-color: var(--main-color-black);
   color: var(--main-color-gray);
-  border-radius: 0.375rem;
+  border-radius: var(--medium-border-radius);
   ul {
     list-style-type: none;
     margin: 0;

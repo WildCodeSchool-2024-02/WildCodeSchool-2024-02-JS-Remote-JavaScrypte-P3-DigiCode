@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import axios from "axios";
 import "./SignupPage.css";
 
@@ -24,8 +25,10 @@ export default function LoginPage() {
         .post(`${expressURL}/api/users/register`, data, {
           headers: { "Content-Type": "application/json" },
         })
-        .finally(() => navigate("/login"))
+
+        .finally(() => navigate("/login"));
     } catch (err) {
+      toast.error("an error occured, please try again");
       console.error(err);
     }
   };
@@ -189,8 +192,8 @@ export default function LoginPage() {
           <p className="form-error">{errors.confirmpassword.message}</p>
         )}
 
-        <button className="signup-button" type="submit" >
-          Create
+        <button className="signup-button" type="submit">
+          Sign up
         </button>
       </form>
     </>

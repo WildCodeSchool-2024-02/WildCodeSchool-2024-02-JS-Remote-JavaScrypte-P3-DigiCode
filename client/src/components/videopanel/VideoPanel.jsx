@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function VideoPanel() {
   const [categoryData, setCategoryData] = useState();
@@ -16,7 +17,9 @@ export default function VideoPanel() {
   const onSubmit = async (uploadData) => {
     try {
       await axios.post(`${expressURL}/api/videos`, uploadData);
+      toast.success("video added successfully!");
     } catch (err) {
+      toast.error("an error occured, please try again");
       console.error(err);
     }
   };

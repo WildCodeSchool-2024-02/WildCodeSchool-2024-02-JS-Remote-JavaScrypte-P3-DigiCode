@@ -2,13 +2,13 @@
 import { useForm } from "react-hook-form";
 import { useRef } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import axios from "axios";
 
 export default function SignupPage() {
-
   const navigate = useNavigate();
-  const {currentUser, setCurrentUser} = useOutletContext();
+  const { currentUser, setCurrentUser } = useOutletContext();
   const inputRef = useRef();
 
   const {
@@ -21,23 +21,32 @@ export default function SignupPage() {
   const onSubmit = async (data) => {
     try {
       await axios
-        .post(`${expressURL}/api/auth/login`, data, 
+        .post(
+          `${expressURL}/api/auth/login`,
+          data,
           {
-          withCredentials: true,
-        },
+            withCredentials: true,
+          },
           {
-          headers: { 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8' },
-        })
+            headers: {
+              "Content-Type":
+                "application/x-www-form-urlencoded; charset=UTF-8",
+            },
+          }
+        )
         .then((response) => {
           setCurrentUser(response.data.user);
-        }).finally(currentUser.role === "admin" ? navigate("/history9") : navigate("/"))
+        })
+        .finally(
+          currentUser.role === "admin" ? navigate("/history9") : navigate("/")
+        );
     } catch (error) {
+      toast.error("an error occured, please try again");
       console.error(error);
     }
   };
 
-
-  return ( 
+  return (
     <>
       <h1>Login</h1>
 
@@ -90,7 +99,7 @@ export default function SignupPage() {
           <p className="form-error">{errors.password.message}</p>
         )}
 
-        <button type="submit" >Login</button>
+        <button type="submit">Login</button>
       </form>
     </>
   );

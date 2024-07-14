@@ -15,7 +15,7 @@ const browse = async (req, res, next) => {
 // Read
 const read = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params || req.body;
     const user = await tables.user.readById(id);
 
     if (user != null) res.json(user);
@@ -32,6 +32,7 @@ const edit = async (req, res, next) => {
     const { firstname, lastname, email, password, role_id } = req.body;
     await tables.user.update(firstname, lastname, email, password, role_id, id);
 
+    console.info(`User with id ${id} updated`);
     res.sendStatus(204);
   } catch (error) {
     next(error);

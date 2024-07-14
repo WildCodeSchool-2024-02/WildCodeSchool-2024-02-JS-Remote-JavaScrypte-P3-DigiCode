@@ -17,20 +17,10 @@ export default function UserPage() {
   const requiredFieldError = "This field is required !";
 
   const onSubmit = async (data) => {
-    const { firstname, lastname, email, password } = data;
-    const updatedUser = {
-      firstname,
-      lastname,
-      email,
-      password,
-      role_id: 1,
-      id: currentUser.id,
-    };
+    const updatedUser = { ...data, role_id: 1, id: currentUser.id };
 
     try {
-      axios.put(`${express}/api/users/${currentUser.id}`, updatedUser, {
-        headers: { "Content-Type": "application/json" },
-      });
+      axios.put(`${express}/api/users/${currentUser.id}`, updatedUser);
     } catch (err) {
       console.error(err);
     }

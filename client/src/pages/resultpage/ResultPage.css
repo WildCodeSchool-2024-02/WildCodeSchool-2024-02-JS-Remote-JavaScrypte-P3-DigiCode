@@ -11,7 +11,7 @@
   font-size: 0.8em;
 }
 
-@media screen and (width > 600px) {
+@media screen and (width >= 600px) {
   .resultCards {
     justify-content: center;
     flex-direction: row;

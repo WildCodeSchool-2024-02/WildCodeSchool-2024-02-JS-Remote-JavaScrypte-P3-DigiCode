@@ -2,7 +2,7 @@
   margin-top: 2.5rem;
 }
 
-@media screen and (width > 760px) {
+@media screen and (width >= 760px) {
   #newinSwiper {
     margin-bottom: 2rem;
   }

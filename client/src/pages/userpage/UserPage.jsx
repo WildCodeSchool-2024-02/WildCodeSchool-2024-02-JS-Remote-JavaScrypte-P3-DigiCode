@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function UserPage() {
   const user = useOutletContext();
-  const { currentUser } = user;
+  const { currentUser, setCurrentUser } = user;
   const express = import.meta.env.VITE_API_URL;
 
   const {
@@ -20,7 +20,17 @@ export default function UserPage() {
     const updatedUser = { ...data, role_id: 1, id: currentUser.id };
 
     try {
-      axios.put(`${express}/api/users/${currentUser.id}`, updatedUser);
+      axios
+        .put(`${express}/api/users/${currentUser.id}`, updatedUser)
+        .finally(() => {
+          setCurrentUser({
+            firstname: updatedUser.firstname,
+            lastname: updatedUser.lastname,
+            email: updatedUser.email,
+            id: updatedUser.id,
+            role: "user",
+          });
+        });
     } catch (err) {
       console.error(err);
     }

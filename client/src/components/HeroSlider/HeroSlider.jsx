@@ -23,7 +23,7 @@ export default function HeroSlider() {
     } catch (err) {
       console.error(err);
     }
-  });
+  }, [express]);
 
   return (
     <Swiper

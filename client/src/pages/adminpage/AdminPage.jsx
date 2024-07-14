@@ -1,28 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useOutletContext , Navigate } from "react-router-dom";
+import { useOutletContext, Navigate } from "react-router-dom";
 import VideoPanel from "../../components/videopanel/VideoPanel";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
+import fetchAuth from "../../utils/auth";
 
 export default function AdminPage() {
-
-
-
   const [categoryData, setCategoryData] = useState();
-  const { currentUser } = useOutletContext();
+  const { currentUser, setCurrentUser } = useOutletContext();
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_API_URL}/api/auth/checkauth`;
     const express = import.meta.env.VITE_API_URL;
 
     // vérification de l'authentification
-    try {
-      axios.get(url, {
-        withCredentials: true,
-      });
-    } catch (err) {
-      console.error(err);
-    }
+    fetchAuth().then((response) => setCurrentUser(response));
 
     try {
       axios.get(`${express}/api/categories`).then((response) => {
@@ -32,14 +23,12 @@ export default function AdminPage() {
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [setCurrentUser]);
 
   return currentUser && currentUser.role === "admin" ? (
     <>
       <h1>Admin Panel</h1>
-
       <VideoPanel />
-
       <div>
         <h2> Categories panel </h2>
 
@@ -55,6 +44,6 @@ export default function AdminPage() {
       </div>
     </>
   ) : (
-   <Navigate to="/"/>
-  )
+    <Navigate to="/" />
+  );
 }

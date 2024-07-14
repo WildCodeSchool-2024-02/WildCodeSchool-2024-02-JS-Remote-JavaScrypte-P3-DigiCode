@@ -7,8 +7,9 @@ export default function LogoutPage() {
 
   const handleLogout = async () => {
     try {
-      await axios.get(`${expressURL}/api/auth/logout`, {
+      await axios.post(`${expressURL}/api/auth/logout`, {
         withCredencials: true,
+        credentials: "include",
       });
       setCurrentUser(null);
     } catch (err) {

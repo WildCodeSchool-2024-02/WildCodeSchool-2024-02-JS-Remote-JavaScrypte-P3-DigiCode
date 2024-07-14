@@ -3,20 +3,29 @@
 .form-error {
   margin: 0;
   color: var(--red);
+  font-size: 0.7rem;
+  margin-top: 0.2rem;
 }
 .signup-title {
   text-align: center;
   font-size: 1.4rem;
 }
+.msg-error {
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+}
 
 .signup-form {
-  margin: 0 auto;
+  margin: 0 auto 10rem;
   display: flex;
   flex-direction: column;
-  width: 20rem;
-  height: 35rem;
+  align-items: cente;
+  width: 17rem;
+  height: 38rem;
   background-color: var(--main-color-gray);
   border-radius: var(--input-radius);
+  padding: 1rem;
 }
 .signup-subtitle {
   color: black;
@@ -43,8 +52,11 @@
 }
 
 .signup-button {
+  margin-top: 2rem;
+  margin-left: 4rem;
   background-color: var(--accent-color);
   width: 7rem;
+  height: 1.6rem;
   border-radius: 1.25rem;
   border: none;
 }
@@ -60,6 +72,16 @@
 }
 
 @media screen and (width > 1200px) {
+  .signup-form {
+    padding: 1rem 2rem;
+    height: 36rem;
+  }
+
+  .msg-error {
+    display: flex;
+    flex-direction: column;
+  }
+
   .names-oneline {
     display: flex;
     flex-direction: row;
@@ -72,6 +94,7 @@
     }
     .user-lastname {
       display: block;
+      padding-left: 0.7rem;
       * {
         margin: 0 auto;
       }

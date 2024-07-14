@@ -26,9 +26,7 @@ class UserRepository extends AbstractRepository {
   }
 
   // Edit
-  async update(user) {
-    const { firstname, lastname, email, password, role_id, id } = user;
-
+  async update(firstname, lastname, email, password, role_id, id) {
     const [result] = await this.database.query(
       `UPDATE ${this.table} SET firstname=?, lastname=?, email=?, password=?, role_id=? WHERE id=?`,
       [firstname, lastname, email, password, role_id, id]

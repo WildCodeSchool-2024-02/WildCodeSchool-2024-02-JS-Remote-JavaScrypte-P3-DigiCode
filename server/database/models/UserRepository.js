@@ -9,7 +9,7 @@ class UserRepository extends AbstractRepository {
   // Browse
   async readAll() {
     const [rows] = await this.database.query(
-      `SELECT u.firstname, u.lastname, u.email, u.password, r.name AS role_name, r.access AS role_access FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id`
+      `SELECT u.firstname, u.lastname, u.email, u.password, r.name AS role_name, r.name AS role FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id`
     );
 
     return rows;
@@ -18,7 +18,7 @@ class UserRepository extends AbstractRepository {
   // Read
   async readById(id) {
     const [row] = await this.database.query(
-      `SELECT u.firstname, u.lastname, u.email, u.password, r.name AS role_name, r.access AS role_access FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id WHERE u.id=?`,
+      `SELECT u.firstname, u.lastname, u.email, u.password, r.name AS role_name, r.name AS role FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id WHERE u.id=?`,
       [id]
     );
 

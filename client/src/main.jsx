@@ -51,7 +51,7 @@ const router = createBrowserRouter([
         element: <ResultPage />,
       },
       {
-        path: "/admin",
+        path: "/hystory9",
         element: <AdminPage />,
       },
       {

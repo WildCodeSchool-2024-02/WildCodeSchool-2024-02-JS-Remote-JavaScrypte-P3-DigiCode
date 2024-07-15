@@ -108,7 +108,9 @@ export default function SignupPage() {
           )}{" "}
         </div>
 
-        <button type="submit">Login</button>
+        <button className="login-button" type="submit">
+          Login
+        </button>
       </form>
     </section>
   );

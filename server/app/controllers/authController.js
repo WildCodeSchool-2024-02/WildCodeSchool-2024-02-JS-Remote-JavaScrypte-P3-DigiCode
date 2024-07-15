@@ -37,7 +37,7 @@ const login = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  res.clearCookie("auth_token").sendStatus(200).console.log("logout");
+  res.clearCookie("auth_token").sendStatus(200);
 };
 
 const checkAuth = async (req, res) => {

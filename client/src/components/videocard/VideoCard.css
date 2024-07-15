@@ -9,7 +9,7 @@
   width: 18.75rem;
 }
 
-@media screen and (width > 1200px) {
+@media screen and (width >= 1200px) {
   .cardImage:hover {
     opacity: 0.4;
   }

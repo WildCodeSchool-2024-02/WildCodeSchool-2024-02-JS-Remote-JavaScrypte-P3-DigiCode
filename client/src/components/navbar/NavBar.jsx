@@ -55,5 +55,9 @@ NavBar.propTypes = {
     lastname: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
+};
+// defaultProps will be deprecated but eslint won't shut up about it
+NavBar.defaultProps = {
+  user: null,
 };

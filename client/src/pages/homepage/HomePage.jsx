@@ -20,6 +20,8 @@ export default function HomePage() {
 
       <SearchBar />
 
+      <style>{` #heroSwiper { scale: 0.8; margin-top: 0.5rem; margin-bottom: 0.5rem; }`}</style>
+
       <Swiper
         slidesPerView={1}
         spaceBetween={50}
@@ -42,7 +44,7 @@ export default function HomePage() {
         }}
         navigation
         modules={[Pagination, Navigation]}
-        className="newinSwiper"
+        className="newinSwiper homePageSwiper"
         id="newinSwiper"
       >
         {videoData?.map((v) => (

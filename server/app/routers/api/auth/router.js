@@ -11,6 +11,6 @@ const validateAuth = require("../../../services/validation/authValidation");
 
 router.post("/login", validateAuth, login);
 router.get("/checkauth", checkAuth);
-router.post("/logout", logout);
+router.get("/logout", logout);
 
 module.exports = router;

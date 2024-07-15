@@ -21,9 +21,7 @@ export default function LoginPage() {
   const onSubmit = async (data) => {
     try {
       await axios
-        .post(`${expressURL}/api/users/register`, data, {
-          headers: { "Content-Type": "application/json" },
-        })
+        .post(`${expressURL}/api/users/register`, data )
         .finally(() => navigate("/login"));
     } catch (err) {
       console.error(err);

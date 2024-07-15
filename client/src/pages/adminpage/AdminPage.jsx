@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useOutletContext, Navigate } from "react-router-dom";
-import VideoPanel from "../../components/videopanel/VideoPanel";
+import VideoAdd from "../../components/videoforms/VideoAdd";
+import VideoDelete from "../../components/videoforms/VideoDelete";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import "./AdminPage.css";
 
@@ -26,8 +27,8 @@ export default function AdminPage() {
     <div className="admin-panel">
       <h1 className="admin-title">Admin Panel</h1>
       <div className="admin-panel-row1">
-        <VideoPanel />
-
+        <VideoAdd />
+        <VideoDelete />
         <section>
           <h2>Categories Panel</h2>
 

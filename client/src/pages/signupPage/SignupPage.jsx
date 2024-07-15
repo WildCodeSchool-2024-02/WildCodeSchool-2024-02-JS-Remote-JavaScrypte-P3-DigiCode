@@ -158,7 +158,7 @@ export default function LoginPage() {
               value:
                 /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){12,64}$/,
               message:
-                "You need at least 8 characters, including one uppercase, one number and a special character",
+                "You need at least 12 characters, including one uppercase, one number and a special character",
             },
             maxLength: {
               value: 64,

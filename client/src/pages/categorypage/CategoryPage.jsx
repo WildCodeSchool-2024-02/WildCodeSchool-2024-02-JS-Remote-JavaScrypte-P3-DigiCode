@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import VideoCard from "../../components/videocard/VideoCard";
 import "./CategoryPage.css";
 
@@ -19,15 +19,13 @@ export default function CategoryPage() {
     fetchCategoryVideo();
   }, [categoryFind]);
 
-  const handleBack = () => {
-    window.history.back();
-  };
-
   return (
     <>
-      <button type="button" onClick={handleBack} className="backButton">
-        Back
-      </button>
+      <Link to="/categories">
+        <button type="button" className="backButton">
+          Back
+        </button>
+      </Link>
       <h1 className="cTitle">{categoryFind.name.replaceAll("-", " ")}</h1>
       <div className="categoryCards">
         {result && result[0].id !== null ? (

@@ -20,7 +20,7 @@ export default function VideoPage() {
       </video>
       <div className="video-description">
         <p className="video-metadata">
-          <span>{videoData.date.slice(0, 10)}</span>{" "}
+          <span>{videoData.date.slice(0, 10)}</span>
           <span>{videoData.category || "Uncategorized"}</span>
         </p>
         <p>{videoData.description}</p>

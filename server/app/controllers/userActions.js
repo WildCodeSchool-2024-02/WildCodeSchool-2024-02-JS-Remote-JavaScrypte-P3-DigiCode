@@ -32,7 +32,6 @@ const edit = async (req, res, next) => {
     const { firstname, lastname, email, password, role_id } = req.body;
     await tables.user.update(firstname, lastname, email, password, role_id, id);
 
-    console.info(`User with id ${id} updated`);
     res.sendStatus(204);
   } catch (error) {
     next(error);

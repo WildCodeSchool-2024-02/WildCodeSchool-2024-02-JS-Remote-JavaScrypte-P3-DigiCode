@@ -1,0 +1,50 @@
+.video-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  .video-title {
+    text-transform: capitalize;
+    margin-top: 4rem;
+    padding: 0 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+  @media screen and (width >= 760px) {
+    .video-title {
+      font-size: 1.8rem;
+      margin-top: 6rem;
+    }
+  }
+
+  .backButton {
+    align-self: flex-start;
+    position: absolute;
+    top: -1.5rem;
+  }
+  @media screen and (width >= 760px) {
+    .backButton {
+      align-self: flex-start;
+      position: absolute;
+      left: 10%;
+    }
+  }
+
+  .video-playback {
+    width: 75%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-description {
+    margin-top: 2rem;
+    width: 75%;
+  }
+
+  .video-metadata {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
+  }
+}

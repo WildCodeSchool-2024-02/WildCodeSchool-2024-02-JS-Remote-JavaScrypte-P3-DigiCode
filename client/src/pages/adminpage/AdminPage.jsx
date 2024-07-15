@@ -10,20 +10,8 @@ export default function AdminPage() {
   const { currentUser } = useOutletContext();
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_API_URL}/api/auth/checkauth`;
     const express = import.meta.env.VITE_API_URL;
-
-    // vérification de l'authentification (si currentUser n'est pas null)
-    if (currentUser) {
-      try {
-        axios.get(url, {
-          withCredentials: true,
-        });
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    // fetch des catégories
+    // vérification de l'authentification
     try {
       axios.get(`${express}/api/categories`).then((response) => {
         const { data } = response;
@@ -32,12 +20,11 @@ export default function AdminPage() {
     } catch (err) {
       console.error(err);
     }
-  }, [currentUser]);
+  }, []);
 
-  return currentUser && currentUser.role === "admin" ? (
+  return currentUser?.role === "admin" ? (
     <div className="admin-panel">
       <h1 className="admin-title">Admin Panel</h1>
-
       <div className="admin-panel-row1">
         <VideoPanel />
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useOutletContext, Navigate } from "react-router-dom";
 import VideoPanel from "../../components/videopanel/VideoPanel";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
@@ -9,27 +9,25 @@ import CategoryUpdate from "../../components/categoryforms/CategoryUpdate";
 import "./AdminPage.css";
 
 export default function AdminPage() {
+  const [setCategoryData] = useState();
   const { currentUser } = useOutletContext();
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_API_URL}/api/auth/checkauth`;
-
-    // vérification de l'authentification (si currentUser n'est pas null)
-    if (currentUser) {
-      try {
-        axios.get(url, {
-          withCredentials: true,
-        });
-      } catch (err) {
-        console.error(err);
-      }
+    const express = import.meta.env.VITE_API_URL;
+    // vérification de l'authentification
+    try {
+      axios.get(`${express}/api/categories`).then((response) => {
+        const { data } = response;
+        setCategoryData(data);
+      });
+    } catch (err) {
+      console.error(err);
     }
-  }, [currentUser]);
+  }, [setCategoryData]);
 
-  return currentUser && currentUser.role === "admin" ? (
+  return currentUser?.role === "admin" ? (
     <div className="admin-panel">
       <h1 className="admin-title">Admin Panel</h1>
-
       <div className="admin-panel-row1">
         <VideoPanel />
       </div>

@@ -1,9 +1,8 @@
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./NavBar.css";
 
 export default function NavBar({ user = null }) {
-
   return (
     <nav className="navbar-container">
       <button
@@ -22,12 +21,15 @@ export default function NavBar({ user = null }) {
           <li>
             <Link to="/categories">Categories</Link>
           </li>
-          { user === null ? <li>
-            <Link to="login">Login</Link> / <Link to="signup">Signup</Link>
-          </li> :
-          <li>
-            <Link to="logout">Logout</Link>
-          </li>}
+          {user === null ? (
+            <li>
+              <Link to="login">Login</Link> / <Link to="signup">Signup</Link>
+            </li>
+          ) : (
+            <li>
+              <Link to="logout">Logout</Link>
+            </li>
+          )}
           <li>
             <Link to="contact">Contact</Link>
           </li>
@@ -53,5 +55,9 @@ NavBar.propTypes = {
     lastname: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
-  }).isRequired,
-}
+  }),
+};
+// defaultProps will be deprecated but eslint won't shut up about it
+NavBar.defaultProps = {
+  user: null,
+};

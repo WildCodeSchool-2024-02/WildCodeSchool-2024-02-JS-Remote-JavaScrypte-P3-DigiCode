@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 
 import App from "./App";
 import HomePage from "./pages/homepage/HomePage";
@@ -57,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/logout",
         element: <LogoutPage />,
+      },
+      {
+        path: "/*",
+        element: <Navigate to="/" />,
       },
     ],
   },

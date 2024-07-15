@@ -94,7 +94,7 @@ export default function SignupPage() {
               required: "This field is required !",
               pattern: {
                 value:
-                  /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){16,64}$/,
+                  /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){12,64}$/,
                 message:
                   "You need at least 8 characters, including one uppercase, one number and a special character",
               },

@@ -36,6 +36,8 @@ export default function VideoPanel() {
     }
   }, []);
 
+  const requiredFieldError = "This field is required !";
+
   return (
     <section>
       <h1>Video Panel</h1>
@@ -46,7 +48,7 @@ export default function VideoPanel() {
             type="text"
             name="title"
             {...register("title", {
-              required: "This filed is required !",
+              required: requiredFieldError,
               minLength: {
                 value: 2,
                 message: "You need at least 2 characters",
@@ -61,7 +63,7 @@ export default function VideoPanel() {
             type="text"
             name="description"
             {...register("description", {
-              required: "This filed is required !",
+              required: requiredFieldError,
               minLength: {
                 value: 2,
                 message: "You need at least 2 characters",
@@ -76,7 +78,7 @@ export default function VideoPanel() {
           <select name="category" {...register("category_id")}>
             {categoryData?.map((cat) => (
               <option key={cat.id} value={cat.id}>
-                {cat.name}
+                {`${cat.name.charAt(0).toUpperCase()}${cat.name.slice(1)}`}
               </option>
             ))}
           </select>
@@ -86,9 +88,10 @@ export default function VideoPanel() {
             type="radio"
             name="free"
             value="0"
+            defaultChecked
             {...register("is_connected")}
           />
-          <label htmlFor="free"> Access limité </label>
+          <label htmlFor="free">Free</label>
 
           <input
             type="radio"
@@ -96,34 +99,34 @@ export default function VideoPanel() {
             value="1"
             {...register("is_connected")}
           />
-          <label htmlFor="premium"> Access illimité </label>
+          <label htmlFor="premium">Premium</label>
         </div>
 
         <div className="pannelimage-url">
-          <label htmlFor="image"> image </label>
+          <label htmlFor="image">Thumbnail</label>
           <input
             type="text"
             name="image"
             {...register("image", {
-              required: " this field is required!",
+              required: requiredFieldError,
             })}
           />
           {errors.image && <p> {errors.image.message}</p>}
         </div>
 
         <div className="pannelvideo-url">
-          <label htmlFor="url"> url </label>
+          <label htmlFor="url">URL</label>
           <input
             type="text"
             name="url"
             {...register("url", {
-              required: " this field is required!",
+              required: requiredFieldError,
             })}
           />
           {errors.url && <p> {errors.url.message}</p>}
         </div>
 
-        <button type="submit"> post video</button>
+        <button type="submit">Post video</button>
       </form>
     </section>
   );

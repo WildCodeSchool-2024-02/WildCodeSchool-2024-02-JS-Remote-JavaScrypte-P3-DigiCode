@@ -2,12 +2,10 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 
 export default function CategoryDelete() {
   const [categoryData, setCategoryData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
-  const categoryFind = useParams();
 
   const {
     register,
@@ -15,18 +13,13 @@ export default function CategoryDelete() {
     formState: { errors },
   } = useForm();
 
-  const onSubmitDelete = async (data) => {
+  const onSubmit = async (data) => {
     try {
-      await axios.delete(
-        `${expressURL}/api/categories/${categoryFind.id}`,
-        data
-      );
-      console.info(data);
+      await axios.delete(`${expressURL}/api/categories/${data.id}`, data);
     } catch (err) {
       console.error(err);
     }
   };
-
   useEffect(() => {
     const express = import.meta.env.VITE_API_URL;
     try {
@@ -42,7 +35,7 @@ export default function CategoryDelete() {
   return (
     <section>
       <h2>Delete a category</h2>
-      <form onSubmit={handleSubmit(onSubmitDelete)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="pannel-category">
           <label htmlFor="category"> Category </label>
           <select name="category" {...register("id")}>

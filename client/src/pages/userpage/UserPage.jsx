@@ -14,7 +14,10 @@ export default function UserPage() {
     formState: { errors },
     watch,
   } = useForm();
+
   const requiredFieldError = "This field is required !";
+  const min2CharError = "Must have at least 2 characters !";
+  const max120CharError = "Must have at most 120 characters !";
 
   const onSubmit = async (data) => {
     const updatedUser = { ...data, role_id: 1, id: currentUser.id };
@@ -58,11 +61,11 @@ export default function UserPage() {
                 required: requiredFieldError,
                 minLength: {
                   value: 2,
-                  message: "You need at least 2 characters",
+                  message: min2CharError,
                 },
                 maxLength: {
                   value: 120,
-                  message: "You can't have more than 120 characters",
+                  message: max120CharError,
                 },
               })}
             />
@@ -83,11 +86,11 @@ export default function UserPage() {
                 required: requiredFieldError,
                 minLength: {
                   value: 2,
-                  message: "You need at least 2 characters",
+                  message: min2CharError,
                 },
                 maxLength: {
                   value: 120,
-                  message: "You can't have more than 120 characters",
+                  message: max120CharError,
                 },
               })}
             />
@@ -112,7 +115,7 @@ export default function UserPage() {
                 },
                 maxLength: {
                   value: 120,
-                  message: "You can't have more than 120 characters",
+                  message: max120CharError,
                 },
               })}
             />
@@ -135,7 +138,7 @@ export default function UserPage() {
                 },
                 maxLength: {
                   value: 120,
-                  message: "You can't have more than 120 characters",
+                  message: max120CharError,
                 },
                 validate: (value) =>
                   value === watch("email") || "Emails do not match",
@@ -158,9 +161,9 @@ export default function UserPage() {
                 required: requiredFieldError,
                 pattern: {
                   value:
-                    /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){16,64}$/,
+                    /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){12,64}$/,
                   message:
-                    "You need at least 16 characters, including at least: one uppercase and one lowercase letter, one number and a special character",
+                    "You need at least 12 characters, including one uppercase, one number and a special character",
                 },
                 maxLength: {
                   value: 64,
@@ -185,7 +188,7 @@ export default function UserPage() {
                 required: requiredFieldError,
                 pattern: {
                   value:
-                    /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){16,64}$/,
+                    /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){12,64}$/,
                   message: "Invalid password format",
                 },
                 validate: (value) =>

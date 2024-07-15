@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="app-container">
       <p>Your name is : {currentUser?.firstname}</p>
-      <NavBar user={currentUser} />
+      <NavBar />
       <main>
         <Outlet context={{ currentUser, setCurrentUser }} />
       </main>

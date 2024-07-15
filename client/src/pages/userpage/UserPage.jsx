@@ -25,7 +25,7 @@ export default function UserPage() {
     try {
       axios
         .put(`${express}/api/users/${currentUser.id}`, updatedUser)
-        .finally(() => {
+        .then(() => {
           setCurrentUser({
             firstname: updatedUser.firstname,
             lastname: updatedUser.lastname,

@@ -17,9 +17,9 @@ export default function VideoPanel() {
   const onSubmit = async (uploadData) => {
     try {
       await axios.post(`${expressURL}/api/videos`, uploadData);
-      toast.success("video added successfully!");
+      toast.success("Video added successfully!");
     } catch (err) {
-      toast.error("an error occured, please try again");
+      toast.error("An error occured, please try again later");
       console.error(err);
     }
   };

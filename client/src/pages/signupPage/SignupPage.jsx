@@ -22,13 +22,10 @@ export default function LoginPage() {
   const onSubmit = async (data) => {
     try {
       await axios
-        .post(`${expressURL}/api/users/register`, data, {
-          headers: { "Content-Type": "application/json" },
-        })
-
+        .post(`${expressURL}/api/users/register`, data)
         .finally(() => navigate("/login"));
     } catch (err) {
-      toast.error("an error occured, please try again");
+      toast.error("An error occured, please try again");
       console.error(err);
     }
   };

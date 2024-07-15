@@ -21,19 +21,9 @@ export default function SignupPage() {
   const onSubmit = async (data) => {
     try {
       await axios
-        .post(
-          `${expressURL}/api/auth/login`,
-          data,
-          {
-            withCredentials: true,
-          },
-          {
-            headers: {
-              "Content-Type":
-                "application/x-www-form-urlencoded; charset=UTF-8",
-            },
-          }
-        )
+        .post(`${expressURL}/api/auth/login`, data, {
+          withCredentials: true,
+        })
         .then((response) => {
           setCurrentUser(response.data.user);
         })
@@ -41,7 +31,7 @@ export default function SignupPage() {
           currentUser.role === "admin" ? navigate("/history9") : navigate("/")
         );
     } catch (error) {
-      toast.error("an error occured, please try again");
+      toast.error("An error occured, please try again");
       console.error(error);
     }
   };

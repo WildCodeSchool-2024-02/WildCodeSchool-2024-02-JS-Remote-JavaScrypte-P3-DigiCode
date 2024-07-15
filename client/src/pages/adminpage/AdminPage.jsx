@@ -3,18 +3,15 @@ import { useEffect, useState } from "react";
 import { useOutletContext, Navigate } from "react-router-dom";
 import VideoPanel from "../../components/videopanel/VideoPanel";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
-import fetchAuth from "../../utils/auth";
+import "./AdminPage.css";
 
 export default function AdminPage() {
   const [categoryData, setCategoryData] = useState();
-  const { currentUser, setCurrentUser } = useOutletContext();
+  const { currentUser } = useOutletContext();
 
   useEffect(() => {
     const express = import.meta.env.VITE_API_URL;
-
     // vérification de l'authentification
-    fetchAuth().then((response) => setCurrentUser(response));
-
     try {
       axios.get(`${express}/api/categories`).then((response) => {
         const { data } = response;
@@ -23,26 +20,31 @@ export default function AdminPage() {
     } catch (err) {
       console.error(err);
     }
-  }, [setCurrentUser]);
+  }, []);
 
-  return currentUser && currentUser.role === "admin" ? (
-    <>
-      <h1>Admin Panel</h1>
-      <VideoPanel />
-      <div>
-        <h2> Categories panel </h2>
+  return currentUser?.role === "admin" ? (
+    <div className="admin-panel">
+      <h1 className="admin-title">Admin Panel</h1>
+      <div className="admin-panel-row1">
+        <VideoPanel />
 
-        <select>
-          {categoryData?.map((cat) => (
-            <option key={cat.id}> {cat.name} </option>
-          ))}
-        </select>
+        <section>
+          <h2>Categories Panel</h2>
+
+          <select>
+            {categoryData?.map((cat) => (
+              <option
+                key={cat.id}
+              >{`${cat.name.charAt(0).toUpperCase()}${cat.name.slice(1)}`}</option>
+            ))}
+          </select>
+        </section>
       </div>
       <div>
         <h2>Hero slider</h2>
         <HeroSlider />
       </div>
-    </>
+    </div>
   ) : (
     <Navigate to="/" />
   );

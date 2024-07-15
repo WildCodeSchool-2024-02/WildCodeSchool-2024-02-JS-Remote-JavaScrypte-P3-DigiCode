@@ -11,10 +11,10 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 export default function HeroSlider() {
-  const express = import.meta.env.VITE_API_URL;
   const [videoData, setVideoData] = useState([]);
 
   useEffect(() => {
+    const express = import.meta.env.VITE_API_URL;
     try {
       axios.get(`${express}/api/videos`).then((response) => {
         const { data } = response;
@@ -23,7 +23,7 @@ export default function HeroSlider() {
     } catch (err) {
       console.error(err);
     }
-  }, [express]);
+  }, []);
 
   return (
     <Swiper

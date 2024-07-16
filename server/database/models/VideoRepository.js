@@ -22,7 +22,7 @@ class VideoRepository extends AbstractRepository {
   async read(id) {
     // execute the SQL SELECT query to retrieve a specific video by its id
     const [row] = await this.database.query(
-      `SELECT id, title, url, image, description, date, is_connected FROM ${this.table} where id = ?`,
+      `SELECT v.id, v.title, v.url, v.image, v.description, v.date, v.is_connected, c.name AS category FROM ${this.table} AS v JOIN category AS c ON v.category_id = c.id where v.id = ?`,
       [id]
     );
 

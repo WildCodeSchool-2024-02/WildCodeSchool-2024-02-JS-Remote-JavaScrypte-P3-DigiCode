@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 import { useOutletContext, Navigate } from "react-router-dom";
 import VideoPanel from "../../components/videopanel/VideoPanel";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
+import CategoryAdd from "../../components/categoryforms/CategoryAdd";
+import CategoryDelete from "../../components/categoryforms/CategoryDelete";
+
 import "./AdminPage.css";
 
 export default function AdminPage() {
-  const [categoryData, setCategoryData] = useState();
+  const [setCategoryData] = useState();
   const { currentUser } = useOutletContext();
 
   useEffect(() => {
@@ -20,25 +23,19 @@ export default function AdminPage() {
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [setCategoryData]);
 
   return currentUser?.role === "admin" ? (
     <div className="admin-panel">
       <h1 className="admin-title">Admin Panel</h1>
       <div className="admin-panel-row1">
         <VideoPanel />
-
-        <section>
-          <h2>Categories Panel</h2>
-
-          <select>
-            {categoryData?.map((cat) => (
-              <option
-                key={cat.id}
-              >{`${cat.name.charAt(0).toUpperCase()}${cat.name.slice(1)}`}</option>
-            ))}
-          </select>
-        </section>
+      </div>
+      <div>
+        <CategoryAdd />
+      </div>
+      <div>
+        <CategoryDelete />
       </div>
       <div>
         <h2>Hero slider</h2>

@@ -27,12 +27,17 @@ const login = async (req, res) => {
 
   const token = await encodeJWT(user);
   return res
-    .cookie("auth_token", token, { httpOnly: true, secure: false })
+    .status(200)
+    .cookie("auth_token", token, {
+      httpOnly: true,
+      secure: false,
+      maxAge: 3600000,
+    })
     .json({ user, token });
 };
 
 const logout = (req, res) => {
-  res.clearCookie("auth").sendStatus(200);
+  res.clearCookie("auth_token").sendStatus(200);
 };
 
 const checkAuth = async (req, res) => {

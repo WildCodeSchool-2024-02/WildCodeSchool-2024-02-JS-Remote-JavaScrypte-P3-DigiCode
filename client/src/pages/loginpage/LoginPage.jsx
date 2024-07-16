@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from "react-hook-form";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useNavigate, useOutletContext, Link } from "react-router-dom";
 
 import axios from "axios";
@@ -11,29 +11,34 @@ export default function SignupPage() {
   const { currentUser, setCurrentUser } = useOutletContext();
   const inputRef = useRef();
 
+  useEffect(() => {
+    if (currentUser?.role === "user") {
+      navigate("/");
+    }
+    if (currentUser?.role === "admin") {
+      navigate("/history9");
+    }
+  }, [currentUser, navigate]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const expressURL = import.meta.env.VITE_API_URL;
 
   const onSubmit = async (data) => {
     try {
       await axios
-        .post(
-          `${expressURL}/api/auth/login`,
-          data,
-          {
-            withCredentials: true,
-          }
-        )
+        .post(`${expressURL}/api/auth/login`, data, {
+          withCredentials: true,
+        })
         .then((response) => {
           setCurrentUser(response.data.user);
-        })
-        .finally(
-          currentUser.role === "admin" ? navigate("/history9") : navigate("/")
-        );
+        });
+
+      console.warn(currentUser);
     } catch (error) {
       console.error(error);
     }

@@ -43,52 +43,56 @@ export default function LoginPage() {
             <label className="label-form" htmlFor="firstname">
               Firstname
             </label>
-            <input
-              ref={inputRef}
-              type="text"
-              name="firstname"
-              className="user-nameone-input"
-              {...register("firstname", {
-                required: "This field is required !",
-                minLength: {
-                  value: 2,
-                  message: "You need at least 2 characters",
-                },
-                maxLength: {
-                  value: 120,
-                  message: "You can't have more than 120 characters",
-                },
-              })}
-            />
-            {errors.firstname && (
-              <p className="form-error">{errors.firstname.message}</p>
-            )}
+            <div className="msg-error-name">
+              <input
+                ref={inputRef}
+                type="text"
+                name="firstname"
+                className="user-nameone-input"
+                {...register("firstname", {
+                  required: "This field is required !",
+                  minLength: {
+                    value: 2,
+                    message: "You need at least 2 characters",
+                  },
+                  maxLength: {
+                    value: 120,
+                    message: "You can't have more than 120 characters",
+                  },
+                })}
+              />
+              {errors.firstname && (
+                <p className="form-error">{errors.firstname.message}</p>
+              )}
+            </div>
           </div>
 
           <div className="user-lastname">
             <label className="label-form" htmlFor="lastname">
               Lastname
             </label>
-            <input
-              ref={inputRef}
-              type="text"
-              name="lastname"
-              className="user-nameone-input"
-              {...register("lastname", {
-                required: "This field is required !",
-                minLength: {
-                  value: 2,
-                  message: "You need at least 2 characters",
-                },
-                maxLength: {
-                  value: 120,
-                  message: "You can't have more than 120 characters",
-                },
-              })}
-            />
-            {errors.lastname && (
-              <p className="form-error">{errors.lastname.message}</p>
-            )}
+            <div className="msg-error-name">
+              <input
+                ref={inputRef}
+                type="text"
+                name="lastname"
+                className="user-nameone-input"
+                {...register("lastname", {
+                  required: "This field is required !",
+                  minLength: {
+                    value: 2,
+                    message: "You need at least 2 characters",
+                  },
+                  maxLength: {
+                    value: 120,
+                    message: "You can't have more than 120 characters",
+                  },
+                })}
+              />
+              {errors.lastname && (
+                <p className="form-error">{errors.lastname.message}</p>
+              )}
+            </div>
           </div>
         </div>
 
@@ -152,9 +156,9 @@ export default function LoginPage() {
             required: "This field is required !",
             pattern: {
               value:
-                /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){16,64}$/,
+                /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){12,64}$/,
               message:
-                "You need at least 16 characters, including at least: one uppercase and one lowercase letter, one number and a special character",
+                "You need at least 12 characters, including one uppercase, one number and a special character",
             },
             maxLength: {
               value: 64,
@@ -178,7 +182,7 @@ export default function LoginPage() {
             required: "This field is required !",
             pattern: {
               value:
-                /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){16,64}$/,
+                /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){12,64}$/,
               message: "Invalid password format",
             },
             validate: (value) =>
@@ -190,7 +194,7 @@ export default function LoginPage() {
         )}
 
         <button className="signup-button" type="submit">
-          Sign up
+          Create
         </button>
       </form>
     </>

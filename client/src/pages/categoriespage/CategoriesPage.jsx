@@ -1,4 +1,4 @@
-import { useLoaderData, NavLink, Link } from "react-router-dom";
+import { useLoaderData, NavLink } from "react-router-dom";
 import SearchBar from "../../components/searchbar/SearchBar";
 import Filter from "../../components/filter/Filter";
 import CategoriesList from "../../components/categorieslist/CategoriesList";
@@ -7,13 +7,15 @@ import "./CategoriesPage.css";
 export default function CategoriesPage() {
   const categoriesData = useLoaderData();
 
+  const handleBack = () => {
+    window.history.back();
+  };
+
   return (
     <>
-      <Link to="/">
-        <button type="button" className="backButton">
-          Home
-        </button>
-      </Link>
+      <button type="button" onClick={handleBack} className="backButton">
+        Back
+      </button>
       <div className="categories-container">
         <SearchBar />
         <Filter category={categoriesData} />

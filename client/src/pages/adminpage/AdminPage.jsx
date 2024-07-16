@@ -5,7 +5,7 @@ import VideoPanel from "../../components/videopanel/VideoPanel";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import CategoryAdd from "../../components/categoryforms/CategoryAdd";
 import CategoryDelete from "../../components/categoryforms/CategoryDelete";
-import CategoryUpdate from "../../components/categoryforms/CategoryUpdate";
+
 import "./AdminPage.css";
 
 export default function AdminPage() {
@@ -36,9 +36,6 @@ export default function AdminPage() {
       </div>
       <div>
         <CategoryDelete />
-      </div>
-      <div>
-        <CategoryUpdate />
       </div>
       <div>
         <h2>Hero slider</h2>

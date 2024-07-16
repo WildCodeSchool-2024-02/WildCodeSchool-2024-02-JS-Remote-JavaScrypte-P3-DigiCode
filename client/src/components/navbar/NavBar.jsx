@@ -1,20 +1,8 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import fetchAuth from "../../utils/auth";
-import logout from "../../utils/logout";
+import PropTypes from "prop-types";
 import "./NavBar.css";
 
-export default function NavBar() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    let hasBeenChecked = false;
-    if (!hasBeenChecked) {
-      fetchAuth().then((response) => setUser(response));
-      hasBeenChecked = true;
-    }
-  }, []);
-
+export default function NavBar({ user = null }) {
   return (
     <nav className="navbar-container">
       <button
@@ -33,9 +21,13 @@ export default function NavBar() {
           <li>
             <Link to="/categories">Categories</Link>
           </li>
-          {user === null && (
+          {user === null ? (
             <li>
               <Link to="login">Login</Link> / <Link to="signup">Signup</Link>
+            </li>
+          ) : (
+            <li>
+              <Link to="logout">Logout</Link>
             </li>
           )}
           <li>
@@ -46,13 +38,6 @@ export default function NavBar() {
           </li>
         </ul>
       </div>
-
-      {user !== null && (
-        <button type="button" onClick={() => logout()}>
-          Logout
-        </button>
-      )}
-
       <Link to="/">
         <img
           className="logo"
@@ -63,3 +48,16 @@ export default function NavBar() {
     </nav>
   );
 }
+
+NavBar.propTypes = {
+  user: PropTypes.shape({
+    firstname: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+  }),
+};
+// defaultProps will be deprecated but eslint won't shut up about it
+NavBar.defaultProps = {
+  user: null,
+};

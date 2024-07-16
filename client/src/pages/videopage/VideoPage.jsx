@@ -1,14 +1,23 @@
-import { useLoaderData } from "react-router-dom";
+import {
+  useLoaderData,
+  Link,
+  Navigate,
+  useOutletContext,
+} from "react-router-dom";
 import "./VideoPage.css";
 
 export default function VideoPage() {
   const videoData = useLoaderData();
+  const { currentUser } = useOutletContext();
+  console.info(videoData);
 
   const handleBack = () => {
     window.history.back();
   };
 
-  return (
+  return videoData.is_connected && currentUser == null ? (
+    <Navigate to="/login" />
+  ) : (
     <div className="video-container">
       <button type="button" onClick={handleBack} className="backButton">
         Back
@@ -20,8 +29,18 @@ export default function VideoPage() {
       </video>
       <div className="video-description">
         <p className="video-metadata">
-          <span>{videoData.date.slice(0, 10)}</span>{" "}
-          <span>{videoData.category || "Uncategorized"}</span>
+          <span>
+            {videoData.date != null ? videoData.date.slice(0, 10) : "No date"}
+          </span>{" "}
+          <span>
+            {videoData.category != null ? (
+              <Link to={`/categories/${videoData.category}`}>
+                {videoData.category}
+              </Link>
+            ) : (
+              "No category"
+            )}
+          </span>
         </p>
         <p>{videoData.description}</p>
       </div>

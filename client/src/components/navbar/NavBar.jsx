@@ -51,12 +51,6 @@ export default function NavBar({ user, setUser }) {
               </button>
             </li>
           )}
-          <li>
-            <Link to="contact">Contact</Link>
-          </li>
-          <li>
-            <Link to="about">About us</Link>
-          </li>
         </ul>
       </div>
       <div>

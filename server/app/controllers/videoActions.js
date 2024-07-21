@@ -81,9 +81,9 @@ const add = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletedVideo = await tables.video.destroy(id);
+    await tables.video.delete(id);
 
-    res.sendStatus(204).json({ removed: deletedVideo });
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }

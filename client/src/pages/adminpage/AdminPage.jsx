@@ -1,7 +1,6 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useOutletContext, Navigate } from "react-router-dom";
-import VideoPanel from "../../components/videopanel/VideoPanel";
+import { Navigate, useOutletContext } from "react-router-dom";
+import VideoAdd from "../../components/videoforms/VideoAdd";
+import VideoDelete from "../../components/videoforms/VideoDelete";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import CategoryAdd from "../../components/categoryforms/CategoryAdd";
 import CategoryDelete from "../../components/categoryforms/CategoryDelete";
@@ -9,27 +8,14 @@ import CategoryDelete from "../../components/categoryforms/CategoryDelete";
 import "./AdminPage.css";
 
 export default function AdminPage() {
-  const [setCategoryData] = useState();
   const { currentUser } = useOutletContext();
-
-  useEffect(() => {
-    const express = import.meta.env.VITE_API_URL;
-    // vérification de l'authentification
-    try {
-      axios.get(`${express}/api/categories`).then((response) => {
-        const { data } = response;
-        setCategoryData(data);
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  }, [setCategoryData]);
 
   return currentUser?.role === "admin" ? (
     <div className="admin-panel">
       <h1 className="admin-title">Admin Panel</h1>
       <div className="admin-panel-row1">
-        <VideoPanel />
+        <VideoAdd />
+        <VideoDelete />
       </div>
       <div>
         <CategoryAdd />

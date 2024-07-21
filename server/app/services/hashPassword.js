@@ -1,6 +1,10 @@
 const argon2 = require("argon2");
 
 const hashPassword = async (req, res, next) => {
+  if (req.body.confirmpassword) {
+    delete req.body.confirmpassword;
+  }
+
   const { password } = req.body;
 
   try {
@@ -9,9 +13,7 @@ const hashPassword = async (req, res, next) => {
     req.body.password = hashedPassword;
     next();
   } catch (error) {
-    res
-      .sendStatus()
-      .json({ Error: "An error occured while saving your credentials" });
+    res.sendStatus(500);
   }
 };
 

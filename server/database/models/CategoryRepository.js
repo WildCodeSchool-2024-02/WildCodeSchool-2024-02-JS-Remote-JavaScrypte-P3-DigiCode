@@ -25,9 +25,10 @@ class CategoryRepository extends AbstractRepository {
     return rows;
   }
 
-  async add(name) {
+  async create(category) {
+    const { name } = category;
     const [rows] = await this.database.query(
-      `insert into ${this.table} (name) value = ?`,
+      `insert into ${this.table} (name) value (?)`,
       [name]
     );
 
@@ -43,7 +44,7 @@ class CategoryRepository extends AbstractRepository {
     return result.affectedRows;
   }
 
-  async destroy(id) {
+  async delete(id) {
     const [row] = await this.database.query(
       `delete from ${this.table} where id = ?`,
       [id]

@@ -16,6 +16,7 @@ import ResultPage from "./pages/resultpage/ResultPage";
 import LoginPage from "./pages/loginpage/LoginPage";
 import AdminPage from "./pages/adminpage/AdminPage";
 import LogoutPage from "./pages/logoutpage/LogoutPage";
+import UserPage from "./pages/userpage/UserPage";
 
 const express = import.meta.env.VITE_API_URL;
 
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "/history9",
         element: <AdminPage />,
+      },
+      {
+        path: "/user",
+        element: <UserPage />,
       },
       {
         path: "/logout",

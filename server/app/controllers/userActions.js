@@ -15,7 +15,7 @@ const browse = async (req, res, next) => {
 // Read
 const read = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params || req.body;
     const user = await tables.user.readById(id);
 
     if (user != null) res.json(user);

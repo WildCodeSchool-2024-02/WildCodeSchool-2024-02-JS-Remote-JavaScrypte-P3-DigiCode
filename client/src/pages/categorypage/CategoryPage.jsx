@@ -23,7 +23,7 @@ export default function CategoryPage() {
     <>
       <Link to="/categories">
         <button type="button" className="backButton">
-          Back
+          Categories
         </button>
       </Link>
       <h1 className="cTitle">{categoryFind.name.replaceAll("-", " ")}</h1>

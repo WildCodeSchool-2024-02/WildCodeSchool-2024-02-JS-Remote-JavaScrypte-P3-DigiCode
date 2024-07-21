@@ -30,6 +30,16 @@ export default function NavBar({ user = null }) {
               <Link to="logout">Logout</Link>
             </li>
           )}
+          {user && user.role === "admin" && (
+            <li>
+              <Link to="/history9">Admin</Link>
+            </li>
+          )}
+          {user && user.role === "user" && (
+            <li>
+              <Link to="/user">Profile</Link>
+            </li>
+          )}
           <li>
             <Link to="contact">Contact</Link>
           </li>
@@ -55,9 +65,5 @@ NavBar.propTypes = {
     lastname: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
-  }),
-};
-// defaultProps will be deprecated but eslint won't shut up about it
-NavBar.defaultProps = {
-  user: null,
+  }).isRequired,
 };

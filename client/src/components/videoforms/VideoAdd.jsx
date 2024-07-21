@@ -19,8 +19,8 @@ export default function VideoAdd() {
       await axios.post(`${expressURL}/api/videos`, uploadData);
       toast.success("Video added successfully!");
     } catch (err) {
-      toast.error("An error occured, please try again later");
       console.error(err);
+      toast.error("An error occured, please try again later");
     }
   };
 

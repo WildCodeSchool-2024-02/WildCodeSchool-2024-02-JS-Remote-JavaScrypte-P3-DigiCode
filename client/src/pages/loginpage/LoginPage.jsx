@@ -37,12 +37,13 @@ export default function SignupPage() {
         })
         .then((response) => {
           setCurrentUser(response.data.user);
+          toast.success("you are logged in!");
         });
 
       console.warn(currentUser);
     } catch (error) {
-      toast.error("An error occured, please try again");
       console.error(error);
+      toast.error("An error occured, please try again");
     }
   };
 

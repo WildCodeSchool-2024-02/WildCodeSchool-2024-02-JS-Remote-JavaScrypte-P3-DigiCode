@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function VideoDelete() {
   const [videoData, setVideoData] = useState();
@@ -15,11 +16,12 @@ export default function VideoDelete() {
 
   const onSubmit = async (data) => {
     try {
-      await axios
-        .delete(`${expressURL}/api/videos/${data.id}`, data)
-        .then(() => console.info("Video deleted :", data));
+      await axios.delete(`${expressURL}/api/videos/${data.id}`, data);
+
+      toast.success("video deleted successfully!");
     } catch (err) {
       console.error(err);
+      toast.error("An error occured, please try again");
     }
   };
 

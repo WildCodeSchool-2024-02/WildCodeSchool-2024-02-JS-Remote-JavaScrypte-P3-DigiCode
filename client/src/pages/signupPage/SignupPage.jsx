@@ -25,8 +25,8 @@ export default function LoginPage() {
         .post(`${expressURL}/api/users/register`, data)
         .finally(() => navigate("/login"));
     } catch (err) {
-      toast.error("An error occured, please try again");
       console.error(err);
+      toast.success("category added successfully!");
     }
   };
 

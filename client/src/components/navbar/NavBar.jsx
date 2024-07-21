@@ -1,8 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import userLogout from "../../utils/logout";
 import "./NavBar.css";
 
-export default function NavBar({ user = null }) {
+export default function NavBar({ user, setUser }) {
+  const navigate = useNavigate();
+
+  const toggleLogout = () => {
+    userLogout()
+      .then(() => setUser(null))
+      .then(() => navigate("/"));
+  };
+
   return (
     <nav className="navbar-container">
       <button
@@ -21,15 +30,6 @@ export default function NavBar({ user = null }) {
           <li>
             <Link to="/categories">Categories</Link>
           </li>
-          {user === null ? (
-            <li>
-              <Link to="login">Login</Link> / <Link to="signup">Signup</Link>
-            </li>
-          ) : (
-            <li>
-              <Link to="logout">Logout</Link>
-            </li>
-          )}
           {user && user.role === "admin" && (
             <li>
               <Link to="/history9">Admin</Link>
@@ -40,6 +40,17 @@ export default function NavBar({ user = null }) {
               <Link to="/user">Profile</Link>
             </li>
           )}
+          {user === null ? (
+            <li>
+              <Link to="login">Login</Link> / <Link to="signup">Signup</Link>
+            </li>
+          ) : (
+            <li>
+              <button type="button" onClick={toggleLogout} className="logout">
+                Logout
+              </button>
+            </li>
+          )}
           <li>
             <Link to="contact">Contact</Link>
           </li>
@@ -48,18 +59,26 @@ export default function NavBar({ user = null }) {
           </li>
         </ul>
       </div>
-      <Link to="/">
-        <img
-          className="logo"
-          src="src/assets/images/origins-digital.svg"
-          alt="logo"
-        />
-      </Link>
+      <div>
+        <Link to="/">
+          <img
+            className="logo"
+            src="src/assets/images/origins-digital.svg"
+            alt="logo"
+          />
+        </Link>
+        {user && (
+          <p className="helloText">
+            Hello <strong>{user?.firstname}</strong>
+          </p>
+        )}
+      </div>
     </nav>
   );
 }
 
 NavBar.propTypes = {
+  setUser: PropTypes.func.isRequired,
   user: PropTypes.shape({
     firstname: PropTypes.string.isRequired,
     lastname: PropTypes.string.isRequired,

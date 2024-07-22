@@ -1,0 +1,71 @@
+.title-user-page {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.container-user-info {
+  background-color: var(--main-color-gray);
+  color: var(--main-color-black);
+  border-radius: var(--input-radius);
+  padding: 0.1rem 1rem;
+  margin-bottom: 3rem;
+  .title-info {
+    text-align: center;
+  }
+}
+
+.user-page-container {
+  background-color: var(--main-color-gray);
+  color: var(--main-color-black);
+  border-radius: var(--input-radius);
+  padding: 0.1rem 1rem;
+  margin-bottom: 3rem;
+  .title-info {
+    text-align: center;
+  }
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.form-user-page {
+  display: flex;
+  justify-content: center;
+}
+.form-user-page input {
+  margin-bottom: 1rem;
+  width: 50vw;
+  max-width: 20rem;
+  height: 1.3rem;
+  border-radius: var(--input-radius);
+  border: none;
+}
+
+.position-button-updtate {
+  display: flex;
+  justify-content: center;
+}
+
+.button-update-info {
+  border: none;
+  background-color: var(--accent-color);
+  border-radius: var(--input-radius);
+  height: 1.5rem;
+  width: 7rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+@media screen and (width >= 800px) {
+  .section-information {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin: auto;
+    max-width: 60rem;
+  }
+}

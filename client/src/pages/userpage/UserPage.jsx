@@ -3,6 +3,8 @@ import { useOutletContext, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
+import "./UserPage.css";
+
 export default function UserPage() {
   const user = useOutletContext();
   const { currentUser, setCurrentUser } = user;
@@ -42,167 +44,154 @@ export default function UserPage() {
   return currentUser == null ? (
     <Navigate to="/login" />
   ) : (
-    <div className="user-page-container">
-      <h1>User Page</h1>
-      <div>
-        <p>{`${currentUser.firstname} ${currentUser.lastname}`}</p>
-        <p>{currentUser.email}</p>
-      </div>
-
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>
-            Firstname
-            <input
-              type="text"
-              name="firstname"
-              placeholder="John"
-              {...register("firstname", {
-                required: requiredFieldError,
-                minLength: {
-                  value: 2,
-                  message: min2CharError,
-                },
-                maxLength: {
-                  value: 120,
-                  message: max120CharError,
-                },
-              })}
-            />
-          </label>
-          {errors.firstname && (
-            <p className="form-error">{errors.firstname.message}</p>
-          )}
+    <>
+      <h1 className="title-user-page">User Page</h1>
+      <section className="section-information">
+        <div className="container-user-info">
+          <p className="title-info"> Your personal informations : </p>
+          <p> Name : {`${currentUser.firstname}`} </p>
+          <p> Last name : {`${currentUser.lastname}`}</p>
+          <p> Email : {currentUser.email}</p>
         </div>
-
-        <div>
-          <label>
-            Lastname
-            <input
-              type="text"
-              name="lastname"
-              placeholder="Doe"
-              {...register("lastname", {
-                required: requiredFieldError,
-                minLength: {
-                  value: 2,
-                  message: min2CharError,
-                },
-                maxLength: {
-                  value: 120,
-                  message: max120CharError,
-                },
-              })}
-            />
-          </label>
-          {errors.lastname && (
-            <p className="form-error">{errors.lastname.message}</p>
-          )}
+        <div className="user-page-container">
+          <p className="title-info">
+            {" "}
+            You can modify your informations right here{" "}
+          </p>
+          <form className="form-user-page" onSubmit={handleSubmit(onSubmit)}>
+            <div className="user-form">
+              <label htmlFor="firstname">Firstname </label>
+              <input
+                type="text"
+                name="firstname"
+                placeholder="John"
+                {...register("firstname", {
+                  required: requiredFieldError,
+                  minLength: {
+                    value: 2,
+                    message: min2CharError,
+                  },
+                  maxLength: {
+                    value: 120,
+                    message: max120CharError,
+                  },
+                })}
+              />
+              {errors.firstname && (
+                <p className="form-error">{errors.firstname.message}</p>
+              )}
+              <label htmlFor="lastname">Lastname </label>
+              <input
+                type="text"
+                name="lastname"
+                placeholder="Doe"
+                {...register("lastname", {
+                  required: requiredFieldError,
+                  minLength: {
+                    value: 2,
+                    message: min2CharError,
+                  },
+                  maxLength: {
+                    value: 120,
+                    message: max120CharError,
+                  },
+                })}
+              />
+              {errors.lastname && (
+                <p className="form-error">{errors.lastname.message}</p>
+              )}
+              <label htmlFor="email">Email </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="john.doe@example.com"
+                {...register("email", {
+                  required: requiredFieldError,
+                  pattern: {
+                    value: /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/,
+                    message: "Invalid email format",
+                  },
+                  maxLength: {
+                    value: 120,
+                    message: max120CharError,
+                  },
+                })}
+              />
+              {errors.email && (
+                <p className="form-error">{errors.email.message}</p>
+              )}
+              <label htmlFor="confirmemail">Confirm email </label>
+              <input
+                type="email"
+                name="confirmemail"
+                placeholder="john.doe@example.com"
+                {...register("confirmemail", {
+                  required: requiredFieldError,
+                  pattern: {
+                    value: /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/,
+                    message: "Invalid email format",
+                  },
+                  maxLength: {
+                    value: 120,
+                    message: max120CharError,
+                  },
+                  validate: (value) =>
+                    value === watch("email") || "Emails do not match",
+                })}
+              />
+              {errors.confirmemail && (
+                <p className="form-error">{errors.confirmemail.message}</p>
+              )}
+              <label htmlFor="password">Password </label>
+              <input
+                type="password"
+                name="password"
+                placeholder="●●●●●●●●"
+                {...register("password", {
+                  required: requiredFieldError,
+                  pattern: {
+                    value:
+                      /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){12,64}$/,
+                    message:
+                      "You need at least 12 characters, including one uppercase, one number and a special character",
+                  },
+                  maxLength: {
+                    value: 64,
+                    message: "You can't put more that 64 characters",
+                  },
+                })}
+              />
+              {errors.password && (
+                <p className="form-error">{errors.password.message}</p>
+              )}
+              <label htmlFor="confirmpassword">Confirm password </label>
+              <input
+                type="password"
+                name="confirmpassword"
+                placeholder="●●●●●●●●"
+                {...register("confirmpassword", {
+                  required: requiredFieldError,
+                  pattern: {
+                    value:
+                      /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){12,64}$/,
+                    message: "Invalid password format",
+                  },
+                  validate: (value) =>
+                    value === watch("password") || "Passwords do not match",
+                })}
+              />
+              {errors.confirmpassword && (
+                <p className="form-error">{errors.confirmpassword.message}</p>
+              )}
+              <div className="position-button-updtate">
+                <button className="button-update-info" type="submit">
+                  Update
+                </button>
+              </div>{" "}
+            </div>
+          </form>
         </div>
-
-        <div>
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              placeholder="john.doe@example.com"
-              {...register("email", {
-                required: requiredFieldError,
-                pattern: {
-                  value: /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/,
-                  message: "Invalid email format",
-                },
-                maxLength: {
-                  value: 120,
-                  message: max120CharError,
-                },
-              })}
-            />
-          </label>
-          {errors.email && <p className="form-error">{errors.email.message}</p>}
-        </div>
-
-        <div>
-          <label>
-            Confirm email
-            <input
-              type="email"
-              name="confirmemail"
-              placeholder="john.doe@example.com"
-              {...register("confirmemail", {
-                required: requiredFieldError,
-                pattern: {
-                  value: /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/,
-                  message: "Invalid email format",
-                },
-                maxLength: {
-                  value: 120,
-                  message: max120CharError,
-                },
-                validate: (value) =>
-                  value === watch("email") || "Emails do not match",
-              })}
-            />
-          </label>
-          {errors.confirmemail && (
-            <p className="form-error">{errors.confirmemail.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label>
-            Password
-            <input
-              type="password"
-              name="password"
-              placeholder="●●●●●●●●"
-              {...register("password", {
-                required: requiredFieldError,
-                pattern: {
-                  value:
-                    /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){12,64}$/,
-                  message:
-                    "You need at least 12 characters, including one uppercase, one number and a special character",
-                },
-                maxLength: {
-                  value: 64,
-                  message: "You can't put more that 64 characters",
-                },
-              })}
-            />
-          </label>
-          {errors.password && (
-            <p className="form-error">{errors.password.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label>
-            Confirm password
-            <input
-              type="password"
-              name="confirmpassword"
-              placeholder="●●●●●●●●"
-              {...register("confirmpassword", {
-                required: requiredFieldError,
-                pattern: {
-                  value:
-                    /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){12,64}$/,
-                  message: "Invalid password format",
-                },
-                validate: (value) =>
-                  value === watch("password") || "Passwords do not match",
-              })}
-            />
-          </label>
-          {errors.confirmpassword && (
-            <p className="form-error">{errors.confirmpassword.message}</p>
-          )}
-        </div>
-
-        <button type="submit">Update</button>
-      </form>
-    </div>
+      </section>
+    </>
   );
 }

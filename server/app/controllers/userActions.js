@@ -42,7 +42,6 @@ const updateUserName = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { firstname, lastname } = req.body;
-    console.info("data from the form", req.body);
 
     await tables.user.updateUserName(firstname, lastname, id);
     res.sendStatus(204);

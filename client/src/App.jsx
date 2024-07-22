@@ -19,7 +19,7 @@ function App() {
       <p>Your name is : {currentUser?.firstname}</p>
       <NavBar user={currentUser} />
       <main>
-        <ToastContainer role="alert" theme="dark" />
+        <ToastContainer role="alert" theme="colored" />
         <Outlet context={{ currentUser, setCurrentUser }} />
       </main>
     </div>

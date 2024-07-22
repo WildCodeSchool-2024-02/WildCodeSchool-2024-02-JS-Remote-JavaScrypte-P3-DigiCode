@@ -23,10 +23,11 @@ export default function LoginPage() {
     try {
       await axios
         .post(`${expressURL}/api/users/register`, data)
-        .finally(() => navigate("/login"));
+        .then(() => navigate("/login"));
+      toast.success("sign up successful!");
     } catch (err) {
       console.error(err);
-      toast.success("category added successfully!");
+      toast.error("an error occured, please try again later");
     }
   };
 

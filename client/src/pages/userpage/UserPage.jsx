@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 import "./UserPage.css";
+import UserNameForm from "../../components/userpageforms/UserNameForm";
 
 export default function UserPage() {
   const user = useOutletContext();
@@ -18,7 +19,6 @@ export default function UserPage() {
   } = useForm();
 
   const requiredFieldError = "This field is required !";
-  const min2CharError = "Must have at least 2 characters !";
   const max120CharError = "Must have at most 120 characters !";
 
   const onSubmit = async (data) => {
@@ -41,66 +41,25 @@ export default function UserPage() {
     }
   };
 
+  const active = false;
+
   return currentUser == null ? (
     <Navigate to="/login" />
   ) : (
-    <>
-      <h1 className="title-user-page">User Page</h1>
-      <section className="section-information">
-        <div className="container-user-info">
-          <p className="title-info"> Your personal informations : </p>
-          <p> Name : {`${currentUser.firstname}`} </p>
-          <p> Last name : {`${currentUser.lastname}`}</p>
-          <p> Email : {currentUser.email}</p>
-        </div>
-        <div className="user-page-container">
-          <p className="title-info">
-            {" "}
-            You can modify your informations right here{" "}
-          </p>
-          <form className="form-user-page" onSubmit={handleSubmit(onSubmit)}>
-            <div className="user-form">
-              <label htmlFor="firstname">Firstname </label>
-              <input
-                type="text"
-                name="firstname"
-                placeholder="John"
-                {...register("firstname", {
-                  required: requiredFieldError,
-                  minLength: {
-                    value: 2,
-                    message: min2CharError,
-                  },
-                  maxLength: {
-                    value: 120,
-                    message: max120CharError,
-                  },
-                })}
-              />
-              {errors.firstname && (
-                <p className="form-error">{errors.firstname.message}</p>
-              )}
-              <label htmlFor="lastname">Lastname </label>
-              <input
-                type="text"
-                name="lastname"
-                placeholder="Doe"
-                {...register("lastname", {
-                  required: requiredFieldError,
-                  minLength: {
-                    value: 2,
-                    message: min2CharError,
-                  },
-                  maxLength: {
-                    value: 120,
-                    message: max120CharError,
-                  },
-                })}
-              />
-              {errors.lastname && (
-                <p className="form-error">{errors.lastname.message}</p>
-              )}
-              <label htmlFor="email">Email </label>
+    <div className="user-page-container">
+      <h1>User Page</h1>
+      <div>
+        <p>{`${currentUser.firstname} ${currentUser.lastname}`}</p>
+        <p>{currentUser.email}</p>
+      </div>
+
+      <UserNameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
+
+      {active && (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label>
+              Email
               <input
                 type="email"
                 name="email"
@@ -117,10 +76,15 @@ export default function UserPage() {
                   },
                 })}
               />
-              {errors.email && (
-                <p className="form-error">{errors.email.message}</p>
-              )}
-              <label htmlFor="confirmemail">Confirm email </label>
+            </label>
+            {errors.email && (
+              <p className="form-error">{errors.email.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label>
+              Confirm email
               <input
                 type="email"
                 name="confirmemail"
@@ -139,10 +103,15 @@ export default function UserPage() {
                     value === watch("email") || "Emails do not match",
                 })}
               />
-              {errors.confirmemail && (
-                <p className="form-error">{errors.confirmemail.message}</p>
-              )}
-              <label htmlFor="password">Password </label>
+            </label>
+            {errors.confirmemail && (
+              <p className="form-error">{errors.confirmemail.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label>
+              Password
               <input
                 type="password"
                 name="password"
@@ -161,10 +130,15 @@ export default function UserPage() {
                   },
                 })}
               />
-              {errors.password && (
-                <p className="form-error">{errors.password.message}</p>
-              )}
-              <label htmlFor="confirmpassword">Confirm password </label>
+            </label>
+            {errors.password && (
+              <p className="form-error">{errors.password.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label>
+              Confirm password
               <input
                 type="password"
                 name="confirmpassword"
@@ -180,18 +154,15 @@ export default function UserPage() {
                     value === watch("password") || "Passwords do not match",
                 })}
               />
-              {errors.confirmpassword && (
-                <p className="form-error">{errors.confirmpassword.message}</p>
-              )}
-              <div className="position-button-updtate">
-                <button className="button-update-info" type="submit">
-                  Update
-                </button>
-              </div>{" "}
-            </div>
-          </form>
-        </div>
-      </section>
-    </>
+            </label>
+            {errors.confirmpassword && (
+              <p className="form-error">{errors.confirmpassword.message}</p>
+            )}
+          </div>
+
+          <button type="submit">Update</button>
+        </form>
+      )}
+    </div>
   );
 }

@@ -38,6 +38,19 @@ const edit = async (req, res, next) => {
   }
 };
 
+const updateUserName = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { firstname, lastname } = req.body;
+    console.info("data from the form", req.body);
+
+    await tables.user.updateUserName(firstname, lastname, id);
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Add
 const add = async (req, res, next) => {
   try {
@@ -71,4 +84,4 @@ const destroy = async (req, res, next) => {
   }
 };
 
-module.exports = { browse, read, edit, add, destroy };
+module.exports = { browse, read, edit, updateUserName, add, destroy };

@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from "react-hook-form";
-import { useRef, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext, Link } from "react-router-dom";
 
 import axios from "axios";
@@ -9,7 +9,6 @@ import "./LoginPage.css";
 export default function SignupPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useOutletContext();
-  const inputRef = useRef();
 
   useEffect(() => {
     if (currentUser?.role === "user") {
@@ -28,6 +27,8 @@ export default function SignupPage() {
 
   const expressURL = import.meta.env.VITE_API_URL;
 
+  const [responseStatus, setResponseStatus] = useState(null);
+
   const onSubmit = async (data) => {
     try {
       await axios
@@ -37,10 +38,8 @@ export default function SignupPage() {
         .then((response) => {
           setCurrentUser(response.data.user);
         });
-
-      console.warn(currentUser);
     } catch (error) {
-      console.error(error);
+      setResponseStatus(error.response.status);
     }
   };
 
@@ -49,19 +48,17 @@ export default function SignupPage() {
       <h1 className="login-title">Login with you email</h1>
       <div className="container-text">
         <p className="login-text">
-          Don't have an account ?{" "}
+          {"Don't have an account ? "}
           <Link to="/signup" id="button-here">
-            {" "}
-            Click here{" "}
+            Click here
           </Link>
         </p>
-        <p className="login-text"> To have acces to more videos </p>
+        <p className="login-text"> To gain access to more videos </p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="email-login">
           <label htmlFor="email">Email </label>
           <input
-            ref={inputRef}
             type="text"
             name="email"
             className="input-login"
@@ -76,7 +73,7 @@ export default function SignupPage() {
                 message: "You can't have more than 120 characters",
               },
             })}
-          />{" "}
+          />
           {errors.email && (
             <p className="form-error-login"> {errors.email.message}</p>
           )}
@@ -85,7 +82,6 @@ export default function SignupPage() {
         <div className="password-login">
           <label htmlFor="password">Password </label>
           <input
-            ref={inputRef}
             type="password"
             name="password"
             className="input-login"
@@ -105,8 +101,14 @@ export default function SignupPage() {
           />
           {errors.password && (
             <p className="form-error-login">{errors.password.message}</p>
-          )}{" "}
+          )}
         </div>
+
+        {responseStatus === 404 && (
+          <p className="form-error-login" style={{ marginBottom: "1rem" }}>
+            Email and password do not match
+          </p>
+        )}
 
         <button className="login-button" type="submit">
           Login

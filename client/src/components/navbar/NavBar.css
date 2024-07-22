@@ -10,7 +10,7 @@
 }
 
 .logo {
-  max-height: 4rem;
+  max-height: 6rem;
 }
 
 .menu-button {
@@ -60,4 +60,15 @@
   max-width: 10ch;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (width > 800px) {
+  .logo {
+    max-height: 8rem;
+  }
 }

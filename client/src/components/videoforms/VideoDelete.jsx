@@ -12,16 +12,17 @@ export default function VideoDelete() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      await axios.delete(`${expressURL}/api/videos/${data.id}`, data);
-
-      toast.info("video deleted successfully!");
+      await axios
+        .delete(`${expressURL}/api/videos/${data.id}`, data)
+        .then(() => reset());
+      toast.info("Video deleted successfully!");
     } catch (err) {
-      console.error(err);
-      toast.error("An error occured, please try again");
+      if (err) toast.error("An error occured, please try again");
     }
   };
 
@@ -33,7 +34,7 @@ export default function VideoDelete() {
         setVideoData(data);
       });
     } catch (err) {
-      console.error(err);
+      if (err) toast.error("Couldn't retrieve the videos");
     }
   }, []);
 
@@ -52,7 +53,8 @@ export default function VideoDelete() {
             {errors.id && <p>{errors.id.message}</p>}
           </select>
         </div>
-        <button type="submit"> Delete video</button>
+
+        <button type="submit">Delete video</button>
       </form>
     </section>
   );

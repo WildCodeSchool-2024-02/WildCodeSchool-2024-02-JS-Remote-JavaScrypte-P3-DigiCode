@@ -44,7 +44,8 @@
 }
 
 .logout {
-  font-size: 1.15em;
+  font-family: exo, sans-serif;
+  font-size: 1em;
   border: none;
   background-color: transparent;
   color: var(--main-color-gray);

@@ -24,6 +24,7 @@ export default function SignupPage() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const expressURL = import.meta.env.VITE_API_URL;
@@ -36,10 +37,13 @@ export default function SignupPage() {
         .post(`${expressURL}/api/auth/login`, data, {
           withCredentials: true,
         })
+        .then(() => reset())
         .then((response) => {
           setCurrentUser(response.data.user);
           toast.success("you are logged in!");
         });
+
+      console.warn(currentUser);
     } catch (error) {
       setResponseStatus(error.response.status);
       toast.error("An error occured, please try again");

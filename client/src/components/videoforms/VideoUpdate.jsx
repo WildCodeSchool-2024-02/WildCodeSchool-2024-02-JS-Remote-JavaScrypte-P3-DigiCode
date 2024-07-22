@@ -17,9 +17,8 @@ export default function VideoUpdate() {
       axios
         .put(`${expressURL}/api/videos/${data.id}`, data)
         toast.success("Video access updated successfully ! ");
-    } catch (err) {
-
-      toast.err("An error occured, please try again later");
+    } catch (error) {
+      toast.error("An error occured, please try again later");
     }
     }
 
@@ -31,8 +30,8 @@ export default function VideoUpdate() {
         const {data} = response;
         setVideoData(data);
       });
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      toast.error("An error occured, please try again later");
     }
   }, []);
 

@@ -16,8 +16,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <p>Your name is : {currentUser?.firstname}</p>
-      <NavBar user={currentUser} />
+      <NavBar user={currentUser} setUser={setCurrentUser} />
       <main>
         <ToastContainer role="alert" theme="colored" />
         <Outlet context={{ currentUser, setCurrentUser }} />

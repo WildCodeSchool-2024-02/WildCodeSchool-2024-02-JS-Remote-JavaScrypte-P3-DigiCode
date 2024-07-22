@@ -14,6 +14,7 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm();
 
   const expressURL = import.meta.env.VITE_API_URL;
@@ -21,7 +22,8 @@ export default function LoginPage() {
   const onSubmit = async (data) => {
     try {
       await axios
-        .post(`${expressURL}/api/users/register`, data )
+        .post(`${expressURL}/api/users/register`, data)
+        .then(() => reset())
         .finally(() => navigate("/login"));
     } catch (err) {
       console.error(err);

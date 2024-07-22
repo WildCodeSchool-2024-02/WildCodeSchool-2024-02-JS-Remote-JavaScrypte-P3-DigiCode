@@ -2,13 +2,11 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function VideoAdd() {
   const [categoryData, setCategoryData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
-
-  const [hasVideoPostFailed, setHasVideoPostFailed] = useState(false);
 
   const {
     register,
@@ -22,8 +20,9 @@ export default function VideoAdd() {
       await axios
         .post(`${expressURL}/api/videos`, uploadData)
         .then(() => reset());
+      toast.success("Video added successfully!");
     } catch (err) {
-      if (err) setHasVideoPostFailed(true);
+      if (err) toast.error("An error occured, please try again later");
     }
   };
 
@@ -44,7 +43,6 @@ export default function VideoAdd() {
   return (
     <section>
       <h1>Video Panel</h1>
-      <ToastContainer />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="pannel-title">
           <label htmlFor="name"> Title </label>
@@ -129,12 +127,6 @@ export default function VideoAdd() {
           />
           {errors.url && <p> {errors.url.message}</p>}
         </div>
-
-        {hasVideoPostFailed && (
-          <p className="form-error" style={{ marginBottom: "1rem" }}>
-            Video post failed
-          </p>
-        )}
 
         <button type="submit">Post video</button>
       </form>

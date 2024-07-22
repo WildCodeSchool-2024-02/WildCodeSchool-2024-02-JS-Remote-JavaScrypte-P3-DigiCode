@@ -2,13 +2,11 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function CategoryDelete() {
   const [categoryData, setCategoryData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
-
-  const [hasCategoryDeleteFailed, setHasCategoryDeleteFailed] = useState(false);
 
   const {
     register,
@@ -22,8 +20,9 @@ export default function CategoryDelete() {
       await axios
         .delete(`${expressURL}/api/categories/${data.id}`, data)
         .then(() => reset());
+      toast.info("Category deleted successfully!");
     } catch (err) {
-      if (err) setHasCategoryDeleteFailed(true);
+      if (err) toast.error("An error occured, please try again");
     }
   };
 
@@ -42,7 +41,6 @@ export default function CategoryDelete() {
   return (
     <section>
       <h2>Delete a category</h2>
-      <ToastContainer />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="pannel-category">
           <label htmlFor="category"> Category </label>
@@ -55,12 +53,6 @@ export default function CategoryDelete() {
             {errors.id && <p>{errors.id.message}</p>}
           </select>
         </div>
-
-        {hasCategoryDeleteFailed && (
-          <p className="form-error" style={{ marginBottom: "1rem" }}>
-            Something went wrong while deleting the category
-          </p>
-        )}
 
         <button type="submit"> Delete category</button>
       </form>

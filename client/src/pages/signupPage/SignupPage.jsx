@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import axios from "axios";
 import "./SignupPage.css";
 
@@ -24,9 +25,9 @@ export default function LoginPage() {
       await axios
         .post(`${expressURL}/api/users/register`, data)
         .then(() => reset())
-        .finally(() => navigate("/login"));
+        .then(() => navigate("/login"));
     } catch (err) {
-      console.error(err);
+      if (err) toast.error("An error occured, please try again later");
     }
   };
 

@@ -2,13 +2,11 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function CategoryAdd() {
   const [setCategoryData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
-
-  const [categoriesPostFailed, setCategoriesPostFailed] = useState(false);
 
   const {
     register,
@@ -20,8 +18,9 @@ export default function CategoryAdd() {
   const onSubmit = async (data) => {
     try {
       await axios.post(`${expressURL}/api/categories`, data);
+      toast.success("Category added successfully!");
     } catch (err) {
-      if (err) setCategoriesPostFailed(true);
+      if (err) toast.error("Something went wrong while adding the category");
     }
   };
 
@@ -48,7 +47,6 @@ export default function CategoryAdd() {
       <h1>Category Panel</h1>
       <section>
         <h2>Add a category</h2>
-        <ToastContainer />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="category-panel_name">
             <label htmlFor="name"> Category name </label>
@@ -65,12 +63,6 @@ export default function CategoryAdd() {
             />
             {errors.name && <p>{errors.name.message}</p>}
           </div>
-
-          {categoriesPostFailed && (
-            <p className="form-error" style={{ marginBottom: "1rem" }}>
-              Something went wrong while adding the category
-            </p>
-          )}
 
           <button type="submit">Add category</button>
         </form>

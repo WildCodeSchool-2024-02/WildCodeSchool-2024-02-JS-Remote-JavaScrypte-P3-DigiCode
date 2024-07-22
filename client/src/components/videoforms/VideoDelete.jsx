@@ -2,24 +2,28 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function VideoDelete() {
   const [videoData, setVideoData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
 
+  const [hasVideoDeleteFailed, setHasVideoDeleteFailed] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
       await axios
         .delete(`${expressURL}/api/videos/${data.id}`, data)
-        .then(() => console.info("Video deleted :", data));
+        .then(() => reset());
     } catch (err) {
-      console.error(err);
+      if (err) setHasVideoDeleteFailed(true);
     }
   };
 
@@ -31,13 +35,14 @@ export default function VideoDelete() {
         setVideoData(data);
       });
     } catch (err) {
-      console.error(err);
+      if (err) toast.error("Couldn't retrieve the videos");
     }
   }, []);
 
   return (
     <section>
       <h2>Delete a video</h2>
+      <ToastContainer />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="videodelete"> Category </label>
@@ -50,7 +55,14 @@ export default function VideoDelete() {
             {errors.id && <p>{errors.id.message}</p>}
           </select>
         </div>
-        <button type="submit"> Delete video</button>
+
+        {hasVideoDeleteFailed && (
+          <p className="form-error" style={{ marginBottom: "1rem" }}>
+            Something went wrong while deleting the video
+          </p>
+        )}
+
+        <button type="submit">Delete video</button>
       </form>
     </section>
   );

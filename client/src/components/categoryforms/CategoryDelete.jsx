@@ -53,9 +53,15 @@ export default function CategoryDelete() {
               </option>
             ))}
             {errors.id && <p>{errors.id.message}</p>}
-            {hasCategoryDeleteFailed && <p>Category delete failed</p>}
           </select>
         </div>
+
+        {hasCategoryDeleteFailed && (
+          <p className="form-error" style={{ marginBottom: "1rem" }}>
+            Something went wrong while deleting the category
+          </p>
+        )}
+
         <button type="submit"> Delete category</button>
       </form>
     </section>

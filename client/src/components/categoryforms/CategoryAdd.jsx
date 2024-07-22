@@ -64,10 +64,14 @@ export default function CategoryAdd() {
               })}
             />
             {errors.name && <p>{errors.name.message}</p>}
-            {categoriesPostFailed && (
-              <p>Something went wrong while adding the category</p>
-            )}
           </div>
+
+          {categoriesPostFailed && (
+            <p className="form-error" style={{ marginBottom: "1rem" }}>
+              Something went wrong while adding the category
+            </p>
+          )}
+
           <button type="submit">Add category</button>
         </form>
       </section>

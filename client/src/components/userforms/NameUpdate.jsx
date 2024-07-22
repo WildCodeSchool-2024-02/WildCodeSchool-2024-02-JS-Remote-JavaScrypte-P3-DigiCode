@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import PropTypes from "prop-types";
 
@@ -27,8 +28,9 @@ export default function NameUpdate({ user }) {
   const onSubmit = async (data) => {
     try {
       await axios.put(`${expressURL}/api/users/${user.id}/name`, data);
+      toast.success("Your user informations have been updated");
     } catch (err) {
-      console.error(err);
+      if (err) toast.error("An error occured, please try again");
     }
   };
 

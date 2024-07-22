@@ -12,17 +12,20 @@ export default function CategoryDelete() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      await axios.delete(`${expressURL}/api/categories/${data.id}`, data);
-      toast.info("category deleted successfully!");
+      await axios
+        .delete(`${expressURL}/api/categories/${data.id}`, data)
+        .then(() => reset());
+      toast.info("Category deleted successfully!");
     } catch (err) {
-      console.error(err);
-      toast.error("An error occured, please try again");
+      if (err) toast.error("An error occured, please try again");
     }
   };
+
   useEffect(() => {
     const express = import.meta.env.VITE_API_URL;
     try {
@@ -31,7 +34,7 @@ export default function CategoryDelete() {
         setCategoryData(data);
       });
     } catch (err) {
-      console.error(err);
+      if (err) toast.error("Couldn't retrieve the categories");
     }
   }, []);
 
@@ -50,6 +53,7 @@ export default function CategoryDelete() {
             {errors.id && <p>{errors.id.message}</p>}
           </select>
         </div>
+
         <button type="submit"> Delete category</button>
       </form>
     </section>

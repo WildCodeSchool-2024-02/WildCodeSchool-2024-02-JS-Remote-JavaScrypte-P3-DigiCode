@@ -39,7 +39,7 @@ export default function VideoUpdate() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div> 
-      <label htmlFor="videoUpdate"> Acces </label>
+      <label htmlFor="videoUpdate"> Access </label>
       <select name="videoupdate" {...register("id")}>
         {videoData?.map((v) => (
           <option key={v.id} value={v.id}>

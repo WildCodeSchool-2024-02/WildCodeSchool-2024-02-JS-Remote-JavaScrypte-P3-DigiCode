@@ -9,6 +9,10 @@
   width: 18.75rem;
 }
 
+#imageNotConnected {
+  opacity: 0.4;
+}
+
 @media screen and (width >= 1200px) {
   .cardImage:hover {
     opacity: 0.4;

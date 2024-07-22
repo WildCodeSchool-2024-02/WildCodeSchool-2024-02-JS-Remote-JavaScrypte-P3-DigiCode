@@ -29,7 +29,7 @@
 #navlinks {
   margin: 0;
   position: absolute;
-  top: calc(var(--nav-menu-size) + var(--nav-vertical-padding));
+  top: calc(var(--nav-menu-size) + var(--nav-vertical-padding) + 0.5rem);
   left: var(--nav-horizontal-padding);
   background-color: var(--main-color-black);
   color: var(--main-color-gray);

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { ArrowLeftIcon } from "lucide-react";
 import VideoCard from "../../components/videocard/VideoCard";
 import "./CategoryPage.css";
 
@@ -23,6 +24,7 @@ export default function CategoryPage() {
     <>
       <Link to="/categories">
         <button type="button" className="backButton">
+          <ArrowLeftIcon size={18} />
           Categories
         </button>
       </Link>

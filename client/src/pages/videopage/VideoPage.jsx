@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { useEffect } from "react";
 import "./VideoPage.css";
+import { HistoryIcon } from "lucide-react";
 
 export default function VideoPage() {
   const videoData = useLoaderData();
@@ -26,12 +27,16 @@ export default function VideoPage() {
   return (
     <>
       <button type="button" onClick={handleBack} className="backButton">
+        <HistoryIcon size={18} />
         Back
       </button>
       {videoData.is_connected && currentUser === null ? (
         <h1 className="video-title">
-          To view this video, you need to be connected. You will be redirected
-          to the login page . . .
+          <span style={{ whiteSpace: "pre-wrap" }}>
+            {
+              "To view this video, you need to be connected. You will be redirected \nto the login page . . ."
+            }
+          </span>
         </h1>
       ) : (
         <div className="video-container">

@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 import userLogout from "../../utils/logout";
+
 import "./NavBar.css";
 
 export default function NavBar({ user, setUser }) {
@@ -10,6 +12,7 @@ export default function NavBar({ user, setUser }) {
     userLogout()
       .then(() => setUser(null))
       .then(() => navigate("/"));
+    toast.info("you are logged out!");
   };
 
   return (

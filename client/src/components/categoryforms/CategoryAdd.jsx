@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function CategoryAdd() {
   const [setCategoryData] = useState();
@@ -16,8 +17,10 @@ export default function CategoryAdd() {
   const onSubmit = async (data) => {
     try {
       await axios.post(`${expressURL}/api/categories`, data);
+      toast.success("category added successfully!");
     } catch (err) {
       console.error(err);
+      toast.error("An error occured, please try again");
     }
   };
 

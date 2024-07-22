@@ -12,7 +12,7 @@ export default function NavBar({ user, setUser }) {
     userLogout()
       .then(() => setUser(null))
       .then(() => navigate("/"));
-    toast.success("you are logged out!");
+    toast.info("you are logged out!");
   };
 
   return (

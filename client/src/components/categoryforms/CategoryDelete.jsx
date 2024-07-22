@@ -17,7 +17,7 @@ export default function CategoryDelete() {
   const onSubmit = async (data) => {
     try {
       await axios.delete(`${expressURL}/api/categories/${data.id}`, data);
-      toast.success("category deleted successfully!");
+      toast.info("category deleted successfully!");
     } catch (err) {
       console.error(err);
       toast.error("An error occured, please try again");

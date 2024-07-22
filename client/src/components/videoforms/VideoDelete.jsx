@@ -18,7 +18,7 @@ export default function VideoDelete() {
     try {
       await axios.delete(`${expressURL}/api/videos/${data.id}`, data);
 
-      toast.success("video deleted successfully!");
+      toast.info("video deleted successfully!");
     } catch (err) {
       console.error(err);
       toast.error("An error occured, please try again");

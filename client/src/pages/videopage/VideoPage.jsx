@@ -9,7 +9,6 @@ import "./VideoPage.css";
 export default function VideoPage() {
   const videoData = useLoaderData();
   const { currentUser } = useOutletContext();
-  console.info(videoData);
 
   const Navigate = useNavigate();
 

@@ -34,9 +34,30 @@
   background-color: var(--main-color-black);
   color: var(--main-color-gray);
   border-radius: var(--medium-border-radius);
+  padding: 1em;
+  line-height: 2em;
   ul {
     list-style-type: none;
     margin: 0;
     padding: 0.25rem;
   }
+}
+
+.logout {
+  font-size: 1.15em;
+  border: none;
+  background-color: transparent;
+  color: var(--main-color-gray);
+  padding: 0;
+}
+
+.logout:hover {
+  text-decoration: underline;
+}
+
+.helloText {
+  text-align: center;
+  max-width: 10ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import axios from "axios";
 import "./SignupPage.css";
 
@@ -18,15 +19,19 @@ export default function LoginPage() {
   const expressURL = import.meta.env.VITE_API_URL;
 
   const [responseStatus, setResponseStatus] = useState(null);
+  const [isEmailDuplicate, setIsEmailDuplicate] = useState(false);
 
   const onSubmit = async (data) => {
     try {
       await axios
         .post(`${expressURL}/api/users/register`, data)
         .then(() => navigate("/login"));
+      toast.success("Signup successful, please login !");
     } catch (err) {
       if (err.response.data.includes("Duplicate entry"))
-        setResponseStatus(err.response.status);
+        setIsEmailDuplicate(true);
+      setResponseStatus(err.response.status);
+      toast.error("an error occured, please try again later");
     }
   };
 
@@ -114,7 +119,7 @@ export default function LoginPage() {
           })}
         />
         {errors.email && <p className="form-error">{errors.email.message}</p>}
-        {responseStatus === 500 && (
+        {responseStatus === 500 && isEmailDuplicate && (
           <p className="form-error">
             <span style={{ whiteSpace: "pre-wrap" }}>
               {

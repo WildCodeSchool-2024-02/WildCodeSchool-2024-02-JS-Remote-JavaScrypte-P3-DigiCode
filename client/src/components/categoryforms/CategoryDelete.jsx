@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function CategoryDelete() {
   const [categoryData, setCategoryData] = useState();
@@ -16,8 +17,10 @@ export default function CategoryDelete() {
   const onSubmit = async (data) => {
     try {
       await axios.delete(`${expressURL}/api/categories/${data.id}`, data);
+      toast.info("category deleted successfully!");
     } catch (err) {
       console.error(err);
+      toast.error("An error occured, please try again");
     }
   };
   useEffect(() => {

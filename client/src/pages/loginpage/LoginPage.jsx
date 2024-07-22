@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import axios from "axios";
 import "./LoginPage.css";
@@ -37,9 +38,11 @@ export default function SignupPage() {
         })
         .then((response) => {
           setCurrentUser(response.data.user);
+          toast.success("you are logged in!");
         });
     } catch (error) {
       setResponseStatus(error.response.status);
+      toast.error("An error occured, please try again");
     }
   };
 

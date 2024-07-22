@@ -1,7 +1,7 @@
 import {
   useLoaderData,
   Link,
-  Navigate,
+  useNavigate,
   useOutletContext,
 } from "react-router-dom";
 import "./VideoPage.css";
@@ -11,12 +11,14 @@ export default function VideoPage() {
   const { currentUser } = useOutletContext();
   console.info(videoData);
 
+  const Navigate = useNavigate();
+
   const handleBack = () => {
     window.history.back();
   };
 
   return videoData.is_connected && currentUser == null ? (
-    <Navigate to="/login" />
+    setTimeout(() => Navigate("/login"), 3000)
   ) : (
     <div className="video-container">
       <button type="button" onClick={handleBack} className="backButton">

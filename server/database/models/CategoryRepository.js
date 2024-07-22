@@ -15,7 +15,7 @@ class CategoryRepository extends AbstractRepository {
 
   async read(id) {
     const [rows] = await this.database.query(
-      `SELECT c.name, v.id, v.title, v.image
+      `SELECT c.name, v.id, v.title, v.image, v.is_connected
          FROM ${this.table} AS c  
          LEFT JOIN video AS v ON c.id = v.category_id 
          WHERE c.name = ?`,

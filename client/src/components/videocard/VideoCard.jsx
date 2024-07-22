@@ -8,7 +8,11 @@ export default function VideoCard({ video }) {
       <div className="overlay">
         <h2 className="cardTitle">{video.title}</h2>
       </div>
-      <img className="cardImage" src={video.image} alt={video.title} />
+      {video.is_connected === 0 ? (
+        <img className="cardImage" src={video.image} alt={video.title} />
+      ) : (
+        <img id="imageNotConnected" src={video.image} alt={video.title} />
+      )}
     </NavLink>
   );
 }

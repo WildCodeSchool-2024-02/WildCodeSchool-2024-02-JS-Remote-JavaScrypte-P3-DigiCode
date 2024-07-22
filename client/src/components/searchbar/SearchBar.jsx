@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import "./SearchBar.css";
 
@@ -19,19 +19,16 @@ export default function SearchBar() {
   };
 
   return (
-    <>
-      <ToastContainer />
-      <form className="searchForm" onSubmit={handleSubmit}>
-        <input
-          id="search"
-          type="text"
-          placeholder="Search"
-          onChange={(event) => setInputValue(event.target.value)}
-        />
-        <button className="searchButton" type="submit">
-          🔎
-        </button>
-      </form>
-    </>
+    <form className="searchForm" onSubmit={handleSubmit}>
+      <input
+        id="search"
+        type="text"
+        placeholder="Search"
+        onChange={(event) => setInputValue(event.target.value)}
+      />
+      <button className="searchButton" type="submit">
+        🔎
+      </button>
+    </form>
   );
 }

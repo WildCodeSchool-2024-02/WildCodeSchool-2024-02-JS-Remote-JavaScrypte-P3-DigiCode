@@ -17,6 +17,7 @@ class VideoSeeder extends AbstractSeeder {
         image: this.faker.image.urlPicsumPhotos(), // generates a fake image
         description: this.faker.lorem.paragraph(), // generates a fake description
         date: this.faker.date.recent(), // generate a fake date
+        is_connected: this.faker.number.int({ min: 0, max: 1 }),
         category_id: this.faker.number.int({ min: 1, max: 5 }),
       };
 

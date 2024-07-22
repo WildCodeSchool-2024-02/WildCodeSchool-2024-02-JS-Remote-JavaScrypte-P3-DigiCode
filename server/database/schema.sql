@@ -1,5 +1,3 @@
--- SQLBook: Code
--- Catégorie
 CREATE TABLE category (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
     name VARCHAR(80) NOT NULL

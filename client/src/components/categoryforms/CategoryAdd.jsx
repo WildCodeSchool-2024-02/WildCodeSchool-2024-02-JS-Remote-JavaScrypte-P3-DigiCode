@@ -2,36 +2,44 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function CategoryAdd() {
   const [setCategoryData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
 
+  const [categoriesPostFailed, setCategoriesPostFailed] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
       await axios.post(`${expressURL}/api/categories`, data);
     } catch (err) {
-      console.error(err);
+      if (err) setCategoriesPostFailed(true);
     }
   };
 
   useEffect(() => {
     const express = import.meta.env.VITE_API_URL;
+
     try {
-      axios.get(`${express}/api/categories`).then((response) => {
-        const { data } = response;
-        setCategoryData(data);
-      });
+      axios
+        .get(`${express}/api/categories`)
+        .then((response) => {
+          const { data } = response;
+          setCategoryData(data);
+        })
+        .then(() => reset());
     } catch (err) {
-      console.error(err);
+      if (err) toast.error("Couldn't retrieve the categories");
     }
-  }, [setCategoryData]);
+  }, [setCategoryData, reset]);
 
   const requiredFieldError = "This field is required!";
 
@@ -40,6 +48,7 @@ export default function CategoryAdd() {
       <h1>Category Panel</h1>
       <section>
         <h2>Add a category</h2>
+        <ToastContainer />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="category-panel_name">
             <label htmlFor="name"> Category name </label>
@@ -55,6 +64,9 @@ export default function CategoryAdd() {
               })}
             />
             {errors.name && <p>{errors.name.message}</p>}
+            {categoriesPostFailed && (
+              <p>Something went wrong while adding the category</p>
+            )}
           </div>
           <button type="submit">Add category</button>
         </form>

@@ -36,8 +36,8 @@ export default function VideoUpdate() {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div> 
+    <form className="form-video-pannel" onSubmit={handleSubmit(onSubmit)}>
+      <div className="input-form-video"> 
       <label htmlFor="videoUpdate"> Access </label>
       <select name="videoupdate" {...register("id")}>
         {videoData?.map((v) => (
@@ -47,6 +47,7 @@ export default function VideoUpdate() {
         ))}
       </select>
 </div>
+<div className="input-form-video"> 
       <input type="radio" name="free" value="0" {...register("is_connected")} />
 
       <label htmlFor="acces"> Free </label>
@@ -57,8 +58,8 @@ export default function VideoUpdate() {
         value="1"
         {...register("is_connected")}
       />
-      <label htmlFor="acces"> Premium </label>
-      <button type="submit"> Update Video</button>
+      <label htmlFor="acces"> Premium </label></div>
+      <button type="submit" className="button-form-video"> Update Video</button>
     </form>
   );
 }

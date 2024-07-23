@@ -1,0 +1,28 @@
+.form-video-pannel {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-video-pannel label {
+  margin-right: 1rem;
+}
+
+.input-form-video {
+  margin-bottom: 0.8rem;
+}
+
+#description-video {
+  display: flex;
+}
+
+.button-form-video {
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: var(--input-radius);
+  width: 6rem;
+  height: 1.8rem;
+  margin-top: 1;
+  margin-bottom: 2rem;
+  margin-left: 6.5rem;
+  margin-top: 1rem;
+}

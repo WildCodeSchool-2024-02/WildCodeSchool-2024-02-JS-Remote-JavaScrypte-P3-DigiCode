@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+import "./VideoPannel.css"
+
 export default function VideoAdd() {
   const [categoryData, setCategoryData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
@@ -42,9 +44,9 @@ export default function VideoAdd() {
 
   return (
     <section>
-      <h1>Video Panel</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="pannel-title">
+
+      <form className="form-video-pannel" onSubmit={handleSubmit(onSubmit)}>
+        <div className="input-form-video">
           <label htmlFor="name"> Title </label>
           <input
             type="text"
@@ -59,9 +61,9 @@ export default function VideoAdd() {
           />
           {errors.title && <p> {errors.title.message}</p>}
         </div>
-        <div className="pannel-description">
+        <div className="input-form-video" id="description-video">
           <label htmlFor="description"> Description </label>
-          <input
+          <textarea
             type="text"
             name="description"
             {...register("description", {
@@ -75,7 +77,7 @@ export default function VideoAdd() {
           {errors.description && <p> {errors.description.message}</p>}
         </div>
 
-        <div className="pannelvideo-category">
+        <div className="input-form-video">
           <label htmlFor="category">Category </label>
           <select name="category" {...register("category_id")}>
             {categoryData?.map((cat) => (
@@ -85,7 +87,8 @@ export default function VideoAdd() {
             ))}
           </select>
         </div>
-        <div>
+        <div className="input-form-video">
+          <label htmlFor="access"> Access : </label>
           <input
             type="radio"
             name="free"
@@ -104,7 +107,7 @@ export default function VideoAdd() {
           <label htmlFor="premium">Premium</label>
         </div>
 
-        <div className="pannelimage-url">
+        <div className="input-form-video">
           <label htmlFor="image">Thumbnail</label>
           <input
             type="text"
@@ -116,7 +119,7 @@ export default function VideoAdd() {
           {errors.image && <p> {errors.image.message}</p>}
         </div>
 
-        <div className="pannelvideo-url">
+        <div className="input-form-video">
           <label htmlFor="url">URL</label>
           <input
             type="text"
@@ -128,7 +131,7 @@ export default function VideoAdd() {
           {errors.url && <p> {errors.url.message}</p>}
         </div>
 
-        <button type="submit">Post video</button>
+        <button type="submit" className="button-form-video">Post video</button>
       </form>
     </section>
   );

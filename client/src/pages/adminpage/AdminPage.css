@@ -2,10 +2,21 @@
   text-align: center;
 }
 
+.admin-panel-video {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-color-gray);
+  color: var(--main-color-black);
+  padding: 1rem;
+  border-radius: var(--input-radius);
+}
+
 @media screen and (width >= 1000px) {
-  .admin-panel-row1 {
+  .admin-panel-video {
     margin: 6rem 0;
     display: flex;
     justify-content: space-evenly;
+    max-width: 40%;
+    padding-left: 3rem;
   }
 }

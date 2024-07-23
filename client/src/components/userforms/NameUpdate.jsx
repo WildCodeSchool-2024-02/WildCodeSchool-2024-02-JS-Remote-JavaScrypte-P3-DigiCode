@@ -11,7 +11,7 @@ export default function NameUpdate({ user }) {
   const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
-    axios.get(`${expressURL}/api/users/${user.id}`).then((response) => {
+    axios.get(`${expressURL}/api/users/${user?.id}`).then((response) => {
       setCurrentUser({
         firstname: response.data.firstname,
         lastname: response.data.lastname,
@@ -23,12 +23,14 @@ export default function NameUpdate({ user }) {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
       await axios.put(`${expressURL}/api/users/${user.id}/name`, data);
       toast.success("Your user informations have been updated");
+      reset();
     } catch (err) {
       if (err) toast.error("An error occured, please try again");
     }
@@ -39,52 +41,50 @@ export default function NameUpdate({ user }) {
   const max120CharactersError = "You can't have more than 120 characters";
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label htmlFor="firstname">Firstname</label>
-        <input
-          type="text"
-          name="firstname"
-          id="firstname"
-          placeholder={currentUser?.firstname || "Firstname"}
-          {...register("firstname", {
-            required: requiredFieldError,
-            minLength: {
-              value: 2,
-              message: min2CharactersError,
-            },
-            maxLength: {
-              value: 120,
-              message: max120CharactersError,
-            },
-          })}
-        />
-        {errors.firstname && (
-          <p className="form-error">{errors.firstname.message}</p>
-        )}
-      </div>
-      <div>
-        <label htmlFor="lastname">Lastname</label>
-        <input
-          type="text"
-          name="lastname"
-          id="lastname"
-          placeholder={currentUser?.lastname || "Lastname"}
-          {...register("lastname", {
-            required: requiredFieldError,
-            minLength: {
-              value: 2,
-              message: min2CharactersError,
-            },
-            maxLength: {
-              value: 120,
-              message: max120CharactersError,
-            },
-          })}
-        />
-      </div>
-      <button type="submit" /* value={user?.id} {...register("id")} */>
-        Submit
+    <form onSubmit={handleSubmit(onSubmit)} className="user-form">
+      <label htmlFor="firstname">Firstname</label>
+      <input
+        className="upload-input"
+        type="text"
+        name="firstname"
+        id="firstname"
+        placeholder={currentUser?.firstname || "Firstname"}
+        {...register("firstname", {
+          required: requiredFieldError,
+          minLength: {
+            value: 2,
+            message: min2CharactersError,
+          },
+          maxLength: {
+            value: 120,
+            message: max120CharactersError,
+          },
+        })}
+      />
+      {errors.firstname && (
+        <p className="form-error">{errors.firstname.message}</p>
+      )}
+      <label htmlFor="lastname">Lastname</label>
+      <input
+        className="upload-input"
+        type="text"
+        name="lastname"
+        id="lastname"
+        placeholder={currentUser?.lastname || "Lastname"}
+        {...register("lastname", {
+          required: requiredFieldError,
+          minLength: {
+            value: 2,
+            message: min2CharactersError,
+          },
+          maxLength: {
+            value: 120,
+            message: max120CharactersError,
+          },
+        })}
+      />
+      <button type="submit" className="update-submit">
+        Update
       </button>
     </form>
   );

@@ -30,7 +30,7 @@ CREATE TABLE user (
     lastname VARCHAR(120) NOT NULL,
     email VARCHAR(120) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role_id INT UNSIGNED DEFAULT 2,
+    role_id INT UNSIGNED DEFAULT 1,
     FOREIGN KEY (role_id) REFERENCES role (id)
 );
 

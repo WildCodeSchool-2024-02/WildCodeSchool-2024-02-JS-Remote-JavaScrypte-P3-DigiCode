@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { SearchIcon } from "lucide-react";
 
 import "./SearchBar.css";
 
@@ -9,8 +11,11 @@ export default function SearchBar() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (inputValue.length > 1) {
+    if (inputValue.length > 2) {
       navigate(`/result/${inputValue}`);
+    }
+    if (inputValue.length < 2) {
+      toast.error("Please enter at least 2 characters");
     }
   };
 
@@ -22,8 +27,12 @@ export default function SearchBar() {
         placeholder="Search"
         onChange={(event) => setInputValue(event.target.value)}
       />
-      <button className="searchButton" type="submit">
-        🔎
+      <button
+        className="searchButton"
+        type="submit"
+        style={{ display: "flex", alignItems: "center" }}
+      >
+        <SearchIcon aria-label="Search" />
       </button>
     </form>
   );

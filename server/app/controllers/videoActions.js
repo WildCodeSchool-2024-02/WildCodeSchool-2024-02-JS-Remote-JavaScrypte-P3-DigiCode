@@ -40,19 +40,12 @@ const read = async (req, res, next) => {
 // Edit
 const edit = async (req, res, next) => {
   try {
-    const { title, url, image, description, date, is_connected, category_id } =
-      req.body;
+    const { id } = req.params;
+    const { is_connected } = req.body;
 
-    const video = await tables.video.edit(
-      title,
-      url,
-      image,
-      description,
-      date,
-      is_connected,
-      category_id
-    );
-    res.sendStatus(204).json({ updated: video });
+    await tables.video.edit(is_connected, id);
+
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }

@@ -12,29 +12,33 @@ export default function CategoryAdd() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
       await axios.post(`${expressURL}/api/categories`, data);
-      toast.success("category added successfully!");
+      toast.success("Category added successfully!");
     } catch (err) {
-      console.error(err);
-      toast.error("An error occured, please try again");
+      if (err) toast.error("Something went wrong while adding the category");
     }
   };
 
   useEffect(() => {
     const express = import.meta.env.VITE_API_URL;
+
     try {
-      axios.get(`${express}/api/categories`).then((response) => {
-        const { data } = response;
-        setCategoryData(data);
-      });
+      axios
+        .get(`${express}/api/categories`)
+        .then((response) => {
+          const { data } = response;
+          setCategoryData(data);
+        })
+        .then(() => reset());
     } catch (err) {
-      console.error(err);
+      if (err) toast.error("Couldn't retrieve the categories");
     }
-  }, [setCategoryData]);
+  }, [setCategoryData, reset]);
 
   const requiredFieldError = "This field is required!";
 
@@ -59,6 +63,7 @@ export default function CategoryAdd() {
             />
             {errors.name && <p>{errors.name.message}</p>}
           </div>
+
           <button type="submit">Add category</button>
         </form>
       </section>

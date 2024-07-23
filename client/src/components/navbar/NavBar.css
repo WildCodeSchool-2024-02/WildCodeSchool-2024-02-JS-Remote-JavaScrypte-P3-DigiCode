@@ -29,7 +29,7 @@
 #navlinks {
   margin: 0;
   position: absolute;
-  top: calc(var(--nav-menu-size) + var(--nav-vertical-padding));
+  top: calc(var(--nav-menu-size) + var(--nav-vertical-padding) + 0.5rem);
   left: var(--nav-horizontal-padding);
   background-color: var(--main-color-black);
   color: var(--main-color-gray);
@@ -44,7 +44,8 @@
 }
 
 .logout {
-  font-size: 1.15em;
+  font-family: exo, sans-serif;
+  font-size: 1em;
   border: none;
   background-color: transparent;
   color: var(--main-color-gray);

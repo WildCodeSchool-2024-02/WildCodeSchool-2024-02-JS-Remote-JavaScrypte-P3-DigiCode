@@ -32,12 +32,11 @@ class VideoRepository extends AbstractRepository {
 
   // Edit
 
-  async edit(video) {
-    const { is_connected, category_id } = video;
-
+  async edit(is_connected,id) {
+  
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET is_connected=?, category_id=? WHERE id=?`,
-      [is_connected, category_id]
+      `UPDATE ${this.table} SET is_connected=? WHERE id=?`,
+      [is_connected, id]
     );
 
     return result.affectedRows;

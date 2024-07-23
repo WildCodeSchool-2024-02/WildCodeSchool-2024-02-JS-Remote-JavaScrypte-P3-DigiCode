@@ -12,15 +12,17 @@ export default function VideoAdd() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (uploadData) => {
     try {
-      await axios.post(`${expressURL}/api/videos`, uploadData);
+      await axios
+        .post(`${expressURL}/api/videos`, uploadData)
+        .then(() => reset());
       toast.success("Video added successfully!");
     } catch (err) {
-      console.error(err);
-      toast.error("An error occured, please try again later");
+      if (err) toast.error("An error occured, please try again later");
     }
   };
 
@@ -32,7 +34,7 @@ export default function VideoAdd() {
         setCategoryData(data);
       });
     } catch (err) {
-      console.error(err);
+      if (err) toast.error("Couldn't retrieve the categories");
     }
   }, []);
 

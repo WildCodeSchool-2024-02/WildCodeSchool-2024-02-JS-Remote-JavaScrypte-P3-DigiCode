@@ -1,4 +1,5 @@
 import { useLoaderData, NavLink, Link } from "react-router-dom";
+import { ArrowLeftIcon } from "lucide-react";
 import SearchBar from "../../components/searchbar/SearchBar";
 import Filter from "../../components/filter/Filter";
 import CategoriesList from "../../components/categorieslist/CategoriesList";
@@ -11,6 +12,7 @@ export default function CategoriesPage() {
     <>
       <Link to="/">
         <button type="button" className="backButton">
+          <ArrowLeftIcon size={18} />
           Home
         </button>
       </Link>

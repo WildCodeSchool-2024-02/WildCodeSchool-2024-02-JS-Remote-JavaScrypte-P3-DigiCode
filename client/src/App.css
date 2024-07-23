@@ -57,6 +57,13 @@ a:hover {
   border: 0.125rem solid var(--accent-color);
   border-radius: var(--medium-border-radius);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+a:has(> .backButton) {
+  text-decoration: none;
 }
 
 /** Style pour les boutons de navigation de Swiper */

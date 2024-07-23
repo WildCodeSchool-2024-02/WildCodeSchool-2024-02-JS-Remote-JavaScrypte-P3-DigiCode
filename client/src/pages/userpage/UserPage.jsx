@@ -1,197 +1,41 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { useOutletContext, Navigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useState, useEffect } from "react";
 
 import "./UserPage.css";
+import NameUpdate from "../../components/userforms/NameUpdate";
 
 export default function UserPage() {
-  const user = useOutletContext();
-  const { currentUser, setCurrentUser } = user;
+  const { currentUser } = useOutletContext();
+  const [user, setUser] = useState();
+
   const express = import.meta.env.VITE_API_URL;
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm();
+  useEffect(() => {
+    axios.get(`${express}/api/users/${currentUser?.id}`).then((response) => {
+      setUser({
+        firstname: response.data.firstname,
+        lastname: response.data.lastname,
+        email: response.data.email,
+      });
+    });
+  }, [express, setUser, currentUser?.id]);
 
-  const requiredFieldError = "This field is required !";
-  const min2CharError = "Must have at least 2 characters !";
-  const max120CharError = "Must have at most 120 characters !";
-
-  const onSubmit = async (data) => {
-    const updatedUser = { ...data, role_id: 1, id: currentUser.id };
-
-    try {
-      axios
-        .put(`${express}/api/users/${currentUser.id}`, updatedUser)
-        .then(() => {
-          setCurrentUser({
-            firstname: updatedUser.firstname,
-            lastname: updatedUser.lastname,
-            email: updatedUser.email,
-            id: updatedUser.id,
-            role: "user",
-          });
-        });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  return currentUser == null ? (
+  return currentUser === undefined ? (
     <Navigate to="/login" />
   ) : (
-    <>
-      <h1 className="title-user-page">User Page</h1>
-      <section className="section-information">
-        <div className="container-user-info">
-          <p className="title-info"> Your personal informations : </p>
-          <p> Name : {`${currentUser.firstname}`} </p>
-          <p> Last name : {`${currentUser.lastname}`}</p>
-          <p> Email : {currentUser.email}</p>
-        </div>
-        <div className="user-page-container">
-          <p className="title-info">
-            {" "}
-            You can modify your informations right here{" "}
-          </p>
-          <form className="form-user-page" onSubmit={handleSubmit(onSubmit)}>
-            <div className="user-form">
-              <label htmlFor="firstname">Firstname </label>
-              <input
-                type="text"
-                name="firstname"
-                placeholder="John"
-                {...register("firstname", {
-                  required: requiredFieldError,
-                  minLength: {
-                    value: 2,
-                    message: min2CharError,
-                  },
-                  maxLength: {
-                    value: 120,
-                    message: max120CharError,
-                  },
-                })}
-              />
-              {errors.firstname && (
-                <p className="form-error">{errors.firstname.message}</p>
-              )}
-              <label htmlFor="lastname">Lastname </label>
-              <input
-                type="text"
-                name="lastname"
-                placeholder="Doe"
-                {...register("lastname", {
-                  required: requiredFieldError,
-                  minLength: {
-                    value: 2,
-                    message: min2CharError,
-                  },
-                  maxLength: {
-                    value: 120,
-                    message: max120CharError,
-                  },
-                })}
-              />
-              {errors.lastname && (
-                <p className="form-error">{errors.lastname.message}</p>
-              )}
-              <label htmlFor="email">Email </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="john.doe@example.com"
-                {...register("email", {
-                  required: requiredFieldError,
-                  pattern: {
-                    value: /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/,
-                    message: "Invalid email format",
-                  },
-                  maxLength: {
-                    value: 120,
-                    message: max120CharError,
-                  },
-                })}
-              />
-              {errors.email && (
-                <p className="form-error">{errors.email.message}</p>
-              )}
-              <label htmlFor="confirmemail">Confirm email </label>
-              <input
-                type="email"
-                name="confirmemail"
-                placeholder="john.doe@example.com"
-                {...register("confirmemail", {
-                  required: requiredFieldError,
-                  pattern: {
-                    value: /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/,
-                    message: "Invalid email format",
-                  },
-                  maxLength: {
-                    value: 120,
-                    message: max120CharError,
-                  },
-                  validate: (value) =>
-                    value === watch("email") || "Emails do not match",
-                })}
-              />
-              {errors.confirmemail && (
-                <p className="form-error">{errors.confirmemail.message}</p>
-              )}
-              <label htmlFor="password">Password </label>
-              <input
-                type="password"
-                name="password"
-                placeholder="●●●●●●●●"
-                {...register("password", {
-                  required: requiredFieldError,
-                  pattern: {
-                    value:
-                      /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){12,64}$/,
-                    message:
-                      "You need at least 12 characters, including one uppercase, one number and a special character",
-                  },
-                  maxLength: {
-                    value: 64,
-                    message: "You can't put more that 64 characters",
-                  },
-                })}
-              />
-              {errors.password && (
-                <p className="form-error">{errors.password.message}</p>
-              )}
-              <label htmlFor="confirmpassword">Confirm password </label>
-              <input
-                type="password"
-                name="confirmpassword"
-                placeholder="●●●●●●●●"
-                {...register("confirmpassword", {
-                  required: requiredFieldError,
-                  pattern: {
-                    value:
-                      /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){12,64}$/,
-                    message: "Invalid password format",
-                  },
-                  validate: (value) =>
-                    value === watch("password") || "Passwords do not match",
-                })}
-              />
-              {errors.confirmpassword && (
-                <p className="form-error">{errors.confirmpassword.message}</p>
-              )}
-              <div className="position-button-updtate">
-                <button className="button-update-info" type="submit">
-                  Update
-                </button>
-              </div>{" "}
-            </div>
-          </form>
-        </div>
+    <div className="user-page-container">
+      <section className="personal-information">
+        <h1 className="title-info">{user?.firstname} Page</h1>
+
+        <p className="user-details">{`Username: ${user?.firstname} ${user?.lastname}`}</p>
+        <p className="user-details">Email: {user?.email}</p>
       </section>
-    </>
+      <section className="update-information">
+        <h2>Update your personal informations</h2>
+        <NameUpdate user={currentUser} />
+      </section>
+    </div>
   );
 }

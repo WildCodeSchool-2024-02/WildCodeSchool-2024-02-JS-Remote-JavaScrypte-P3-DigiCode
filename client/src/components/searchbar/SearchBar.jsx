@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { SearchIcon } from "lucide-react";
 
 import "./SearchBar.css";
 
@@ -26,8 +27,12 @@ export default function SearchBar() {
         placeholder="Search"
         onChange={(event) => setInputValue(event.target.value)}
       />
-      <button className="searchButton" type="submit">
-        🔎
+      <button
+        className="searchButton"
+        type="submit"
+        style={{ display: "flex", alignItems: "center" }}
+      >
+        <SearchIcon aria-label="Search" />
       </button>
     </form>
   );

@@ -7,6 +7,7 @@ import CategoryDelete from "../../components/categoryforms/CategoryDelete";
 
 import "./AdminPage.css";
 import VideoUpdate from "../../components/videoforms/VideoUpdate";
+import CategoryUpdate from "../../components/categoryforms/CategoryUpdate";
 
 export default function AdminPage() {
   const { currentUser } = useOutletContext();
@@ -17,13 +18,14 @@ export default function AdminPage() {
       <div className="admin-panel-row1">
         <VideoAdd />
         <VideoDelete />
-        <VideoUpdate/>
+        <VideoUpdate />
       </div>
       <div>
         <CategoryAdd />
       </div>
       <div>
         <CategoryDelete />
+        <CategoryUpdate />
       </div>
       <div>
         <h2>Hero slider</h2>

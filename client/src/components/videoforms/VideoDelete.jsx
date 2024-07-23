@@ -40,11 +40,14 @@ export default function VideoDelete() {
 
   return (
     <section>
-
       <form className="form-video-pannel" onSubmit={handleSubmit(onSubmit)}>
         <div className="input-form-video">
-          <label htmlFor="videodelete"> Category </label>
-          <select name="videodelete" {...register("id")}>
+          <label htmlFor="videodelete"> Choose a video </label>
+          <select
+            className="select-panel"
+            name="videodelete"
+            {...register("id")}
+          >
             {videoData?.map((video) => (
               <option key={video.id} value={video.id}>
                 {`${video.title.charAt(0).toUpperCase()}${video.title.slice(1)}`}
@@ -54,7 +57,9 @@ export default function VideoDelete() {
           </select>
         </div>
 
-        <button type="submit" className="button-form-video">Delete video</button>
+        <button type="submit" className="button-form-panel">
+          Delete video
+        </button>
       </form>
     </section>
   );

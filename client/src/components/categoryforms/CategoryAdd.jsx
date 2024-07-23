@@ -43,12 +43,11 @@ export default function CategoryAdd() {
   const requiredFieldError = "This field is required!";
 
   return (
-    <>
-      <h1>Category Panel</h1>
+
       <section>
-        <h2>Add a category</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="category-panel_name">
+
+        <form onSubmit={handleSubmit(onSubmit)} className="form-category-panel">
+          <div  className="panel-category">
             <label htmlFor="name"> Category name </label>
             <input
               type="text"
@@ -64,9 +63,9 @@ export default function CategoryAdd() {
             {errors.name && <p>{errors.name.message}</p>}
           </div>
 
-          <button type="submit">Add category</button>
+          <button type="submit" className="button-form-panel">Add category</button>
         </form>
       </section>
-    </>
+
   );
 }

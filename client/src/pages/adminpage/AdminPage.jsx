@@ -1,7 +1,6 @@
 import { Navigate, useOutletContext } from "react-router-dom";
 import VideoAdd from "../../components/videoforms/VideoAdd";
 import VideoDelete from "../../components/videoforms/VideoDelete";
-import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import CategoryAdd from "../../components/categoryforms/CategoryAdd";
 import CategoryDelete from "../../components/categoryforms/CategoryDelete";
 
@@ -12,31 +11,35 @@ export default function AdminPage() {
   const { currentUser } = useOutletContext();
 
   return currentUser?.role === "admin" ? (
+    <> 
+    <h1 className="title-admin-page"> Admin pannel</h1>
     <div className="admin-panel">
-      <h1 className="admin-title">Admin Panel</h1>
-<h2> Video pannel </h2>
-      <section className="admin-panel-video">
-      <h3> Video add </h3>
-        <VideoAdd />
-        <h3> Video Delete </h3>
-        <VideoDelete />
-        <h3> Video Update </h3>
-        <VideoUpdate/>
-      </section>
-      <section className="admin-pannel-category"> 
-      <div>
-        <CategoryAdd />
-      </div>
-      <div>
-        <CategoryDelete />
-      </div>
-      <div>
-        <h2>Hero slider</h2>
-        <HeroSlider />
-      </div>
-    </section>  </div>
   
+      <section>
+
+        <h2> Video panel </h2>
+        <article className="admin-panel-video">
+          <h3> Add a video </h3>
+          <VideoAdd />
+          <h3> Update a video </h3>
+          <VideoUpdate />
+          <h3> Delete a video  </h3>
+          <VideoDelete />
+        </article>
+      </section>
+      <section>
+        <h2>  Category Panel</h2>
+        <artcile className="admin-panel-category">
+          <h3> Add a category </h3>
+          <CategoryAdd />
+          <h3> Delete a category</h3>
+          <CategoryDelete />
+        </artcile>
+      </section>
+    </div>
+    </>
   ) : (
     <Navigate to="/" />
   );
 }
+

@@ -78,7 +78,7 @@ export default function VideoAdd() {
         </div>
 
         <div className="input-form-video">
-          <label htmlFor="category">Category </label>
+          <label htmlFor="category">Choose a category </label>
           <select name="category" {...register("category_id")}>
             {categoryData?.map((cat) => (
               <option key={cat.id} value={cat.id}>
@@ -131,7 +131,7 @@ export default function VideoAdd() {
           {errors.url && <p> {errors.url.message}</p>}
         </div>
 
-        <button type="submit" className="button-form-video">Post video</button>
+        <button type="submit" className="button-form-panel">Post video</button>
       </form>
     </section>
   );

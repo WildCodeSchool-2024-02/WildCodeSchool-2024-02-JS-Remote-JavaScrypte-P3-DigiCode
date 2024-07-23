@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+import "./CategoryPanel.css"
+
 export default function CategoryDelete() {
   const [categoryData, setCategoryData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
@@ -40,11 +42,11 @@ export default function CategoryDelete() {
 
   return (
     <section>
-      <h2>Delete a category</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="pannel-category">
-          <label htmlFor="category"> Category </label>
-          <select name="category" {...register("id")}>
+
+      <form onSubmit={handleSubmit(onSubmit)} >
+        <div className="panel-category" >
+          <label htmlFor="category"> Choose a category </label>
+          <select className="select-panel" name="category" {...register("id")}>
             {categoryData?.map((cat) => (
               <option key={cat.id} value={cat.id}>
                 {`${cat.name.charAt(0).toUpperCase()}${cat.name.slice(1)}`}
@@ -54,7 +56,7 @@ export default function CategoryDelete() {
           </select>
         </div>
 
-        <button type="submit"> Delete category</button>
+        <button type="submit" className="button-form-panel"> Delete category</button>
       </form>
     </section>
   );

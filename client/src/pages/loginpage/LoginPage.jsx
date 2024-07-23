@@ -37,11 +37,11 @@ export default function SignupPage() {
         .post(`${expressURL}/api/auth/login`, data, {
           withCredentials: true,
         })
-        .then(() => reset())
         .then((response) => {
           setCurrentUser(response.data.user);
           toast.success("you are logged in!");
-        });
+        })
+        .then(() => reset());
 
       console.warn(currentUser);
     } catch (error) {

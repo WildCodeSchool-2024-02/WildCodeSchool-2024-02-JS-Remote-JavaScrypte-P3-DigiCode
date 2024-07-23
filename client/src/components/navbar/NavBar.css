@@ -10,7 +10,7 @@
 }
 
 .logo {
-  max-height: 4rem;
+  max-height: 6rem;
 }
 
 .menu-button {
@@ -29,7 +29,7 @@
 #navlinks {
   margin: 0;
   position: absolute;
-  top: calc(var(--nav-menu-size) + var(--nav-vertical-padding));
+  top: calc(var(--nav-menu-size) + var(--nav-vertical-padding) + 0.5rem);
   left: var(--nav-horizontal-padding);
   background-color: var(--main-color-black);
   color: var(--main-color-gray);
@@ -61,4 +61,15 @@
   max-width: 10ch;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (width > 800px) {
+  .logo {
+    max-height: 8rem;
+  }
 }

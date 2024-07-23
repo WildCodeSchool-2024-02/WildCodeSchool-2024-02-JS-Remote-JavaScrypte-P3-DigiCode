@@ -2,6 +2,11 @@
   margin-top: 2.5rem;
 }
 
+#newinSlide.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (width >= 760px) {
   #newinSwiper {
     margin-bottom: 2rem;

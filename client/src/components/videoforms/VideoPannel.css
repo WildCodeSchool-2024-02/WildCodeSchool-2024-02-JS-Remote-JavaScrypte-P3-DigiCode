@@ -18,6 +18,18 @@
   border: var(--accent-color) 2px solid;
 }
 
+.header-panel {
+  display: flex;
+
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.show-button {
+  border: none;
+  background-color: var(--gray-color);
+}
+
 .input-form-video {
   margin-bottom: 0.8rem;
 }

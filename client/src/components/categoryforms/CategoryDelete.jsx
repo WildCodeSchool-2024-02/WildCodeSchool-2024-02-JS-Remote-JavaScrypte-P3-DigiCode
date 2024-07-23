@@ -3,12 +3,18 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { CircleChevronRight, CircleChevronDown } from "lucide-react";
 
-import "./CategoryPanel.css"
+import "./CategoryPanel.css";
 
 export default function CategoryDelete() {
   const [categoryData, setCategoryData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
+  const [categoryDeleteShow, setCategoryDeleteShow] = useState(false);
+
+  const togglePanel = () => {
+    setCategoryDeleteShow(!categoryDeleteShow);
+  };
 
   const {
     register,
@@ -42,22 +48,40 @@ export default function CategoryDelete() {
 
   return (
     <section>
+      <div className="header-panel">
+        <h3> Add a category </h3>
+        <button type="button" onClick={togglePanel} className="show-button">
+          {categoryDeleteShow ? (
+            <CircleChevronRight strokeWidth={2} />
+          ) : (
+            <CircleChevronDown strokeWidth={2} />
+          )}
+        </button>
+      </div>
+      {categoryDeleteShow ? null : (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="panel-category">
+            <label htmlFor="category"> Choose a category </label>
+            <select
+              className="select-panel"
+              name="category"
+              {...register("id")}
+            >
+              {categoryData?.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {`${cat.name.charAt(0).toUpperCase()}${cat.name.slice(1)}`}
+                </option>
+              ))}
+              {errors.id && <p>{errors.id.message}</p>}
+            </select>
+          </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} >
-        <div className="panel-category" >
-          <label htmlFor="category"> Choose a category </label>
-          <select className="select-panel" name="category" {...register("id")}>
-            {categoryData?.map((cat) => (
-              <option key={cat.id} value={cat.id}>
-                {`${cat.name.charAt(0).toUpperCase()}${cat.name.slice(1)}`}
-              </option>
-            ))}
-            {errors.id && <p>{errors.id.message}</p>}
-          </select>
-        </div>
-
-        <button type="submit" className="button-form-panel"> Delete category</button>
-      </form>
+          <button type="submit" className="button-form-panel">
+            {" "}
+            Delete category
+          </button>
+        </form>
+      )}
     </section>
   );
 }

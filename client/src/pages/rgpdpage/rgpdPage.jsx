@@ -1,10 +1,15 @@
+import { Scale, Cookie, PenLine, FolderClosed } from "lucide-react";
+
 export default function RgpdPage() {
   return (
     <>
-      <h1> RGPD </h1>
+      <h1> RGPD</h1>
       <section>
         <h2> Origins Digital Privacy Policy. </h2>
-        <h3>in accordance with article 6 of law n° 2004-575 du 21 juin 2004</h3>
+        <h3>
+          in accordance with article 6 of law n° 2004-575 du 21 juin 2004{" "}
+          <Scale color="#1FD360" strokeWidth={1.75} />
+        </h3>
         <p>
           Last updated: [23/07/2024] This Privacy Policy describes how Origins
           Digital (the "Site", "we", "us", or "our") collects, uses, and
@@ -26,7 +31,10 @@ export default function RgpdPage() {
           by applicable law.
         </p>
 
-        <h3>How We Collect and Use Your Personal Information</h3>
+        <h3>
+          How We Collect and Use Your Personal Information{" "}
+          <PenLine color="#1FD360" strokeWidth={1.75} />
+        </h3>
         <p>
           To provide the Services, we collect and have collected over the past
           12 months personal information about you from a variety of sources, as
@@ -39,7 +47,10 @@ export default function RgpdPage() {
           users or others.
         </p>
 
-        <h3>What Personal Information We Collect</h3>
+        <h3>
+          What Personal Information We Collect{" "}
+          <FolderClosed color="#1FD360" strokeWidth={1.75} />
+        </h3>
 
         <p>
           Basic contact details including your name and email. - Order
@@ -52,7 +63,9 @@ export default function RgpdPage() {
           elect not to provide this information, but doing so may prevent you
           from using or accessing certain features
         </p>
-        <h3>Cookies</h3>
+        <h3>
+          Cookies <Cookie color="#1FD360" strokeWidth={1.75} />
+        </h3>
         <p>
           Like many websites, we use Cookies on our Site. Most browsers
           automatically accept Cookies by default, but you can choose to set

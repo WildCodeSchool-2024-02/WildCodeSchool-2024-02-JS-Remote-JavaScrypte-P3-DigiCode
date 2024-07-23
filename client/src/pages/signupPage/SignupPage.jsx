@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from "react-hook-form";
-import { useRef } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -8,7 +8,6 @@ import "./SignupPage.css";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const inputRef = useRef();
 
   const {
     register,
@@ -20,14 +19,21 @@ export default function LoginPage() {
 
   const expressURL = import.meta.env.VITE_API_URL;
 
+  const [responseStatus, setResponseStatus] = useState(null);
+  const [isEmailDuplicate, setIsEmailDuplicate] = useState(false);
+
   const onSubmit = async (data) => {
     try {
       await axios
         .post(`${expressURL}/api/users/register`, data)
         .then(() => reset())
         .then(() => navigate("/login"));
+      toast.success("Signup successful, please login !");
     } catch (err) {
-      if (err) toast.error("An error occured, please try again later");
+      if (err.response.data.includes("Duplicate entry"))
+        setIsEmailDuplicate(true);
+      setResponseStatus(err.response.status);
+      toast.error("an error occured, please try again later");
     }
   };
 
@@ -46,7 +52,6 @@ export default function LoginPage() {
             </label>
             <div className="msg-error-name">
               <input
-                ref={inputRef}
                 type="text"
                 name="firstname"
                 className="user-nameone-input"
@@ -74,7 +79,6 @@ export default function LoginPage() {
             </label>
             <div className="msg-error-name">
               <input
-                ref={inputRef}
                 type="text"
                 name="lastname"
                 className="user-nameone-input"
@@ -101,7 +105,6 @@ export default function LoginPage() {
           Email
         </label>
         <input
-          ref={inputRef}
           type="email"
           name="email"
           className="signup-input"
@@ -118,12 +121,20 @@ export default function LoginPage() {
           })}
         />
         {errors.email && <p className="form-error">{errors.email.message}</p>}
+        {responseStatus === 500 && isEmailDuplicate && (
+          <p className="form-error">
+            <span style={{ whiteSpace: "pre-wrap" }}>
+              {
+                "This email is already present in the database, \nuse a different email."
+              }
+            </span>
+          </p>
+        )}
 
         <label className="label-form" htmlFor="confirmemail">
           Confirm Email
         </label>
         <input
-          ref={inputRef}
           type="email"
           name="confirmemail"
           className="signup-input"
@@ -149,7 +160,6 @@ export default function LoginPage() {
           Password
         </label>
         <input
-          ref={inputRef}
           type="password"
           name="password"
           className="signup-input"
@@ -175,7 +185,6 @@ export default function LoginPage() {
           Confirm password
         </label>
         <input
-          ref={inputRef}
           type="password"
           name="confirmpassword"
           className="signup-input"

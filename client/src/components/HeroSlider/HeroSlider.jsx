@@ -4,13 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import "./HeroSlider.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-export default function HeroSlider() {
+export default function HeroSlider({numberOfSlides = null}) {
   const [videoData, setVideoData] = useState([]);
 
   useEffect(() => {
@@ -31,11 +32,11 @@ export default function HeroSlider() {
       spaceBetween={50}
       breakpoints={{
         768: {
-          slidesPerView: 2,
+          slidesPerView: numberOfSlides || 2,
           spaceBetween: 40,
         },
         1024: {
-          slidesPerView: 3,
+          slidesPerView: numberOfSlides || 3,
           spaceBetween: 50,
         },
       }}
@@ -61,3 +62,7 @@ export default function HeroSlider() {
     </Swiper>
   );
 }
+
+HeroSlider.propTypes = {
+  numberOfSlides: PropTypes.number.isRequired,
+};

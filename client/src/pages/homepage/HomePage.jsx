@@ -19,6 +19,8 @@ export default function HomePage() {
       </h2>
       <HeroSlider />
 
+      <style>{"#heroSlide.swiper-slide {display: flex; justify-content: center}"}</style>
+
       <SearchBar />
 
       <h2>

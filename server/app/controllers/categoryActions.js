@@ -37,11 +37,10 @@ const add = async (req, res, next) => {
 };
 
 const edit = async (req, res, next) => {
-  const { id } = req.params;
-  const { name } = req.body;
-
   try {
-    await tables.category.edit(id, name);
+    const { id } = req.params;
+    const { name } = req.body;
+    await tables.category.edit(name, id);
 
     res.sendStatus(204);
   } catch (err) {

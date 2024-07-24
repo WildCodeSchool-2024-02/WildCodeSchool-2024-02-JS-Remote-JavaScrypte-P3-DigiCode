@@ -12,9 +12,7 @@ export default function CategoryDelete() {
   const expressURL = import.meta.env.VITE_API_URL;
   const [categoryDeleteShow, setCategoryDeleteShow] = useState(false);
 
-  const togglePanel = () => {
-    setCategoryDeleteShow(!categoryDeleteShow);
-  };
+  const togglePanel = () => setCategoryDeleteShow(!categoryDeleteShow);
 
   const {
     register,
@@ -52,13 +50,13 @@ export default function CategoryDelete() {
         <h3> Delete a category </h3>
         <button type="button" onClick={togglePanel} className="show-button">
           {categoryDeleteShow ? (
-            <CircleChevronRight strokeWidth={2} />
-          ) : (
             <CircleChevronDown strokeWidth={2} />
+          ) : (
+            <CircleChevronRight strokeWidth={2} />
           )}
         </button>
       </div>
-      {categoryDeleteShow ? null : (
+      {categoryDeleteShow && (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="panel-category">
             <label htmlFor="category"> Choose a category </label>

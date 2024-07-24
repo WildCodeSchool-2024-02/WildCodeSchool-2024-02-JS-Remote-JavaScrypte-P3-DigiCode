@@ -11,9 +11,7 @@ export default function VideoUpdate() {
   const [videoUpdateShow, setVideoUpdateShow] = useState(false);
   const { register, handleSubmit } = useForm();
 
-  const togglePanel = () => {
-    setVideoUpdateShow(!videoUpdateShow);
-  };
+  const togglePanel = () => setVideoUpdateShow(!videoUpdateShow);
 
   const onSubmit = async (data) => {
     try {
@@ -42,13 +40,13 @@ export default function VideoUpdate() {
         <h3> Update a video </h3>
         <button type="button" onClick={togglePanel} className="show-button">
           {videoUpdateShow ? (
-            <CircleChevronRight strokeWidth={2} />
-          ) : (
             <CircleChevronDown strokeWidth={2} />
+          ) : (
+            <CircleChevronRight strokeWidth={2} />
           )}
         </button>
       </div>
-      {videoUpdateShow ? null : (
+      {videoUpdateShow && (
         <form className="form-video-pannel" onSubmit={handleSubmit(onSubmit)}>
           <div className="input-form-video">
             <label htmlFor="videoUpdate"> Choose a video </label>

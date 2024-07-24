@@ -10,6 +10,7 @@
 }
 
 .logo {
+  margin-top: 2em;
   max-height: 6rem;
 }
 
@@ -70,6 +71,7 @@
 
 @media screen and (width > 800px) {
   .logo {
+    margin-top: 0;
     max-height: 8rem;
   }
 }

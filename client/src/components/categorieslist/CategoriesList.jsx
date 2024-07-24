@@ -11,25 +11,18 @@ import "./CategoriesList.css"
 export default function CategoriesList({ category }) {
   const { name } = category;
   const [result, setResult] = useState();
-console.log(category)
-{name === undefined ?   useEffect(() => {
-  const express = import.meta.env.VITE_API_URL;
-  const fetchCategoryVideo = async () => {
-    const response = await fetch(`${express}/api/categories/${category}`);
-    const data = await response.json();
-    setResult(data);
-  };
-  fetchCategoryVideo();
-}, [category])  :
-  useEffect(() => {
+
+useEffect(() => {
     const express = import.meta.env.VITE_API_URL;
     const fetchCategoryVideo = async () => {
-      const response = await fetch(`${express}/api/categories/${name}`);
+      const response = await fetch(`${express}/api/categories/${name || category}`);
       const data = await response.json();
       setResult(data);
     };
     fetchCategoryVideo();
-  }, [name]);}
+
+}, [category, name])  
+
 
   return (
     <Swiper

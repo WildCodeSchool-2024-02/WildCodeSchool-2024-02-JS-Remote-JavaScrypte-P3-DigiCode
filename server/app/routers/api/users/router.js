@@ -7,6 +7,7 @@ const {
   browse,
   read,
   edit,
+  updateUserName,
   add,
   destroy,
 } = require("../../../controllers/userActions");
@@ -21,6 +22,9 @@ router.get("/:id", read);
 
 // route to edit an existing user
 router.put("/:id", hashPassword, edit);
+
+// route to update user name
+router.put("/:id/name", updateUserName);
 
 // route to add a new user
 router.post("/register", userValidation, hashPassword, add);

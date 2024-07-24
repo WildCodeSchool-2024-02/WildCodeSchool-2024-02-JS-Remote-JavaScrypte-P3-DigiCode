@@ -10,7 +10,7 @@ class VideoRepository extends AbstractRepository {
 
   async readAll() {
     const [rows] = await this.database.query(
-      `SELECT id, title, url, image, description, date, is_premium, is_free  FROM ${this.table}`
+      `SELECT id, title, url, image, description, date, is_connected  FROM ${this.table}`
     );
 
     // return the array of videos
@@ -22,7 +22,7 @@ class VideoRepository extends AbstractRepository {
   async read(id) {
     // execute the SQL SELECT query to retrieve a specific video by its id
     const [row] = await this.database.query(
-      `SELECT id, title, url, image, description, date, is_premium, is_free FROM ${this.table} where id = ?`,
+      `SELECT v.id, v.title, v.url, v.image, v.description, v.date, v.is_connected, c.name AS category FROM ${this.table} AS v JOIN category AS c ON v.category_id = c.id where v.id = ?`,
       [id]
     );
 
@@ -32,12 +32,11 @@ class VideoRepository extends AbstractRepository {
 
   // Edit
 
-  async edit(video) {
-    const { is_premium, is_free, category_id } = video;
-
+  async edit(is_connected,id) {
+  
     const [result] = await this.database.query(
-      `UPDATE ${this.table} SET is_premium=?, is_free=?, category_id=? WHERE id=?`,
-      [is_premium, is_free, category_id]
+      `UPDATE ${this.table} SET is_connected=? WHERE id=?`,
+      [is_connected, id]
     );
 
     return result.affectedRows;
@@ -45,21 +44,12 @@ class VideoRepository extends AbstractRepository {
 
   // Add (create)
 
-  async add(video) {
-    const {
-      title,
-      url,
-      image,
-      description,
-      date,
-      is_premium,
-      is_free,
-      category_id,
-    } = video;
+  async create(video) {
+    const { title, url, image, description, is_connected, category_id } = video;
     // execute the SQL INSERT query to add a new video to the "video" table
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (title, url, image, description, date, is_premium, is_free, category_id) values(?, ?, ?, ?, ?, ?, ?, ?)`,
-      [title, url, image, description, date, is_premium, is_free, category_id]
+      `INSERT INTO ${this.table} (title, url, image, description, is_connected, category_id) values( ?, ?, ?, ?, ?, ?)`,
+      [title, url, image, description, is_connected, category_id]
     );
 
     // return the id of the newly inserted video
@@ -67,7 +57,7 @@ class VideoRepository extends AbstractRepository {
   }
 
   // Destroy (delete)
-  async destroy(id) {
+  async delete(id) {
     const [result] = await this.database.query(
       `DELETE FROM ${this.table} WHERE id=?`,
       [id]
@@ -79,7 +69,7 @@ class VideoRepository extends AbstractRepository {
   // Search (query)
   async query(search) {
     const [rows] = await this.database.query(
-      `SELECT id, title, url, image, description, date, is_premium, is_free, category_id FROM ${this.table} WHERE LOCATE(?, title)`,
+      `SELECT id, title, url, image, description, date, is_connected, category_id FROM ${this.table} WHERE LOCATE(?, title)`,
       [search]
     );
 

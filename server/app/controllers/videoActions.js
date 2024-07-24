@@ -40,28 +40,12 @@ const read = async (req, res, next) => {
 // Edit
 const edit = async (req, res, next) => {
   try {
-    const {
-      title,
-      url,
-      image,
-      description,
-      date,
-      is_premium,
-      is_free,
-      category_id,
-    } = req.body;
+    const { id } = req.params;
+    const { is_connected } = req.body;
 
-    const video = await tables.video.edit(
-      title,
-      url,
-      image,
-      description,
-      date,
-      is_premium,
-      is_free,
-      category_id
-    );
-    res.sendStatus(204).json({ updated: video });
+    await tables.video.edit(is_connected, id);
+
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }
@@ -90,9 +74,9 @@ const add = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletedVideo = await tables.video.destroy(id);
+    await tables.video.delete(id);
 
-    res.sendStatus(204).json({ removed: deletedVideo });
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }
@@ -103,7 +87,7 @@ const destroy = async (req, res, next) => {
 const query = async (req, res, next) => {
   try {
     const { search } = req.params;
-  
+
     const searchResults = await tables.video.query(search);
 
     res.json(searchResults);

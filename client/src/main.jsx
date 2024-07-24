@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 
 import App from "./App";
 import HomePage from "./pages/homepage/HomePage";
@@ -11,7 +15,8 @@ import SignupPage from "./pages/signupPage/SignupPage";
 import ResultPage from "./pages/resultpage/ResultPage";
 import LoginPage from "./pages/loginpage/LoginPage";
 import AdminPage from "./pages/adminpage/AdminPage";
-import LogoutPage from "./pages/logoutpage/LogoutPage";
+import UserPage from "./pages/userpage/UserPage";
+import RgpdPage from "./pages/rgpdpage/rgpdPage";
 
 const express = import.meta.env.VITE_API_URL;
 
@@ -32,6 +37,7 @@ const router = createBrowserRouter([
       {
         path: "/categories/:name",
         element: <CategoryPage />,
+        loader: () => fetch(`${express}/api/categories`),
       },
       {
         path: "/video/:id",
@@ -51,13 +57,21 @@ const router = createBrowserRouter([
         element: <ResultPage />,
       },
       {
-        path: "/admin",
+        path: "/history9",
         element: <AdminPage />,
       },
       {
-        path: "/logout",
-        element: <LogoutPage />,
+        path: "/user",
+        element: <UserPage />,
       },
+      {
+        path: "/rgpd",
+        element: <RgpdPage />,
+      },
+      {
+        path: "/*",
+        element: <Navigate to="/" />,
+      }
     ],
   },
 ]);

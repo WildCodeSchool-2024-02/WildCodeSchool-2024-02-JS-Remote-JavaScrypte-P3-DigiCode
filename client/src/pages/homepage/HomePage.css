@@ -1,9 +1,18 @@
-#heroSwiper {
-  margin-top: 7rem;
-  margin-bottom: 5rem;
+.title-home {
+  margin-top: 4em;
 }
 
 #newinSwiper {
-  margin-top: 5rem;
-  height: 15rem;
+  margin-top: 2.5rem;
+}
+
+#newinSlide.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (width >= 800px) {
+  #newinSwiper {
+    margin-bottom: 2rem;
+  }
 }

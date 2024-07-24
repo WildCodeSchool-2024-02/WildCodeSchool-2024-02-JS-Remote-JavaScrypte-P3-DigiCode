@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
-import "./Filter.css";
 import { Link } from "react-router-dom";
+import "./Filter.css";
 
 export default function Filter({ category }) {
   return (
-    <>
-      <h1>Categories</h1>
+    <div className="filter-wrapper">
+      <h2>Categories</h2>
       <div className="filterContainer">
         {category.map((c) => (
           <Link
@@ -14,11 +14,11 @@ export default function Filter({ category }) {
             type="button"
             key={c.name}
           >
-            {c.name}
+            <span className="categories-mapped-name">{`${c.name.charAt(0).toUpperCase()}${c.name.slice(1)}`}</span>
           </Link>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

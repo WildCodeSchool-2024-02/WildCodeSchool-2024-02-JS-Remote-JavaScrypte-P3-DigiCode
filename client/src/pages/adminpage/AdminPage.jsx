@@ -1,23 +1,41 @@
-import axios from "axios";
-import { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
+import { Navigate, useOutletContext } from "react-router-dom";
+
+import VideoAdd from "../../components/videoforms/VideoAdd";
+import VideoDelete from "../../components/videoforms/VideoDelete";
+import CategoryAdd from "../../components/categoryforms/CategoryAdd";
+import CategoryDelete from "../../components/categoryforms/CategoryDelete";
+
+import "./AdminPage.css";
+import VideoUpdate from "../../components/videoforms/VideoUpdate";
+import CategoryUpdate from "../../components/categoryforms/CategoryUpdate";
 
 export default function AdminPage() {
   const { currentUser } = useOutletContext();
 
-  useEffect(() => {
-    try {
-      axios.get(`${import.meta.env.VITE_API_URL}/api/auth/checkauth`, {
-        withCredentials: true,
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
-
-  return currentUser && currentUser.role === "admin" ? (
-    <h1>Admin page</h1>
+  return currentUser?.role === "admin" ? (
+    <>
+      <h1 className="title-admin-page"> Admin pannel</h1>
+      <div className="admin-panel">
+        <section>
+          <h2> Video panel </h2>
+          <article className="admin-panel-video">
+            <VideoAdd />
+            <VideoUpdate />
+            <VideoDelete />
+          </article>
+        </section>
+        <section>
+          <h2> Category Panel</h2>
+          <article className="admin-panel-category">
+            <CategoryAdd />
+            <CategoryUpdate />
+            <CategoryDelete />
+          </article>
+        </section>
+      </div>
+    </>
   ) : (
-    <h2>Not connected as an admin</h2>
+    <Navigate to="/" />
   );
+
 }

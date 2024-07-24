@@ -8,13 +8,31 @@ body {
   background-color: var(--main-color-black);
   color: var(--main-color-gray);
   font-family: "Exo";
+  line-height: 1.5rem;
   margin: 0;
   padding: 0;
 }
+@media screen and (width >= 760px) {
+  body {
+    font-size: 1.25rem;
+  }
+}
 
 .app-container {
-  min-height: 100vh;
   position: relative;
+}
+
+main {
+  max-width: clamp(320px, 90%, 1800px);
+  margin: auto;
+}
+
+img {
+  max-width: 100%;
+}
+
+p {
+  max-width: 80ch;
 }
 
 /** Style commun aux liens de navigation */
@@ -33,9 +51,26 @@ a:hover {
 .backButton {
   font-weight: bold;
   margin-top: 3em;
-  margin-left: 0.9375rem;
-  padding: 0.3125rem;
+  margin-left: 1rem;
+  padding: 4px 10px;
   background-color: var(--accent-color);
   border: 0.125rem solid var(--accent-color);
-  border-radius: 0.3125rem;
+  border-radius: var(--medium-border-radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+a:has(> .backButton) {
+  text-decoration: none;
+}
+
+/** Style pour les boutons de navigation de Swiper */
+.swiper-button-prev,
+.swiper-button-next {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 1px;
+  background-color: rgba(0, 0, 0, 0.22);
 }

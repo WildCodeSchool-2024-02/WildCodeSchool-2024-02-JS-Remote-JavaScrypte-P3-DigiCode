@@ -6,7 +6,7 @@ const browse = async (req, res, next) => {
   try {
     const users = await tables.user.readAll();
 
-    res.sendStatus(200).json(users);
+    res.json(users);
   } catch (error) {
     next(error);
   }
@@ -15,10 +15,10 @@ const browse = async (req, res, next) => {
 // Read
 const read = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params || req.body;
     const user = await tables.user.readById(id);
 
-    if (user != null) res.sendStatus(200).json(user);
+    if (user != null) res.json(user);
     else res.sendStatus(404);
   } catch (error) {
     next(error);
@@ -30,16 +30,21 @@ const edit = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { firstname, lastname, email, password, role_id } = req.body;
-    const user = await tables.user.update(
-      firstname,
-      lastname,
-      email,
-      password,
-      role_id,
-      id
-    );
+    await tables.user.update(firstname, lastname, email, password, role_id, id);
 
-    res.sendStatus(204).json({ updatedUserInfo: user });
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateUserName = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { firstname, lastname } = req.body;
+
+    await tables.user.updateUserName(firstname, lastname, id);
+    res.sendStatus(204);
   } catch (error) {
     next(error);
   }
@@ -70,13 +75,12 @@ const add = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletedUser = await tables.user.destroy(id);
+    await tables.user.destroy(id);
 
-    res.sendStatus(204).json({ removed: deletedUser });
+    res.sendStatus(204);
   } catch (error) {
     next(error);
   }
 };
 
-
-module.exports = { browse, read, edit, add, destroy};
+module.exports = { browse, read, edit, updateUserName, add, destroy };

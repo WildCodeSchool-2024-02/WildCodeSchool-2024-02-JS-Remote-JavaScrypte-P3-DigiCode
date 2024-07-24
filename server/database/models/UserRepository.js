@@ -9,7 +9,7 @@ class UserRepository extends AbstractRepository {
   // Browse
   async readAll() {
     const [rows] = await this.database.query(
-      `SELECT u.firstname, u.lastname, u.email, u.password, r.name AS role_name, r.access AS role_access FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id`
+      `SELECT u.firstname, u.lastname, u.email, u.password, r.name AS role FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id`
     );
 
     return rows;
@@ -18,7 +18,7 @@ class UserRepository extends AbstractRepository {
   // Read
   async readById(id) {
     const [row] = await this.database.query(
-      `SELECT u.firstname, u.lastname, u.email, u.password, r.name AS role_name, r.access AS role_access FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id WHERE u.id=?`,
+      `SELECT u.firstname, u.lastname, u.email, u.password, r.name AS role FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id WHERE u.id=?`,
       [id]
     );
 
@@ -26,12 +26,19 @@ class UserRepository extends AbstractRepository {
   }
 
   // Edit
-  async update(user) {
-    const { firstname, lastname, email, password, role_id, id } = user;
-
+  async update(firstname, lastname, email, password, role_id, id) {
     const [result] = await this.database.query(
       `UPDATE ${this.table} SET firstname=?, lastname=?, email=?, password=?, role_id=? WHERE id=?`,
       [firstname, lastname, email, password, role_id, id]
+    );
+
+    return result;
+  }
+
+  async updateUserName(firstname, lastname, id) {
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} SET firstname=?, lastname=? WHERE id=?`,
+      [firstname, lastname, id]
     );
 
     return result;
@@ -60,7 +67,7 @@ class UserRepository extends AbstractRepository {
   // Search user by email
   async searchByEmail(email) {
     const [result] = await this.database.query(
-      `SELECT firstname, lastname, email, password, r.name AS role FROM ${this.table} JOIN role AS r ON user.role_id=r.id WHERE email = ?`,
+      `SELECT u.firstname, u.lastname, u.email, u.password, u.id, r.name AS role FROM ${this.table} AS u JOIN role AS r ON u.role_id=r.id WHERE email = ?`,
       [email]
     );
 

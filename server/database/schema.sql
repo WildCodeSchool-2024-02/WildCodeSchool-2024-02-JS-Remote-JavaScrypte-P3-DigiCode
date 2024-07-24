@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- Catégorie
 CREATE TABLE category (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -11,9 +12,8 @@ CREATE TABLE video (
     url VARCHAR(255) NOT NULL,
     image VARCHAR(255) NOT NULL,
     description TEXT,
-    date DATE NOT NULL,
-    is_premium BOOLEAN NOT NULL DEFAULT FALSE,
-    is_free BOOLEAN NOT NULL DEFAULT FALSE,
+    date DATETIME DEFAULT NOW(),
+    is_connected BOOLEAN DEFAULT FALSE,
     category_id INT UNSIGNED,
     FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE SET NULL ON UPDATE CASCADE
 );

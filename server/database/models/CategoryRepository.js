@@ -15,7 +15,7 @@ class CategoryRepository extends AbstractRepository {
 
   async read(id) {
     const [rows] = await this.database.query(
-      `SELECT c.name, v.id, v.title, v.image
+      `SELECT c.name, v.id, v.title, v.image, v.is_connected
          FROM ${this.table} AS c  
          LEFT JOIN video AS v ON c.id = v.category_id 
          WHERE c.name = ?`,
@@ -25,9 +25,10 @@ class CategoryRepository extends AbstractRepository {
     return rows;
   }
 
-  async add(name) {
+  async create(category) {
+    const { name } = category;
     const [rows] = await this.database.query(
-      `insert into ${this.table} (name) value = ?`,
+      `insert into ${this.table} (name) value (?)`,
       [name]
     );
 
@@ -43,7 +44,7 @@ class CategoryRepository extends AbstractRepository {
     return result.affectedRows;
   }
 
-  async destroy(id) {
+  async delete(id) {
     const [row] = await this.database.query(
       `delete from ${this.table} where id = ?`,
       [id]

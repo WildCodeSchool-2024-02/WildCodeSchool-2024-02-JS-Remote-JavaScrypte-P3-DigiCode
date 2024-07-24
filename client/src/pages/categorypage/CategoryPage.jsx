@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useLoaderData } from "react-router-dom";
+import { ArrowLeftIcon } from "lucide-react";
 import VideoCard from "../../components/videocard/VideoCard";
+import Filter from "../../components/filter/Filter";
+
 import "./CategoryPage.css";
 
 export default function CategoryPage() {
+  const categoriesData = useLoaderData();
   const [result, setResult] = useState();
   const categoryFind = useParams();
 
@@ -19,15 +23,14 @@ export default function CategoryPage() {
     fetchCategoryVideo();
   }, [categoryFind]);
 
-  const handleBack = () => {
-    window.history.back();
-  };
-
   return (
     <>
-      <button type="button" onClick={handleBack} className="backButton">
-        Back
-      </button>
+      <Link to="/categories">
+        <button type="button" className="backButton">
+          <ArrowLeftIcon size={18} />
+          Categories
+        </button>
+      </Link>
       <h1 className="cTitle">{categoryFind.name.replaceAll("-", " ")}</h1>
       <div className="categoryCards">
         {result && result[0].id !== null ? (
@@ -36,6 +39,7 @@ export default function CategoryPage() {
           <h2>There are no videos associated with this category</h2>
         )}
       </div>
+      <Filter category={categoriesData} />
     </>
   );
 }

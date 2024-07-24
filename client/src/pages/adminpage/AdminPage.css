@@ -1,5 +1,6 @@
 .title-admin-page {
   text-align: center;
+  margin-top: 2em;
   margin-bottom: 2rem;
 }
 
@@ -10,6 +11,7 @@
 
 .admin-title {
   text-align: center;
+  margin-bottom: 4em;
 }
 
 .admin-panel-video,

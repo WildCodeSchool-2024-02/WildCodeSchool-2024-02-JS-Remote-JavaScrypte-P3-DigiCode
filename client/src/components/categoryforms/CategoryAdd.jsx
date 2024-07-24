@@ -10,9 +10,7 @@ export default function CategoryAdd() {
   const expressURL = import.meta.env.VITE_API_URL;
   const [categoryAddShow, setCategoryAddShow] = useState(false);
 
-  const togglePanel = () => {
-    setCategoryAddShow(!categoryAddShow);
-  };
+  const togglePanel = () => setCategoryAddShow(!categoryAddShow);
 
   const {
     register,
@@ -54,13 +52,13 @@ export default function CategoryAdd() {
         <h3> Add a category </h3>
         <button type="button" onClick={togglePanel} className="show-button">
           {categoryAddShow ? (
-            <CircleChevronRight strokeWidth={2} />
-          ) : (
             <CircleChevronDown strokeWidth={2} />
+          ) : (
+            <CircleChevronRight strokeWidth={2} />
           )}
         </button>
       </div>
-      {categoryAddShow ? null : (
+      {categoryAddShow && (
         <form onSubmit={handleSubmit(onSubmit)} className="form-category-panel">
           <div className="panel-category">
             <label htmlFor="name"> Category name </label>

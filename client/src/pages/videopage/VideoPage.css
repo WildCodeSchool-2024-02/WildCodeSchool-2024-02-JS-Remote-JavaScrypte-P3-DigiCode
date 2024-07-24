@@ -49,6 +49,11 @@
   }
 }
 
+.redirection-message {
+  white-space: pre-wrap;
+  line-height: 2em;
+}
+
 .related-videos {
   margin-top: 4em;
 }

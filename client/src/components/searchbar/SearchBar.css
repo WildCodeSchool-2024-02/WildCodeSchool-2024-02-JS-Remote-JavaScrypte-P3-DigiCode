@@ -1,6 +1,7 @@
 .searchForm {
   display: flex;
   justify-content: center;
+
 }
 
 #search {
@@ -28,6 +29,11 @@
 
 @media screen and (width >= 760px) {
   #search {
-    width: 30rem;
+    width: 40rem;
+    height: 2.5rem;
+  }
+
+  .searchButton{
+    height: 2.75rem;
   }
 }

@@ -26,10 +26,11 @@ export default function AdminPage() {
         </section>
         <section>
           <h2> Category Panel</h2>
-          <artcile className="admin-panel-category">
+          <article className="admin-panel-category">
             <CategoryAdd />
+            <CategoryUpdate />
             <CategoryDelete />
-          </artcile>
+          </article>
         </section>
       </div>
     </>

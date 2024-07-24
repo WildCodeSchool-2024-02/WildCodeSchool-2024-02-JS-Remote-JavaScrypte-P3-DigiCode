@@ -6,13 +6,19 @@ import SearchBar from "../../components/searchbar/SearchBar";
 import VideoList from "../../components/videolist/VideoList";
 
 import "./HomePage.css";
+import getRandomInt from "../../utils/getRandomInt";
 
 export default function HomePage() {
   const videoData = useLoaderData();
 
   const newVideos = videoData.sort((a, b) => b.id - a.id).slice(0, 9);
-  const randommedVideos = videoData.sort(() => Math.random() - 0.5);
-  const randomVideos = randommedVideos.slice(0, 9);
+  const randomVideos = [];
+  for (let i = 0; i < 10; i += 1) {
+    const max = videoData.length;
+
+    const randomInt = getRandomInt(1, max);
+    randomVideos.push(videoData[randomInt]);
+  }
 
   return (
     <>
@@ -21,7 +27,9 @@ export default function HomePage() {
       </h2>
       <HeroSlider numberOfSlides={1} />
 
-      <style>{"#heroSlide.swiper-slide {display: flex; justify-content: center}"}</style>
+      <style>
+        {"#heroSlide.swiper-slide {display: flex; justify-content: center}"}
+      </style>
 
       <SearchBar />
 

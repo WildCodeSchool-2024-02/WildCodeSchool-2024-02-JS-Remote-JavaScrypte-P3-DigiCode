@@ -7,6 +7,7 @@ import CategoryDelete from "../../components/categoryforms/CategoryDelete";
 
 import "./AdminPage.css";
 import VideoUpdate from "../../components/videoforms/VideoUpdate";
+import CategoryUpdate from "../../components/categoryforms/CategoryUpdate";
 
 export default function AdminPage() {
   const { currentUser } = useOutletContext();
@@ -25,10 +26,11 @@ export default function AdminPage() {
         </section>
         <section>
           <h2> Category Panel</h2>
-          <artcile className="admin-panel-category">
+          <article className="admin-panel-category">
             <CategoryAdd />
+            <CategoryUpdate />
             <CategoryDelete />
-          </artcile>
+          </article>
         </section>
       </div>
     </>

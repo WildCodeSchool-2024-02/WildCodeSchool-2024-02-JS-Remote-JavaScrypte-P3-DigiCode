@@ -16,6 +16,7 @@ import ResultPage from "./pages/resultpage/ResultPage";
 import LoginPage from "./pages/loginpage/LoginPage";
 import AdminPage from "./pages/adminpage/AdminPage";
 import UserPage from "./pages/userpage/UserPage";
+import RgpdPage from "./pages/rgpdpage/rgpdPage";
 
 const express = import.meta.env.VITE_API_URL;
 
@@ -64,9 +65,13 @@ const router = createBrowserRouter([
         element: <UserPage />,
       },
       {
+        path: "/rgpd",
+        element: <RgpdPage />,
+      },
+      {
         path: "/*",
         element: <Navigate to="/" />,
-      },
+      }
     ],
   },
 ]);

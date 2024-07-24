@@ -17,7 +17,9 @@ export default function HomePage() {
       <h2>
         {"Featured "} <BookMarkedIcon color="#1FD360" strokeWidth={1.75} />
       </h2>
-      <HeroSlider />
+      <HeroSlider numberOfSlides={1} />
+
+      <style>{"#heroSlide.swiper-slide {display: flex; justify-content: center}"}</style>
 
       <SearchBar />
 

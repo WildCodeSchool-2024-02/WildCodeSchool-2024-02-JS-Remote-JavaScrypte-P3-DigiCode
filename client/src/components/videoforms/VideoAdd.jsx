@@ -94,7 +94,7 @@ export default function VideoAdd() {
 
           <div className="input-form-video">
             <label htmlFor="category">Choose a category </label>
-            <select name="category" {...register("category_id")}>
+            <select name="category" className="select-panel" {...register("category_id")}>
               {categoryData?.map((cat) => (
                 <option key={cat.id} value={cat.id}>
                   {`${cat.name.charAt(0).toUpperCase()}${cat.name.slice(1)}`}

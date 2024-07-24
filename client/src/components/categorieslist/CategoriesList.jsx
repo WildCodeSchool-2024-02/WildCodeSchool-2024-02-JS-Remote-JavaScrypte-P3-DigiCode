@@ -6,11 +6,21 @@ import "swiper/css";
 import "swiper/css/navigation";
 import PropTypes from "prop-types";
 import VideoCard from "../videocard/VideoCard";
+import "./CategoriesList.css"
 
 export default function CategoriesList({ category }) {
   const { name } = category;
   const [result, setResult] = useState();
-
+console.log(category)
+{name === undefined ?   useEffect(() => {
+  const express = import.meta.env.VITE_API_URL;
+  const fetchCategoryVideo = async () => {
+    const response = await fetch(`${express}/api/categories/${category}`);
+    const data = await response.json();
+    setResult(data);
+  };
+  fetchCategoryVideo();
+}, [category])  :
   useEffect(() => {
     const express = import.meta.env.VITE_API_URL;
     const fetchCategoryVideo = async () => {
@@ -19,7 +29,7 @@ export default function CategoriesList({ category }) {
       setResult(data);
     };
     fetchCategoryVideo();
-  }, [name]);
+  }, [name]);}
 
   return (
     <Swiper

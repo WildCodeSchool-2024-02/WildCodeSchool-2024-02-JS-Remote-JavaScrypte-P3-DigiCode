@@ -11,6 +11,9 @@
     font-size: 1.5rem;
     margin-bottom: 1.75rem;
   }
+
+
+
   @media screen and (width >= 800px) {
     .video-title {
       font-size: 1.8rem;
@@ -46,4 +49,9 @@
     justify-content: space-evenly;
     margin: 0;
   }
+
+}
+
+.related-videos {
+  margin-top: 4em;
 }

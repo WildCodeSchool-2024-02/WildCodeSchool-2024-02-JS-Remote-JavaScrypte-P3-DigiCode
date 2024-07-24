@@ -2,11 +2,17 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { CircleChevronRight, CircleChevronDown } from "lucide-react";
 import { toast } from "react-toastify";
 
 export default function CategoryUpdate() {
   const [categoryData, setCategoryData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
+  const [categoryUpdateShow, setCategoryUpdateShow] = useState(false);
+
+  const togglePanel = () => {
+    setCategoryUpdateShow(!categoryUpdateShow);
+  };
 
   const {
     register,
@@ -39,12 +45,22 @@ export default function CategoryUpdate() {
   }, []);
 
   return (
-    <>
-      <h2>Rename a category</h2>
-
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <section>
+            <div className="header-panel">
+      <h3>Rename a category</h3>
+      <button type="button" onClick={togglePanel} className="show-button">
+          {categoryUpdateShow ? (
+            <CircleChevronRight strokeWidth={2} />
+          ) : (
+            <CircleChevronDown strokeWidth={2} />
+          )}
+          </button>
+      </div>
+      {categoryUpdateShow ? null :
+      <form onSubmit={handleSubmit(onSubmit)} className="form-video-pannel">
+                  <div className="input-form-video">
         <label htmlFor="category"> Choose a Category </label>
-        <select name="category" {...register("id")}>
+        <select name="category" className="select-panel" {...register("id")}>
           {categoryData?.map((cat) => (
             <option
               key={cat.id}
@@ -53,6 +69,8 @@ export default function CategoryUpdate() {
           ))}
           {errors.id && <p>{errors.id.message}</p>}
         </select>
+</div>
+<div className="input-form-video">
         <label htmlFor="name"> name </label>
         <input
           type="text"
@@ -68,8 +86,9 @@ export default function CategoryUpdate() {
           })}
         />
         {errors.name && <p>{errors.name.message}</p>}
-        <button type="submit"> Update category</button>
-      </form>
-    </>
+        </div>
+        <button type="submit" className="button-form-panel"> Update category</button>
+      </form>}
+    </section>
   );
 }

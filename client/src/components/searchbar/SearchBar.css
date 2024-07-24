@@ -1,7 +1,6 @@
 .searchForm {
   display: flex;
   justify-content: center;
-
 }
 
 #search {
@@ -33,7 +32,7 @@
     height: 2.5rem;
   }
 
-  .searchButton{
+  .searchButton {
     height: 2.75rem;
   }
 }

@@ -37,13 +37,11 @@
     justify-content: flex-start;
     gap: 1;
   }
-.filterButton{
-  min-width: 8.5rem;
-  min-height: 2.5rem;
- 
-}
-.filterContainer {
-gap: 2.5rem
-}
-
+  .filterButton {
+    min-width: 8.5rem;
+    min-height: 2.5rem;
+  }
+  .filterContainer {
+    gap: 2.5rem;
+  }
 }

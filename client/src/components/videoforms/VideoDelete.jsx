@@ -3,10 +3,15 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { CircleChevronRight, CircleChevronDown } from "lucide-react";
 
 export default function VideoDelete() {
   const [videoData, setVideoData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
+  const [videoDeleteShow, setVideoDeleteShow] = useState(false);
+  const togglePanel = () => {
+    setVideoDeleteShow(!videoDeleteShow);
+  };
 
   const {
     register,
@@ -40,22 +45,39 @@ export default function VideoDelete() {
 
   return (
     <section>
-      <h2>Delete a video</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="videodelete"> Category </label>
-          <select name="videodelete" {...register("id")}>
-            {videoData?.map((video) => (
-              <option key={video.id} value={video.id}>
-                {`${video.title.charAt(0).toUpperCase()}${video.title.slice(1)}`}
-              </option>
-            ))}
-            {errors.id && <p>{errors.id.message}</p>}
-          </select>
-        </div>
+      <div className="header-panel">
+        <h3> Delete a video </h3>
+        <button type="button" onClick={togglePanel} className="show-button">
+          {videoDeleteShow ? (
+            <CircleChevronRight strokeWidth={2} />
+          ) : (
+            <CircleChevronDown strokeWidth={2} />
+          )}
+        </button>
+      </div>
+      {videoDeleteShow ? null : (
+        <form className="form-video-pannel" onSubmit={handleSubmit(onSubmit)}>
+          <div className="input-form-video">
+            <label htmlFor="videodelete"> Choose a video </label>
+            <select
+              className="select-panel"
+              name="videodelete"
+              {...register("id")}
+            >
+              {videoData?.map((video) => (
+                <option key={video.id} value={video.id}>
+                  {`${video.title.charAt(0).toUpperCase()}${video.title.slice(1)}`}
+                </option>
+              ))}
+              {errors.id && <p>{errors.id.message}</p>}
+            </select>
+          </div>
 
-        <button type="submit">Delete video</button>
-      </form>
+          <button type="submit" className="button-form-panel">
+            Delete video
+          </button>
+        </form>
+      )}
     </section>
   );
 }

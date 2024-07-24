@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLoaderData } from "react-router-dom";
 import { ArrowLeftIcon } from "lucide-react";
 import VideoCard from "../../components/videocard/VideoCard";
+import Filter from "../../components/filter/Filter";
+
 import "./CategoryPage.css";
 
 export default function CategoryPage() {
+  const categoriesData = useLoaderData();
   const [result, setResult] = useState();
   const categoryFind = useParams();
 
@@ -36,6 +39,7 @@ export default function CategoryPage() {
           <h2>There are no videos associated with this category</h2>
         )}
       </div>
+      <Filter category={categoriesData} />
     </>
   );
 }

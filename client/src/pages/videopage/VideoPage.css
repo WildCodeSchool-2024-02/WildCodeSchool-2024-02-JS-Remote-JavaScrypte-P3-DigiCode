@@ -11,7 +11,7 @@
     font-size: 1.5rem;
     margin-bottom: 1.75rem;
   }
-  @media screen and (width >= 760px) {
+  @media screen and (width >= 800px) {
     .video-title {
       font-size: 1.8rem;
       margin-top: 6rem;
@@ -23,12 +23,11 @@
     position: absolute;
     top: -1.5rem;
   }
-  @media screen and (width >= 760px) {
-    .backButton {
-      align-self: flex-start;
-      position: absolute;
-      left: 10%;
-    }
+
+  .backButton {
+    align-self: flex-start;
+    position: absolute;
+    left: 10%;
   }
 
   .video-playback {

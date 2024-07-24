@@ -5,7 +5,7 @@ import "./Filter.css";
 export default function Filter({ category }) {
   return (
     <div className="filter-wrapper">
-      <h1>Categories</h1>
+      <h2>Categories</h2>
       <div className="filterContainer">
         {category.map((c) => (
           <Link

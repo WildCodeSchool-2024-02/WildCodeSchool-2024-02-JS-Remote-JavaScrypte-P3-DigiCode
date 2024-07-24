@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
+import {toast} from "react-toastify";
 
 import "./HeroSlider.css";
 import "swiper/css";
@@ -22,7 +23,7 @@ export default function HeroSlider({numberOfSlides = null}) {
         setVideoData(data);
       });
     } catch (err) {
-      console.error(err);
+     if (err) toast.error("Erreur lors de la récupération des vidéos");
     }
   }, []);
 

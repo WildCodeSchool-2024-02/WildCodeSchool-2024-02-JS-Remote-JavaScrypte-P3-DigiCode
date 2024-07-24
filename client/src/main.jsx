@@ -36,6 +36,7 @@ const router = createBrowserRouter([
       {
         path: "/categories/:name",
         element: <CategoryPage />,
+        loader: () => fetch(`${express}/api/categories`),
       },
       {
         path: "/video/:id",

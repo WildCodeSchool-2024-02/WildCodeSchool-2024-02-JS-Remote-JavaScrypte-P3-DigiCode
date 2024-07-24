@@ -27,7 +27,7 @@ export default function UserPage() {
   ) : (
     <div className="user-page-container">
       <section className="personal-information">
-        <h1 className="title-info">{user?.firstname} Page</h1>
+        <h1 className="title-info">{user?.firstname} Informations:</h1>
 
         <p className="user-details">{`Username: ${user?.firstname} ${user?.lastname}`}</p>
         <p className="user-details">Email: {user?.email}</p>

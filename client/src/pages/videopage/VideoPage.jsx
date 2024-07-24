@@ -7,6 +7,8 @@ import {
 import { useEffect } from "react";
 import "./VideoPage.css";
 import { HistoryIcon } from "lucide-react";
+import CategoriesList from "../../components/categorieslist/CategoriesList";
+
 
 export default function VideoPage() {
   const videoData = useLoaderData();
@@ -34,11 +36,11 @@ export default function VideoPage() {
         <h1 className="video-title">
           <span style={{ whiteSpace: "pre-wrap" }}>
             {
-              "To view this video, you need to be connected. You will be redirected \nto the login page . . ."
+              "To view this video, you need to be connected. \nYou will be redirected to the login page . . ."
             }
           </span>
         </h1>
-      ) : (
+      ) : (<>
         <div className="video-container">
           <h1 className="video-title">{videoData.title}</h1>
           <video controls poster={videoData.image} className="video-playback">
@@ -51,7 +53,7 @@ export default function VideoPage() {
                 {videoData.date != null
                   ? videoData.date.slice(0, 10)
                   : "No date"}
-              </span>{" "}
+              </span>
               <span>
                 {videoData.category != null ? (
                   <Link to={`/categories/${videoData.category}`}>
@@ -65,6 +67,9 @@ export default function VideoPage() {
             <p>{videoData.description}</p>
           </div>
         </div>
+        <h3 className="related-videos">More videos in {videoData.category} category</h3>
+      <CategoriesList category={videoData.category} />
+      </>
       )}
     </>
   );

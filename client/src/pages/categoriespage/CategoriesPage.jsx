@@ -17,11 +17,14 @@ export default function CategoriesPage() {
         </button>
       </Link>
       <div className="categories-container">
-        <SearchBar />
-        <Filter category={categoriesData} />
+        <div className="search-bar-categories">
+          <SearchBar />{" "}
+        </div>
+        <div className="filter-categories"> 
+        <Filter category={categoriesData} /></div>
         {categoriesData.map((c) => (
           <>
-            <h1>
+            <h1 className="title-categories">
               <NavLink to={`/categories/${c.name.replaceAll(" ", "-")}`}>
                 {`${c.name.charAt(0).toUpperCase()}${c.name.slice(1)}`}
               </NavLink>

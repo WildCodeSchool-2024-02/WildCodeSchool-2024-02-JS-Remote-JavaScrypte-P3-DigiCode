@@ -1,5 +1,5 @@
-import { useLoaderData } from "react-router-dom";
 
+import { useLoaderData } from "react-router-dom";
 import { BookMarkedIcon, SparklesIcon, Dices } from "lucide-react";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import SearchBar from "../../components/searchbar/SearchBar";
@@ -10,9 +10,18 @@ import "./HomePage.css";
 export default function HomePage() {
   const videoData = useLoaderData();
 
+  const shuffle = (array) => { 
+    for (let i = array.length - 1; i > 0; i -= 1 ) { 
+      const j = Math.floor(Math.random() * (i + 1)); 
+      // eslint-disable-next-line no-param-reassign
+      [array[i], array[j]] = [array[j], array[i]]; 
+    } 
+    return array; 
+  }; 
+
   const newVideos = videoData.sort((a, b) => b.id - a.id).slice(0, 9);
-  const randommedVideos = videoData.sort(() => Math.random() - 0.5);
-  const randomVideos = randommedVideos.slice(0, 9);
+
+  const randomVideos = shuffle(videoData).slice(0, 9);
 
   return (
     <>

@@ -49,7 +49,7 @@ export default function CategoryDelete() {
   return (
     <section>
       <div className="header-panel">
-        <h3> Add a category </h3>
+        <h3> Delete a category </h3>
         <button type="button" onClick={togglePanel} className="show-button">
           {categoryDeleteShow ? (
             <CircleChevronRight strokeWidth={2} />

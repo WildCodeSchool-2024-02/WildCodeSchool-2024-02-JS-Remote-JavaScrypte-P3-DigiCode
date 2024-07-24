@@ -26,8 +26,13 @@
   cursor: pointer;
 }
 
-@media screen and (width >= 760px) {
+@media screen and (width >= 800px) {
   #search {
-    width: 30rem;
+    width: 40rem;
+    height: 2.5rem;
+  }
+
+  .searchButton {
+    height: 2.75rem;
   }
 }

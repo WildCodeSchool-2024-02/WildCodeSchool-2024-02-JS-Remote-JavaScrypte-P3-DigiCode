@@ -1,3 +1,14 @@
 .categories-container {
   padding-top: 2rem;
 }
+.search-bar-categories {
+  margin-top: 1rem;
+}
+.filter-categories {
+  margin-top: 1rem;
+  margin-bottom: 6rem;
+}
+
+.title-categories {
+  margin-top: 4rem;
+}

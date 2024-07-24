@@ -32,7 +32,7 @@
   z-index: 1;
 }
 
-@media screen and (width >= 1200px) {
+@media screen and (width >= 800px) {
   .cardImage:hover {
     opacity: 0.6;
   }

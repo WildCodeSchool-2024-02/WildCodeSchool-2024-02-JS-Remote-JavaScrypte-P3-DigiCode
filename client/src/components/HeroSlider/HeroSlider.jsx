@@ -23,7 +23,7 @@ export default function HeroSlider({numberOfSlides = null}) {
         setVideoData(data);
       });
     } catch (err) {
-     if (err) toast.error("Erreur lors de la récupération des vidéos");
+     if (err) toast.error("Error when fetching data");
     }
   }, []);
 

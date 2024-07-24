@@ -11,9 +11,7 @@ export default function VideoAdd() {
   const expressURL = import.meta.env.VITE_API_URL;
   const [videoAddShow, setVideoAddShow] = useState(false);
 
-  const togglePanel = () => {
-    setVideoAddShow(!videoAddShow);
-  };
+  const togglePanel = () => setVideoAddShow(!videoAddShow);
 
   const {
     register,
@@ -53,13 +51,13 @@ export default function VideoAdd() {
         <h3> Add a video </h3>
         <button type="button" onClick={togglePanel} className="show-button">
           {videoAddShow ? (
-            <CircleChevronRight strokeWidth={2} />
-          ) : (
             <CircleChevronDown strokeWidth={2} />
+          ) : (
+            <CircleChevronRight strokeWidth={2} />
           )}
         </button>
       </div>
-      {videoAddShow ? null : (
+      {videoAddShow && (
         <form className="form-video-pannel" onSubmit={handleSubmit(onSubmit)}>
           <div className="input-form-video">
             <label htmlFor="name"> Title </label>
@@ -94,7 +92,11 @@ export default function VideoAdd() {
 
           <div className="input-form-video">
             <label htmlFor="category">Choose a category </label>
-            <select name="category" className="select-panel" {...register("category_id")}>
+            <select
+              name="category"
+              className="select-panel"
+              {...register("category_id")}
+            >
               {categoryData?.map((cat) => (
                 <option key={cat.id} value={cat.id}>
                   {`${cat.name.charAt(0).toUpperCase()}${cat.name.slice(1)}`}

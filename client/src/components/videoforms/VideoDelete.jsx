@@ -9,9 +9,7 @@ export default function VideoDelete() {
   const [videoData, setVideoData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
   const [videoDeleteShow, setVideoDeleteShow] = useState(false);
-  const togglePanel = () => {
-    setVideoDeleteShow(!videoDeleteShow);
-  };
+  const togglePanel = () => setVideoDeleteShow(!videoDeleteShow);
 
   const {
     register,
@@ -49,13 +47,13 @@ export default function VideoDelete() {
         <h3> Delete a video </h3>
         <button type="button" onClick={togglePanel} className="show-button">
           {videoDeleteShow ? (
-            <CircleChevronRight strokeWidth={2} />
-          ) : (
             <CircleChevronDown strokeWidth={2} />
+          ) : (
+            <CircleChevronRight strokeWidth={2} />
           )}
         </button>
       </div>
-      {videoDeleteShow ? null : (
+      {videoDeleteShow && (
         <form className="form-video-pannel" onSubmit={handleSubmit(onSubmit)}>
           <div className="input-form-video">
             <label htmlFor="videodelete"> Choose a video </label>

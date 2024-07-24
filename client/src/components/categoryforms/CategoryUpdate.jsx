@@ -10,9 +10,7 @@ export default function CategoryUpdate() {
   const expressURL = import.meta.env.VITE_API_URL;
   const [categoryUpdateShow, setCategoryUpdateShow] = useState(false);
 
-  const togglePanel = () => {
-    setCategoryUpdateShow(!categoryUpdateShow);
-  };
+  const togglePanel = () => setCategoryUpdateShow(!categoryUpdateShow);
 
   const {
     register,
@@ -50,13 +48,13 @@ export default function CategoryUpdate() {
         <h3>Rename a category</h3>
         <button type="button" onClick={togglePanel} className="show-button">
           {categoryUpdateShow ? (
-            <CircleChevronRight strokeWidth={2} />
-          ) : (
             <CircleChevronDown strokeWidth={2} />
+          ) : (
+            <CircleChevronRight strokeWidth={2} />
           )}
         </button>
       </div>
-      {categoryUpdateShow ? null : (
+      {categoryUpdateShow && (
         <form onSubmit={handleSubmit(onSubmit)} className="form-video-pannel">
           <div className="input-form-video">
             <label htmlFor="category"> Choose a Category </label>

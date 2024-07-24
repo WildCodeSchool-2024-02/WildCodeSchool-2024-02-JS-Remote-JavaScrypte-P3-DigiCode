@@ -3,10 +3,16 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { CircleChevronRight, CircleChevronDown } from "lucide-react";
 
 export default function CategoryAdd() {
   const [setCategoryData] = useState();
   const expressURL = import.meta.env.VITE_API_URL;
+  const [categoryAddShow, setCategoryAddShow] = useState(false);
+
+  const togglePanel = () => {
+    setCategoryAddShow(!categoryAddShow);
+  };
 
   const {
     register,
@@ -43,12 +49,20 @@ export default function CategoryAdd() {
   const requiredFieldError = "This field is required!";
 
   return (
-    <>
-      <h1>Category Panel</h1>
-      <section>
-        <h2>Add a category</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="category-panel_name">
+    <section>
+      <div className="header-panel">
+        <h3> Add a category </h3>
+        <button type="button" onClick={togglePanel} className="show-button">
+          {categoryAddShow ? (
+            <CircleChevronRight strokeWidth={2} />
+          ) : (
+            <CircleChevronDown strokeWidth={2} />
+          )}
+        </button>
+      </div>
+      {categoryAddShow ? null : (
+        <form onSubmit={handleSubmit(onSubmit)} className="form-category-panel">
+          <div className="panel-category">
             <label htmlFor="name"> Category name </label>
             <input
               type="text"
@@ -64,9 +78,11 @@ export default function CategoryAdd() {
             {errors.name && <p>{errors.name.message}</p>}
           </div>
 
-          <button type="submit">Add category</button>
+          <button type="submit" className="button-form-panel">
+            Add category
+          </button>
         </form>
-      </section>
-    </>
+      )}
+    </section>
   );
 }

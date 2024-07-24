@@ -1,7 +1,7 @@
 import { Navigate, useOutletContext } from "react-router-dom";
+
 import VideoAdd from "../../components/videoforms/VideoAdd";
 import VideoDelete from "../../components/videoforms/VideoDelete";
-import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import CategoryAdd from "../../components/categoryforms/CategoryAdd";
 import CategoryDelete from "../../components/categoryforms/CategoryDelete";
 
@@ -13,25 +13,26 @@ export default function AdminPage() {
   const { currentUser } = useOutletContext();
 
   return currentUser?.role === "admin" ? (
-    <div className="admin-panel">
-      <h1 className="admin-title">Admin Panel</h1>
-      <div className="admin-panel-row1">
-        <VideoAdd />
-        <VideoDelete />
-        <VideoUpdate />
+    <>
+      <h1 className="title-admin-page"> Admin pannel</h1>
+      <div className="admin-panel">
+        <section>
+          <h2> Video panel </h2>
+          <article className="admin-panel-video">
+            <VideoAdd />
+            <VideoUpdate />
+            <VideoDelete />
+          </article>
+        </section>
+        <section>
+          <h2> Category Panel</h2>
+          <artcile className="admin-panel-category">
+            <CategoryAdd />
+            <CategoryDelete />
+          </artcile>
+        </section>
       </div>
-      <div>
-        <CategoryAdd />
-      </div>
-      <div>
-        <CategoryDelete />
-        <CategoryUpdate />
-      </div>
-      <div>
-        <h2>Hero slider</h2>
-        <HeroSlider />
-      </div>
-    </div>
+    </>
   ) : (
     <Navigate to="/" />
   );

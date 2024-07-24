@@ -1,0 +1,59 @@
+.form-video-pannel {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-video-pannel label {
+  margin-right: 1rem;
+}
+
+.form-video-pannel input {
+  border: none;
+  border-radius: var(--input-radius);
+  height: 1.5rem;
+}
+
+.form-video-pannel input:focus {
+  outline: none;
+  border: var(--accent-color) 2px solid;
+}
+
+.header-panel {
+  display: flex;
+
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.show-button {
+  border: none;
+  background-color: var(--gray-color);
+}
+
+.input-form-video {
+  margin-bottom: 0.8rem;
+}
+
+#description-video {
+  display: flex;
+}
+
+.button-form-panel {
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: var(--input-radius);
+  width: 7rem;
+  height: 1.8rem;
+  margin-top: 1;
+  margin-bottom: 2rem;
+  margin-left: 6.5rem;
+  margin-top: 1rem;
+  font-family: "Exo";
+}
+
+.select-panel {
+  background-color: white;
+  border: none;
+  border-radius: var(--input-radius);
+  height: 1.5rem;
+}

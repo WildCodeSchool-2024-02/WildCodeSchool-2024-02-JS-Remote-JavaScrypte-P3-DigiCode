@@ -1,4 +1,4 @@
 {
-  "pattern": ".*",
+  "pattern": "^[a-zA-Z0-9-_]+$",
   "errorMsg": "Oopsie! You didn't respect branch naming convention. Use 'git branch -m <new-name>' to rename your branch."
 }
